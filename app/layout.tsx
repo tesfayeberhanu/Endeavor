@@ -2,11 +2,11 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "The Healthy Home UAE | Premium Home Services",
-  description: "Premium home and personal wellness services for healthier living across the UAE.",
+  title: "Endeavor | A Tradition of Quality Cleaning",
+  description: "Professional residential and commercial cleaning with a tradition of quality care.",
   icons: {
-    icon: "/assets/favicon.png",
-    shortcut: "/assets/favicon.png",
+    icon: "/assets/endeavor-logo-v1.png",
+    shortcut: "/assets/endeavor-logo-v1.png",
   },
 };
 

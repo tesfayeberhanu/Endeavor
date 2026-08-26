@@ -2,56 +2,49 @@
 
 import { useState } from "react";
 
-type MenuName = "home" | "personal" | null;
+type MenuName = "residential" | "commercial" | null;
 
-const homeServices = [
-  "Packages & Contracts",
-  "AC Services",
-  "Furniture Cleaning Services",
-  "Water & Pipeline Services",
-  "Home Deep Cleaning Services",
-  "Pest Control Services",
-  "Mold Removal",
-  "Painting & Moving",
-  "Indoor Environmental Testing Services",
-  "Maid Services",
-  "Home Improvement",
-  "Other Home Services & Products",
+const residentialServices = [
+  "Routine Home Cleaning",
+  "Deep Cleaning",
+  "Move-In & Move-Out Cleaning",
+  "Kitchen & Bathroom Cleaning",
+  "Carpet & Upholstery Care",
+  "Recurring Cleaning Plans",
 ];
 
-const personalServices = [
-  "Pet Care Services",
-  "Mom & Baby",
-  "Healthcare At Home",
-  "Spa & Beauty At Home",
-  "Health & Nutrition",
-  "Laundry Services",
-  "Other Personal Services & Products",
+const commercialServices = [
+  "Office Cleaning",
+  "Retail Cleaning",
+  "Facility Care",
+  "Post-Construction Cleaning",
+  "Floor Care",
+  "Custom Cleaning Plans",
 ];
 
 const serviceCards = [
-  { name: "AC Cleaning", image: "/assets/ac.webp" },
-  { name: "Mattress Cleaning", image: "/assets/mattress.webp" },
+  { name: "Routine Cleaning", image: "/assets/ac.webp" },
+  { name: "Bedroom Cleaning", image: "/assets/mattress.webp" },
   { name: "Furniture Cleaning", image: "/assets/sofa.webp" },
-  { name: "Home Deep Cleaning", image: "/assets/deep-clean.webp" },
-  { name: "Pest Control", image: "/assets/pest.webp" },
-  { name: "Home Inspection", image: "/assets/inspection.webp" },
-  { name: "Water Tank Cleaning", image: "/assets/water.webp" },
-  { name: "Contract & Packages", image: "/assets/contract.webp" },
-  { name: "More services", image: "/assets/more.webp" },
+  { name: "Deep Cleaning", image: "/assets/deep-clean.webp" },
+  { name: "Sanitization", image: "/assets/pest.webp" },
+  { name: "Property Care", image: "/assets/inspection.webp" },
+  { name: "Commercial Cleaning", image: "/assets/water.webp" },
+  { name: "Custom Plans", image: "/assets/contract.webp" },
+  { name: "More Services", image: "/assets/more.webp" },
 ];
 
 function Chevron({ down = false }: { down?: boolean }) {
   return <span className={down ? "chevron chevron--down" : "chevron"} aria-hidden="true" />;
 }
 
-function Dropdown({ items, kind }: { items: string[]; kind: "home" | "personal" }) {
+function Dropdown({ items, kind }: { items: string[]; kind: "residential" | "commercial" }) {
   return (
     <div className={`service-menu service-menu--${kind}`} role="menu">
       {items.map((item, index) => (
-        <a className="service-menu__item" href="https://thehealthyhome.me/en/ae/services" role="menuitem" key={item}>
+        <a className="service-menu__item" href="#services" role="menuitem" key={item}>
           <span>{item}</span>
-          {kind === "home" || index !== 5 ? <Chevron /> : null}
+          {index !== items.length - 1 ? <Chevron /> : null}
         </a>
       ))}
     </div>
@@ -76,7 +69,7 @@ function WhatsAppIcon() {
 }
 
 export default function Home() {
-  const [openMenu, setOpenMenu] = useState<MenuName>("home");
+  const [openMenu, setOpenMenu] = useState<MenuName>("residential");
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const toggleMenu = (menu: Exclude<MenuName, null>) => {
@@ -87,8 +80,8 @@ export default function Home() {
     <main className="site-frame">
       <header className="site-header">
         <div className="header-shell">
-          <a className="brand" href="https://thehealthyhome.me/en/ae" aria-label="The Healthy Home">
-            <img src="/assets/logo.svg" alt="The Healthy Home" />
+          <a className="brand" href="#" aria-label="Endeavor Cleaning home">
+            <img src="/assets/endeavor-logo-v1.png" alt="Endeavor — A Tradition of Quality Cleaning" />
           </a>
 
           <button
@@ -106,99 +99,96 @@ export default function Home() {
           <nav className={`primary-nav ${mobileOpen ? "primary-nav--open" : ""}`} aria-label="Main navigation">
             <div className="nav-service">
               <button
-                className={`nav-link nav-link--service ${openMenu === "home" ? "nav-link--active" : ""}`}
+                className={`nav-link nav-link--service ${openMenu === "residential" ? "nav-link--active" : ""}`}
                 type="button"
                 aria-haspopup="menu"
-                aria-expanded={openMenu === "home"}
-                onMouseEnter={() => setOpenMenu("home")}
-                onFocus={() => setOpenMenu("home")}
-                onClick={() => toggleMenu("home")}
+                aria-expanded={openMenu === "residential"}
+                onMouseEnter={() => setOpenMenu("residential")}
+                onFocus={() => setOpenMenu("residential")}
+                onClick={() => toggleMenu("residential")}
               >
-                Home Services <Chevron down />
+                Residential <Chevron down />
               </button>
-              {openMenu === "home" ? <Dropdown items={homeServices} kind="home" /> : null}
+              {openMenu === "residential" ? <Dropdown items={residentialServices} kind="residential" /> : null}
             </div>
 
             <div className="nav-service">
               <button
-                className={`nav-link nav-link--service ${openMenu === "personal" ? "nav-link--active" : ""}`}
+                className={`nav-link nav-link--service ${openMenu === "commercial" ? "nav-link--active" : ""}`}
                 type="button"
                 aria-haspopup="menu"
-                aria-expanded={openMenu === "personal"}
-                onMouseEnter={() => setOpenMenu("personal")}
-                onFocus={() => setOpenMenu("personal")}
-                onClick={() => toggleMenu("personal")}
+                aria-expanded={openMenu === "commercial"}
+                onMouseEnter={() => setOpenMenu("commercial")}
+                onFocus={() => setOpenMenu("commercial")}
+                onClick={() => toggleMenu("commercial")}
               >
-                Personal Services <Chevron down />
+                Commercial <Chevron down />
               </button>
-              {openMenu === "personal" ? <Dropdown items={personalServices} kind="personal" /> : null}
+              {openMenu === "commercial" ? <Dropdown items={commercialServices} kind="commercial" /> : null}
             </div>
 
-            <a className="nav-link" href="https://shop.thehealthyhome.me/">Shop</a>
-            <a className="nav-link" href="https://thehealthyhome.me/en/ae/contact-us">Contact Us</a>
+            <a className="nav-link" href="#services">Services</a>
+            <a className="nav-link" href="#contact">Contact Us</a>
           </nav>
 
           <div className="nav-actions">
-            <a className="book-button" href="https://service.thehealthyhome.me/en/ae" aria-label="Book a service now">
+            <a className="book-button" href="#contact" aria-label="Request a cleaning quote">
               <span className="calendar-icon" aria-hidden="true">□</span>
-              Book Now
+              Get a Quote
             </a>
-            <a className="contact-icon contact-icon--call" href="tel:80072648493" aria-label="Call us">
+            <a className="contact-icon contact-icon--call" href="#contact" aria-label="Contact Endeavor Cleaning">
               <CallIcon />
             </a>
-            <a className="contact-icon contact-icon--whatsapp" href="https://takecontrol.thehealthyhome.me/talk-to-an-expert" aria-label="Contact us on WhatsApp">
+            <a className="contact-icon contact-icon--whatsapp" href="#contact" aria-label="Message Endeavor Cleaning">
               <WhatsAppIcon />
             </a>
           </div>
 
-          <a className="language" href="https://thehealthyhome.me/ar/ae" aria-label="Switch to Arabic">
-            <img src="/assets/uae.webp" alt="UAE flag" />
-            <span lang="ar" dir="rtl">العربية</span>
-          </a>
+          <div className="brand-note"><span aria-hidden="true" />Quality First</div>
         </div>
       </header>
 
       <div className="content-shell">
-        <section className="hero-grid" aria-label="The Healthy Home overview">
+        <section className="hero-grid" aria-label="Endeavor Cleaning overview">
           <div className="hero-banner">
-            <img src="/assets/hero.webp" alt="A bright, healthy family living room" />
-            <h1>A world of wellness for your family</h1>
+            <img src="/assets/endeavor-hero.png" alt="An Endeavor cleaning professional caring for a modern living room" />
+            <h1>A tradition of quality cleaning</h1>
             <div className="stats-panel">
-              <div><strong>61,000+</strong><span>Happy Customers</span></div>
-              <div><strong>4.9/5*</strong><span>Google Rating</span></div>
-              <div><strong>7,000+</strong><span>Customer Reviews</span></div>
-              <div><strong>12+ Years</strong><span>of Healthy Living</span></div>
+              <div><strong>Quality</strong><span>First, Every Time</span></div>
+              <div><strong>Flexible</strong><span>Cleaning Plans</span></div>
+              <div><strong>Detailed</strong><span>Care for Every Space</span></div>
+              <div><strong>Home & Business</strong><span>Cleaning Services</span></div>
             </div>
           </div>
 
-          <aside className="side-panels" aria-label="Health and sustainability information">
-            <a className="air-card" href="https://thehealthyhome.me/en/ae/air-quality-index-dubai">
+          <aside className="side-panels" aria-label="Endeavor service information">
+            <a className="air-card" href="#services">
               <div className="panel-title-row">
-                <h2>What is your air quality today?</h2>
+                <h2>What can we clean for you?</h2>
                 <span className="north-east" aria-hidden="true">↗</span>
               </div>
               <div className="air-details">
-                <div className="air-gauge"><span>124</span></div>
+                <div className="air-gauge"><span>✓</span></div>
                 <div className="air-copy">
-                  <strong>Unhealthy for Sensitive Groups</strong>
-                  <p>Air quality is unhealthy for sensitive groups.</p>
+                  <strong>Homes & Workplaces</strong>
+                  <p>Dependable cleaning tailored to your space and schedule.</p>
                 </div>
               </div>
             </a>
 
-            <a className="forest-card" href="https://thehealthyhome.me/en/ae/sustainability">
-              <img src="/assets/forest.webp" alt="Hands planting a young tree" />
+            <a className="forest-card" href="#contact" id="contact">
+              <img src="/assets/endeavor-hero.png" alt="A bright, professionally cleaned living room" />
               <div className="forest-copy">
-                <span className="plant-badge" aria-hidden="true">🌱</span>
-                <div><strong>11,811+ Trees planted</strong><span>View The Healthy Home® Forest</span></div>
+                <span className="plant-badge" aria-hidden="true">✦</span>
+                <div><strong>Care in every detail</strong><span>Request your personalized cleaning quote</span></div>
               </div>
             </a>
           </aside>
         </section>
 
-        <section className="service-grid" aria-label="Popular home services">
+        <section className="service-grid" id="services" aria-label="Endeavor cleaning services">
           {serviceCards.map((service) => (
-            <a className="service-card" href="https://thehealthyhome.me/en/ae/services" key={service.name}>
+            <a className="service-card" href="#contact" key={service.name}>
               <img src={service.image} alt="" />
               <span>{service.name}</span>
             </a>
