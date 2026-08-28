@@ -52,7 +52,7 @@ test("finished source has no starter preview dependency", async () => {
     readFile(new URL("../package.json", import.meta.url), "utf8"),
   ]);
 
-  assert.match(page, /serviceCards/);
+  assert.match(page, /partnerColumns/);
   assert.match(page, /popularServices/);
   assert.match(layout, /Endeavor/);
   assert.doesNotMatch(`${page}\n${layout}\n${packageJson}`, /react-loading-skeleton|codex-preview|SkeletonPreview|vinext/);

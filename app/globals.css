@@ -517,63 +517,12 @@ a {
   line-height: 1.1;
 }
 
-.service-grid {
-  display: grid;
-  grid-template-columns: repeat(9, minmax(0, 1fr));
-  gap: 14px;
-  margin-top: 42px;
-  padding-bottom: 28px;
-}
-
-.service-card {
-  height: 184px;
-  min-width: 0;
-  border: 2px solid var(--border);
-  border-radius: 17px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 14px 8px 12px;
-  text-align: center;
-  background: #fff;
-  transition: border-color .16s ease, transform .16s ease, box-shadow .16s ease;
-}
-
-.service-card:hover,
-.service-card:focus-visible {
-  outline: none;
-  border-color: var(--rust);
-  transform: translateY(-3px);
-  box-shadow: 0 9px 22px rgb(159 64 33 / 14%);
-}
-
-.service-card img {
-  width: 74px;
-  height: 74px;
-  object-fit: contain;
-  margin-bottom: 8px;
-  filter: sepia(1) saturate(2.2) hue-rotate(335deg) contrast(.92);
-}
-
-.service-card span {
-  display: block;
-  max-width: 142px;
-  font-size: clamp(15px, .93vw, 19px);
-  line-height: 1.13;
-  font-weight: 650;
-}
-
 .section-heading {
   margin: 0 0 26px;
   font-size: clamp(28px, 1.9vw, 38px);
   line-height: 1.15;
   letter-spacing: .3px;
   font-weight: 900;
-}
-
-.service-grid-section {
-  margin-top: 56px;
 }
 
 /* Partner / category showcase */
@@ -1155,7 +1104,6 @@ a {
   .contact-icon { display: none; }
   .brand-note { grid-column: 3; grid-row: 1; height: 90px; }
   .hero-grid { grid-template-columns: 1.8fr 1fr; }
-  .service-grid { grid-template-columns: repeat(5, 1fr); }
   .partner-grid { grid-template-columns: 1fr; max-width: 520px; margin: 0 auto; }
   .popular-grid { grid-template-columns: repeat(2, 1fr); }
   .footer-grid { grid-template-columns: 1fr 1fr; }
@@ -1182,8 +1130,6 @@ a {
   .side-panels { grid-template-rows: auto; grid-template-columns: 1fr; }
   .air-card,
   .forest-card { min-height: 236px; }
-  .service-grid { grid-template-columns: repeat(2, 1fr); margin-top: 20px; }
-  .service-card { height: 158px; }
   .trust-bar { grid-template-columns: repeat(2, 1fr); }
   .popular-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
   .contact-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }

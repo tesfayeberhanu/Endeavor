@@ -10,18 +10,6 @@ const primaryNavLinks = [
   { label: "Contact Us", href: "#contact" },
 ];
 
-const serviceCards = [
-  { name: "Routine Cleaning", image: "/assets/ac.webp" },
-  { name: "Bedroom Cleaning", image: "/assets/mattress.webp" },
-  { name: "Furniture Cleaning", image: "/assets/sofa.webp" },
-  { name: "Deep Cleaning", image: "/assets/deep-clean.webp" },
-  { name: "Sanitization", image: "/assets/pest.webp" },
-  { name: "Property Care", image: "/assets/inspection.webp" },
-  { name: "Commercial Cleaning", image: "/assets/water.webp" },
-  { name: "Custom Plans", image: "/assets/contract.webp" },
-  { name: "More Services", image: "/assets/more.webp" },
-];
-
 const partnerColumns = [
   {
     name: "Residential Cleaning",
@@ -337,19 +325,7 @@ export default function Home() {
           </aside>
         </section>
 
-        <section className="service-grid-section" id="services" aria-label="Endeavor cleaning services">
-          <h2 className="section-heading">Our Cleaning Services</h2>
-          <div className="service-grid">
-            {serviceCards.map((service) => (
-              <a className="service-card" href="#contact" key={service.name}>
-                <img src={service.image} alt="" />
-                <span>{service.name}</span>
-              </a>
-            ))}
-          </div>
-        </section>
-
-        <section className="partner-section" aria-label="Endeavor cleaning categories">
+        <section className="partner-section" id="services" aria-label="Endeavor cleaning categories">
           <h2 className="section-heading">Your Partner in a Healthier Home</h2>
           <div className="partner-grid">
             {partnerColumns.map((column) => (
