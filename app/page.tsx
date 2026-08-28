@@ -44,24 +44,34 @@ const popularServices = [
   {
     name: "Deep Cleaning",
     copy: "A thorough, top-to-bottom clean for kitchens, bathrooms, and every corner in between.",
+    image: "/assets/popular-deep-cleaning.jpg",
+    icon: "spray",
   },
   {
     name: "Routine Home Cleaning",
     copy: "Regular visits that keep your home consistently fresh, on a schedule that suits you.",
+    image: "/assets/popular-routine-cleaning.jpg",
+    icon: "broom",
   },
   {
     name: "Move-In & Move-Out Cleaning",
     copy: "Start fresh in a spotless space, whether you're arriving or handing over the keys.",
+    image: "/assets/popular-move-in-out.jpg",
+    icon: "box",
   },
   {
     name: "Office & Commercial Cleaning",
     copy: "Cleaning programs built around your business hours and your standards.",
+    image: "/assets/popular-office-cleaning.jpg",
+    icon: "building",
   },
   {
     name: "Carpet & Upholstery Care",
     copy: "Deep cleaning for carpets, sofas, and mattresses that everyday vacuuming can't reach.",
+    image: "/assets/popular-carpet-upholstery.jpg",
+    icon: "sofa",
   },
-];
+] as const;
 
 const trustPoints = [
   {
@@ -184,14 +194,57 @@ function TrustIcon({ kind }: { kind: (typeof trustPoints)[number]["icon"] }) {
   );
 }
 
+function PopularIcon({ kind }: { kind: (typeof popularServices)[number]["icon"] }) {
+  const common = { fill: "none", stroke: "currentColor", strokeWidth: 2, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
+  if (kind === "spray") {
+    return (
+      <svg viewBox="0 0 40 40" aria-hidden="true">
+        <path {...common} d="M15 15h8v18a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2Z" />
+        <path {...common} d="M17 15v-3h4v3" />
+        <path {...common} d="M25 12h4l-2 3h3l-6 6" />
+      </svg>
+    );
+  }
+  if (kind === "broom") {
+    return (
+      <svg viewBox="0 0 40 40" aria-hidden="true">
+        <path {...common} d="M27 8 15 24" />
+        <path {...common} d="M15 24 9 32l5 2 4-7" />
+        <path {...common} d="M9 32 20 22" />
+        <path {...common} d="M13 27 22 20" />
+      </svg>
+    );
+  }
+  if (kind === "box") {
+    return (
+      <svg viewBox="0 0 40 40" aria-hidden="true">
+        <path {...common} d="M8 14 20 8l12 6-12 6Z" />
+        <path {...common} d="M8 14v13l12 6 12-6V14" />
+        <path {...common} d="M20 20v13" />
+      </svg>
+    );
+  }
+  if (kind === "building") {
+    return (
+      <svg viewBox="0 0 40 40" aria-hidden="true">
+        <path {...common} d="M11 32V9h18v23" />
+        <path {...common} d="M8 32h24" />
+        <path {...common} d="M16 15h2M22 15h2M16 21h2M22 21h2M16 27h2M22 27h2" />
+      </svg>
+    );
+  }
+  return (
+    <svg viewBox="0 0 40 40" aria-hidden="true">
+      <path {...common} d="M9 24v-4a4 4 0 0 1 4-4h14a4 4 0 0 1 4 4v4" />
+      <path {...common} d="M7 24h26v5a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2Z" />
+      <path {...common} d="M9 29v3M31 29v3" />
+    </svg>
+  );
+}
+
 export default function Home() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [openService, setOpenService] = useState<string | null>(popularServices[0].name);
   const [activeTestimonial, setActiveTestimonial] = useState(0);
-
-  const toggleService = (name: string) => {
-    setOpenService((current) => (current === name ? null : name));
-  };
 
   return (
     <main className="site-frame">
@@ -314,29 +367,23 @@ export default function Home() {
 
         <section className="popular-section" aria-label="Popular cleaning services">
           <h2 className="section-heading">Popular Services</h2>
-          <div className="popular-list">
-            {popularServices.map((service) => {
-              const isOpen = openService === service.name;
-              return (
-                <div className={`popular-item ${isOpen ? "popular-item--open" : ""}`} key={service.name}>
-                  <button
-                    className="popular-item__header"
-                    type="button"
-                    aria-expanded={isOpen}
-                    onClick={() => toggleService(service.name)}
-                  >
-                    <span>{service.name}</span>
-                    <Chevron down open={isOpen} />
-                  </button>
-                  {isOpen ? (
-                    <div className="popular-item__body">
-                      <p>{service.copy}</p>
-                      <a className="popular-item__cta" href="#contact">Get a Quote</a>
-                    </div>
-                  ) : null}
+          <div className="popular-grid">
+            {popularServices.map((service) => (
+              <div className="popular-card" key={service.name}>
+                <div className="popular-card__image">
+                  <img src={service.image} alt="" />
+                  <span className="popular-card__icon" aria-hidden="true">
+                    <PopularIcon kind={service.icon} />
+                  </span>
                 </div>
-              );
-            })}
+                <h3>{service.name}</h3>
+                <p>{service.copy}</p>
+                <a className="popular-card__cta" href="#contact">
+                  Learn more
+                  <Chevron />
+                </a>
+              </div>
+            ))}
           </div>
         </section>
       </div>

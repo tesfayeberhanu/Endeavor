@@ -648,85 +648,94 @@ a {
   background: #843217;
 }
 
-/* Popular services accordion */
+/* Popular services */
 
 .popular-section {
   margin-top: 68px;
 }
 
-.popular-list {
+.popular-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 26px;
+}
+
+.popular-card {
   display: flex;
   flex-direction: column;
-  gap: 12px;
 }
 
-.popular-item {
-  border: 2px solid var(--border);
-  border-radius: 14px;
+.popular-card__image {
+  position: relative;
+  height: 220px;
+  border-radius: 20px;
   overflow: hidden;
-  background: #fff;
+  box-shadow: 0 10px 26px rgb(23 23 91 / 14%);
 }
 
-.popular-item--open {
-  border-color: var(--rust);
-}
-
-.popular-item__header {
+.popular-card__image img {
   width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 18px 24px;
-  border: 0;
-  background: transparent;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.popular-card__icon {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: #fff;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 6px 14px rgb(23 23 91 / 18%);
   color: var(--navy);
-  font-size: clamp(18px, 1.1vw, 22px);
+}
+
+.popular-card__icon svg {
+  width: 26px;
+  height: 26px;
+}
+
+.popular-card h3 {
+  margin: 20px 4px 0;
+  font-size: clamp(19px, 1.15vw, 23px);
+  line-height: 1.25;
   font-weight: 800;
-  text-align: left;
-  cursor: pointer;
+  color: var(--navy);
 }
 
-.popular-item__header .chevron {
-  color: var(--rust);
-  transition: transform .18s ease;
-}
-
-.popular-item .chevron--open {
-  transform: rotate(135deg) translateY(3px) scaleY(-1);
-}
-
-.popular-item__body {
-  padding: 0 24px 22px;
-}
-
-.popular-item__body p {
-  margin: 0 0 14px;
-  font-size: 16px;
-  line-height: 1.55;
+.popular-card p {
+  margin: 10px 4px 0;
+  font-size: 15px;
+  line-height: 1.5;
   font-weight: 500;
-  opacity: .85;
-  max-width: 640px;
+  opacity: .8;
+  flex: 1;
 }
 
-.popular-item__cta {
+.popular-card__cta {
+  margin: 18px 4px 0;
   display: inline-flex;
   align-items: center;
-  height: 42px;
-  padding: 0 20px;
+  gap: 12px;
+  height: 50px;
+  padding: 0 22px;
   border-radius: 999px;
-  border: 2px solid var(--rust);
-  color: var(--rust);
+  background: var(--rust);
+  color: #fff;
   font-size: 15px;
   font-weight: 800;
   letter-spacing: 1px;
-  transition: background .18s ease, color .18s ease;
+  align-self: flex-start;
+  transition: background .18s ease;
 }
 
-.popular-item__cta:hover,
-.popular-item__cta:focus-visible {
-  background: var(--rust);
-  color: #fff;
+.popular-card__cta:hover,
+.popular-card__cta:focus-visible {
+  background: #843217;
 }
 
 /* Trust / credibility band */
@@ -1148,6 +1157,7 @@ a {
   .hero-grid { grid-template-columns: 1.8fr 1fr; }
   .service-grid { grid-template-columns: repeat(5, 1fr); }
   .partner-grid { grid-template-columns: 1fr; max-width: 520px; margin: 0 auto; }
+  .popular-grid { grid-template-columns: repeat(2, 1fr); }
   .footer-grid { grid-template-columns: 1fr 1fr; }
   .footer-brand { grid-column: 1 / -1; }
 }
@@ -1175,6 +1185,7 @@ a {
   .service-grid { grid-template-columns: repeat(2, 1fr); margin-top: 20px; }
   .service-card { height: 158px; }
   .trust-bar { grid-template-columns: repeat(2, 1fr); }
+  .popular-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
   .contact-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
   .promo-banner { justify-content: center; text-align: center; }
   .footer-bottom { justify-content: center; text-align: center; }
