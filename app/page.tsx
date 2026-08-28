@@ -34,8 +34,107 @@ const serviceCards = [
   { name: "More Services", image: "/assets/more.webp" },
 ];
 
-function Chevron({ down = false }: { down?: boolean }) {
-  return <span className={down ? "chevron chevron--down" : "chevron"} aria-hidden="true" />;
+const partnerColumns = [
+  {
+    name: "Residential Cleaning",
+    copy: "From routine tidy-ups to deep cleans, we care for every room in your home.",
+    image: "/assets/endeavor-hero.png",
+  },
+  {
+    name: "Commercial Cleaning",
+    copy: "Reliable cleaning programs that keep offices, retail spaces, and facilities spotless.",
+    image: "/assets/hero.webp",
+  },
+  {
+    name: "Specialty Care",
+    copy: "Move-in and move-out cleans, carpets, upholstery, and plans custom-built around you.",
+    image: "/assets/forest.webp",
+  },
+];
+
+const popularServices = [
+  {
+    name: "Deep Cleaning",
+    copy: "A thorough, top-to-bottom clean for kitchens, bathrooms, and every corner in between.",
+  },
+  {
+    name: "Routine Home Cleaning",
+    copy: "Regular visits that keep your home consistently fresh, on a schedule that suits you.",
+  },
+  {
+    name: "Move-In & Move-Out Cleaning",
+    copy: "Start fresh in a spotless space, whether you're arriving or handing over the keys.",
+  },
+  {
+    name: "Office & Commercial Cleaning",
+    copy: "Cleaning programs built around your business hours and your standards.",
+  },
+  {
+    name: "Carpet & Upholstery Care",
+    copy: "Deep cleaning for carpets, sofas, and mattresses that everyday vacuuming can't reach.",
+  },
+];
+
+const trustPoints = [
+  {
+    title: "Vetted & Trained Cleaners",
+    copy: "Every member of our team is background-checked and trained to our standards.",
+    icon: "shield",
+  },
+  {
+    title: "Flexible Scheduling",
+    copy: "Book one-time visits or recurring plans that fit your routine.",
+    icon: "clock",
+  },
+  {
+    title: "Eco-Conscious Products",
+    copy: "We use cleaning products chosen with your family and pets in mind.",
+    icon: "leaf",
+  },
+  {
+    title: "Satisfaction Follow-Up",
+    copy: "Not happy with a spot? Tell us and we'll make it right.",
+    icon: "check",
+  },
+] as const;
+
+const testimonials = [
+  {
+    quote:
+      "Booking was simple and the team left our apartment looking brand new. They were careful with every detail.",
+    attribution: "Homeowner, Dubai",
+  },
+  {
+    quote:
+      "We switched our office cleaning to Endeavor and haven't looked back. Consistent, professional, and always on time.",
+    attribution: "Office Manager, Business Bay",
+  },
+  {
+    quote:
+      "The move-out clean saved us so much stress. Everything was spotless for the handover inspection.",
+    attribution: "Tenant, Abu Dhabi",
+  },
+] as const;
+
+const footerServiceLinks = [
+  "Routine Home Cleaning",
+  "Deep Cleaning",
+  "Office Cleaning",
+  "Move-In & Move-Out Cleaning",
+  "Carpet & Upholstery Care",
+];
+
+const footerCompanyLinks = ["About Us", "Careers", "Reviews", "Blog"];
+
+const footerSupportLinks = ["Contact Us", "FAQs", "Get a Quote", "Service Areas"];
+
+function Chevron({ down = false, open = false }: { down?: boolean; open?: boolean }) {
+  return (
+    <span
+      className={`chevron ${down ? "chevron--down" : ""} ${open ? "chevron--open" : ""}`}
+      aria-hidden="true"
+    />
+  );
 }
 
 function Dropdown({ items, kind }: { items: string[]; kind: "residential" | "commercial" }) {
@@ -68,12 +167,60 @@ function WhatsAppIcon() {
   );
 }
 
+function MailIcon() {
+  return (
+    <svg viewBox="0 0 37 37" aria-hidden="true">
+      <rect x="3" y="8" width="31" height="21" rx="3" />
+      <path d="M5 10.5 18.5 20 32 10.5" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function TrustIcon({ kind }: { kind: (typeof trustPoints)[number]["icon"] }) {
+  if (kind === "shield") {
+    return (
+      <svg viewBox="0 0 40 40" aria-hidden="true">
+        <path d="M20 4 34 9v10c0 9-6 15-14 17C12 34 6 28 6 19V9Z" fill="currentColor" />
+        <path d="M13.5 20 18 24.5 27 15" fill="none" stroke="#fff" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    );
+  }
+  if (kind === "clock") {
+    return (
+      <svg viewBox="0 0 40 40" aria-hidden="true">
+        <circle cx="20" cy="20" r="16" fill="currentColor" />
+        <path d="M20 11v9l6.5 4" fill="none" stroke="#fff" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    );
+  }
+  if (kind === "leaf") {
+    return (
+      <svg viewBox="0 0 40 40" aria-hidden="true">
+        <path d="M9 31c-1-11 5-20 22-22 2 17-7 23-22 22Z" fill="currentColor" />
+        <path d="M12 30c4-6 9-10 16-13" fill="none" stroke="#fff" strokeWidth="2.2" strokeLinecap="round" />
+      </svg>
+    );
+  }
+  return (
+    <svg viewBox="0 0 40 40" aria-hidden="true">
+      <circle cx="20" cy="20" r="16" fill="currentColor" />
+      <path d="M13 20.5 18 25.5 27.5 14.5" fill="none" stroke="#fff" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
 export default function Home() {
   const [openMenu, setOpenMenu] = useState<MenuName>("residential");
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [openService, setOpenService] = useState<string | null>(popularServices[0].name);
+  const [activeTestimonial, setActiveTestimonial] = useState(0);
 
   const toggleMenu = (menu: Exclude<MenuName, null>) => {
     setOpenMenu((current) => (current === menu ? null : menu));
+  };
+
+  const toggleService = (name: string) => {
+    setOpenService((current) => (current === name ? null : name));
   };
 
   return (
@@ -186,15 +333,181 @@ export default function Home() {
           </aside>
         </section>
 
-        <section className="service-grid" id="services" aria-label="Endeavor cleaning services">
-          {serviceCards.map((service) => (
-            <a className="service-card" href="#contact" key={service.name}>
-              <img src={service.image} alt="" />
-              <span>{service.name}</span>
-            </a>
-          ))}
+        <section className="service-grid-section" id="services" aria-label="Endeavor cleaning services">
+          <h2 className="section-heading">Our Cleaning Services</h2>
+          <div className="service-grid">
+            {serviceCards.map((service) => (
+              <a className="service-card" href="#contact" key={service.name}>
+                <img src={service.image} alt="" />
+                <span>{service.name}</span>
+              </a>
+            ))}
+          </div>
+        </section>
+
+        <section className="partner-section" aria-label="Endeavor cleaning categories">
+          <h2 className="section-heading">Your Partner in a Healthier Home</h2>
+          <div className="partner-grid">
+            {partnerColumns.map((column) => (
+              <div className="partner-card" key={column.name}>
+                <div className="partner-card__image">
+                  <img src={column.image} alt="" />
+                </div>
+                <h3>{column.name}</h3>
+                <p>{column.copy}</p>
+                <a className="partner-card__cta" href="#contact">Get a Quote</a>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="popular-section" aria-label="Popular cleaning services">
+          <h2 className="section-heading">Popular Services</h2>
+          <div className="popular-list">
+            {popularServices.map((service) => {
+              const isOpen = openService === service.name;
+              return (
+                <div className={`popular-item ${isOpen ? "popular-item--open" : ""}`} key={service.name}>
+                  <button
+                    className="popular-item__header"
+                    type="button"
+                    aria-expanded={isOpen}
+                    onClick={() => toggleService(service.name)}
+                  >
+                    <span>{service.name}</span>
+                    <Chevron down open={isOpen} />
+                  </button>
+                  {isOpen ? (
+                    <div className="popular-item__body">
+                      <p>{service.copy}</p>
+                      <a className="popular-item__cta" href="#contact">Get a Quote</a>
+                    </div>
+                  ) : null}
+                </div>
+              );
+            })}
+          </div>
         </section>
       </div>
+
+      <section className="trust-band" aria-label="Why choose Endeavor">
+        <div className="content-shell trust-bar">
+          {trustPoints.map((point) => (
+            <div className="trust-item" key={point.title}>
+              <span className="trust-item__icon"><TrustIcon kind={point.icon} /></span>
+              <strong>{point.title}</strong>
+              <p>{point.copy}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <div className="content-shell">
+        <section className="testimonial-section" aria-label="Customer testimonials">
+          <h2 className="section-heading">What Our Customers Say</h2>
+          <div className="testimonial-track">
+            <blockquote className="testimonial-card">
+              <p>“{testimonials[activeTestimonial].quote}”</p>
+              <cite>{testimonials[activeTestimonial].attribution}</cite>
+            </blockquote>
+          </div>
+          <div className="testimonial-dots" role="tablist" aria-label="Choose a testimonial">
+            {testimonials.map((testimonial, index) => (
+              <button
+                key={testimonial.attribution}
+                type="button"
+                role="tab"
+                aria-label={`Show testimonial ${index + 1}`}
+                aria-selected={activeTestimonial === index}
+                className={`testimonial-dot ${activeTestimonial === index ? "testimonial-dot--active" : ""}`}
+                onClick={() => setActiveTestimonial(index)}
+              />
+            ))}
+          </div>
+        </section>
+      </div>
+
+      <section className="promo-band" aria-label="Book online">
+        <div className="content-shell promo-banner">
+          <div>
+            <h2>Book online in minutes</h2>
+            <p>Choose your service, pick a time, and let our team take it from there.</p>
+          </div>
+          <a className="promo-banner__cta" href="#contact">Get a Quote</a>
+        </div>
+      </section>
+
+      <div className="content-shell">
+        <section className="contact-section" aria-label="Get in touch">
+          <h2 className="section-heading">We are here to help you!</h2>
+          <div className="contact-grid">
+            <a className="contact-card" href="#contact" aria-label="Call Endeavor Cleaning">
+              <span className="contact-card__icon contact-card__icon--call"><CallIcon /></span>
+              <strong>Call Us</strong>
+              <p>Speak with our team about your cleaning needs.</p>
+            </a>
+            <a className="contact-card" href="#contact" aria-label="Message Endeavor Cleaning on WhatsApp">
+              <span className="contact-card__icon contact-card__icon--whatsapp"><WhatsAppIcon /></span>
+              <strong>WhatsApp</strong>
+              <p>Message us for a fast, no-obligation quote.</p>
+            </a>
+            <a className="contact-card" href="#contact" aria-label="Email Endeavor Cleaning">
+              <span className="contact-card__icon contact-card__icon--mail"><MailIcon /></span>
+              <strong>Email</strong>
+              <p>Send us the details and we&rsquo;ll get back to you.</p>
+            </a>
+          </div>
+        </section>
+      </div>
+
+      <footer className="site-footer">
+        <div className="content-shell footer-grid">
+          <div className="footer-brand">
+            <img src="/assets/endeavor-logo-v1.png" alt="Endeavor — A Tradition of Quality Cleaning" />
+            <p>A tradition of quality cleaning for homes and businesses.</p>
+            <div className="social-row" aria-label="Endeavor on social media">
+              <a href="#contact" aria-label="Endeavor on Facebook">f</a>
+              <a href="#contact" aria-label="Endeavor on Instagram">◎</a>
+              <a href="#contact" aria-label="Endeavor on LinkedIn">in</a>
+            </div>
+          </div>
+
+          <div className="footer-col">
+            <h4>Services</h4>
+            <ul>
+              {footerServiceLinks.map((link) => (
+                <li key={link}><a href="#services">{link}</a></li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="footer-col">
+            <h4>Company</h4>
+            <ul>
+              {footerCompanyLinks.map((link) => (
+                <li key={link}><a href="#contact">{link}</a></li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="footer-col">
+            <h4>Support</h4>
+            <ul>
+              {footerSupportLinks.map((link) => (
+                <li key={link}><a href="#contact">{link}</a></li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <div className="content-shell footer-bottom">
+          <span>© 2026 Endeavor Cleaning. All rights reserved.</span>
+          <div className="footer-bottom__links">
+            <a href="#contact">Terms</a>
+            <a href="#contact">Privacy</a>
+          </div>
+        </div>
+      </footer>
     </main>
   );
 }
