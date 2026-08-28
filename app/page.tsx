@@ -1,25 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 
-type MenuName = "residential" | "commercial" | null;
-
-const residentialServices = [
-  "Routine Home Cleaning",
-  "Deep Cleaning",
-  "Move-In & Move-Out Cleaning",
-  "Kitchen & Bathroom Cleaning",
-  "Carpet & Upholstery Care",
-  "Recurring Cleaning Plans",
-];
-
-const commercialServices = [
-  "Office Cleaning",
-  "Retail Cleaning",
-  "Facility Care",
-  "Post-Construction Cleaning",
-  "Floor Care",
-  "Custom Cleaning Plans",
+const primaryNavLinks = [
+  { label: "Home", href: "/" },
+  { label: "Services", href: "#services" },
+  { label: "Testimonials", href: "#testimonials" },
+  { label: "Contact Us", href: "#contact" },
 ];
 
 const serviceCards = [
@@ -137,19 +125,6 @@ function Chevron({ down = false, open = false }: { down?: boolean; open?: boolea
   );
 }
 
-function Dropdown({ items, kind }: { items: string[]; kind: "residential" | "commercial" }) {
-  return (
-    <div className={`service-menu service-menu--${kind}`} role="menu">
-      {items.map((item, index) => (
-        <a className="service-menu__item" href="#services" role="menuitem" key={item}>
-          <span>{item}</span>
-          {index !== items.length - 1 ? <Chevron /> : null}
-        </a>
-      ))}
-    </div>
-  );
-}
-
 function CallIcon() {
   return (
     <svg viewBox="0 0 37 37" aria-hidden="true">
@@ -210,14 +185,9 @@ function TrustIcon({ kind }: { kind: (typeof trustPoints)[number]["icon"] }) {
 }
 
 export default function Home() {
-  const [openMenu, setOpenMenu] = useState<MenuName>("residential");
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openService, setOpenService] = useState<string | null>(popularServices[0].name);
   const [activeTestimonial, setActiveTestimonial] = useState(0);
-
-  const toggleMenu = (menu: Exclude<MenuName, null>) => {
-    setOpenMenu((current) => (current === menu ? null : menu));
-  };
 
   const toggleService = (name: string) => {
     setOpenService((current) => (current === name ? null : name));
@@ -227,9 +197,9 @@ export default function Home() {
     <main className="site-frame">
       <header className="site-header">
         <div className="header-shell">
-          <a className="brand" href="#" aria-label="Endeavor Cleaning home">
+          <Link className="brand" href="/" aria-label="Endeavor Cleaning home">
             <img src="/assets/endeavor-logo-v1.png" alt="Endeavor — A Tradition of Quality Cleaning" />
-          </a>
+          </Link>
 
           <button
             className="mobile-toggle"
@@ -244,38 +214,13 @@ export default function Home() {
           </button>
 
           <nav className={`primary-nav ${mobileOpen ? "primary-nav--open" : ""}`} aria-label="Main navigation">
-            <div className="nav-service">
-              <button
-                className={`nav-link nav-link--service ${openMenu === "residential" ? "nav-link--active" : ""}`}
-                type="button"
-                aria-haspopup="menu"
-                aria-expanded={openMenu === "residential"}
-                onMouseEnter={() => setOpenMenu("residential")}
-                onFocus={() => setOpenMenu("residential")}
-                onClick={() => toggleMenu("residential")}
-              >
-                Residential <Chevron down />
-              </button>
-              {openMenu === "residential" ? <Dropdown items={residentialServices} kind="residential" /> : null}
-            </div>
-
-            <div className="nav-service">
-              <button
-                className={`nav-link nav-link--service ${openMenu === "commercial" ? "nav-link--active" : ""}`}
-                type="button"
-                aria-haspopup="menu"
-                aria-expanded={openMenu === "commercial"}
-                onMouseEnter={() => setOpenMenu("commercial")}
-                onFocus={() => setOpenMenu("commercial")}
-                onClick={() => toggleMenu("commercial")}
-              >
-                Commercial <Chevron down />
-              </button>
-              {openMenu === "commercial" ? <Dropdown items={commercialServices} kind="commercial" /> : null}
-            </div>
-
-            <a className="nav-link" href="#services">Services</a>
-            <a className="nav-link" href="#contact">Contact Us</a>
+            {primaryNavLinks.map((link) =>
+              link.href.startsWith("#") ? (
+                <a className="nav-link" href={link.href} key={link.label}>{link.label}</a>
+              ) : (
+                <Link className="nav-link" href={link.href} key={link.label}>{link.label}</Link>
+              )
+            )}
           </nav>
 
           <div className="nav-actions">
@@ -299,7 +244,13 @@ export default function Home() {
         <section className="hero-grid" aria-label="Endeavor Cleaning overview">
           <div className="hero-banner">
             <img src="/assets/endeavor-hero.png" alt="An Endeavor cleaning professional caring for a modern living room" />
-            <h1>A tradition of quality cleaning</h1>
+            <div className="hero-content">
+              <div className="hero-blob">
+                <h1>A tradition of quality cleaning</h1>
+                <p>We make your home spotless so you can enjoy the things that matter.</p>
+                <a className="hero-cta" href="#contact">Get a Quote</a>
+              </div>
+            </div>
             <div className="stats-panel">
               <div><strong>Quality</strong><span>First, Every Time</span></div>
               <div><strong>Flexible</strong><span>Cleaning Plans</span></div>
@@ -403,7 +354,7 @@ export default function Home() {
       </section>
 
       <div className="content-shell">
-        <section className="testimonial-section" aria-label="Customer testimonials">
+        <section className="testimonial-section" id="testimonials" aria-label="Customer testimonials">
           <h2 className="section-heading">What Our Customers Say</h2>
           <div className="testimonial-track">
             <blockquote className="testimonial-card">
