@@ -98,15 +98,6 @@ function WhatsAppIcon() {
   );
 }
 
-function MailIcon() {
-  return (
-    <svg viewBox="0 0 37 37" aria-hidden="true">
-      <rect x="3" y="8" width="31" height="21" rx="3" />
-      <path d="M5 10.5 18.5 20 32 10.5" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
 function PopularIcon({ kind }: { kind: (typeof popularServices)[number]["icon"] }) {
   const common = { fill: "none", stroke: "currentColor", strokeWidth: 2, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
   if (kind === "spray") {
@@ -239,7 +230,7 @@ export default function Home() {
               </div>
             </a>
 
-            <a className="forest-card" href="#contact" id="contact">
+            <a className="forest-card" href="#contact">
               <img src="/assets/endeavor-hero.png" alt="A bright, professionally cleaned living room" />
               <div className="forest-copy">
                 <span className="plant-badge" aria-hidden="true">✦</span>
@@ -288,40 +279,7 @@ export default function Home() {
         </section>
       </div>
 
-      <section className="promo-band" aria-label="Book online">
-        <div className="content-shell promo-banner">
-          <div>
-            <h2>Book online in minutes</h2>
-            <p>Choose your service, pick a time, and let our team take it from there.</p>
-          </div>
-          <a className="promo-banner__cta" href="#contact">Get a Quote</a>
-        </div>
-      </section>
-
-      <div className="content-shell">
-        <section className="contact-section" aria-label="Get in touch">
-          <h2 className="section-heading">We are here to help you!</h2>
-          <div className="contact-grid">
-            <a className="contact-card" href="#contact" aria-label="Call Endeavor Cleaning">
-              <span className="contact-card__icon contact-card__icon--call"><CallIcon /></span>
-              <strong>Call Us</strong>
-              <p>Speak with our team about your cleaning needs.</p>
-            </a>
-            <a className="contact-card" href="#contact" aria-label="Message Endeavor Cleaning on WhatsApp">
-              <span className="contact-card__icon contact-card__icon--whatsapp"><WhatsAppIcon /></span>
-              <strong>WhatsApp</strong>
-              <p>Message us for a fast, no-obligation quote.</p>
-            </a>
-            <a className="contact-card" href="#contact" aria-label="Email Endeavor Cleaning">
-              <span className="contact-card__icon contact-card__icon--mail"><MailIcon /></span>
-              <strong>Email</strong>
-              <p>Send us the details and we&rsquo;ll get back to you.</p>
-            </a>
-          </div>
-        </section>
-      </div>
-
-      <footer className="site-footer">
+      <footer className="site-footer" id="contact">
         <div className="content-shell footer-grid">
           <div className="footer-brand">
             <img src="/assets/endeavor-logo-v1.png" alt="Endeavor — A Tradition of Quality Cleaning" />
