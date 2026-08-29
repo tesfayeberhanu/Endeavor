@@ -6,7 +6,6 @@ import Link from "next/link";
 const primaryNavLinks = [
   { label: "Home", href: "/" },
   { label: "Services", href: "#services" },
-  { label: "Testimonials", href: "#testimonials" },
   { label: "Contact Us", href: "#contact" },
 ];
 
@@ -61,47 +60,6 @@ const popularServices = [
   },
 ] as const;
 
-const trustPoints = [
-  {
-    title: "Vetted & Trained Cleaners",
-    copy: "Every member of our team is background-checked and trained to our standards.",
-    icon: "shield",
-  },
-  {
-    title: "Flexible Scheduling",
-    copy: "Book one-time visits or recurring plans that fit your routine.",
-    icon: "clock",
-  },
-  {
-    title: "Eco-Conscious Products",
-    copy: "We use cleaning products chosen with your family and pets in mind.",
-    icon: "leaf",
-  },
-  {
-    title: "Satisfaction Follow-Up",
-    copy: "Not happy with a spot? Tell us and we'll make it right.",
-    icon: "check",
-  },
-] as const;
-
-const testimonials = [
-  {
-    quote:
-      "Booking was simple and the team left our apartment looking brand new. They were careful with every detail.",
-    attribution: "Homeowner, Dubai",
-  },
-  {
-    quote:
-      "We switched our office cleaning to Endeavor and haven't looked back. Consistent, professional, and always on time.",
-    attribution: "Office Manager, Business Bay",
-  },
-  {
-    quote:
-      "The move-out clean saved us so much stress. Everything was spotless for the handover inspection.",
-    attribution: "Tenant, Abu Dhabi",
-  },
-] as const;
-
 const footerServiceLinks = [
   "Routine Home Cleaning",
   "Deep Cleaning",
@@ -145,39 +103,6 @@ function MailIcon() {
     <svg viewBox="0 0 37 37" aria-hidden="true">
       <rect x="3" y="8" width="31" height="21" rx="3" />
       <path d="M5 10.5 18.5 20 32 10.5" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
-function TrustIcon({ kind }: { kind: (typeof trustPoints)[number]["icon"] }) {
-  if (kind === "shield") {
-    return (
-      <svg viewBox="0 0 40 40" aria-hidden="true">
-        <path d="M20 4 34 9v10c0 9-6 15-14 17C12 34 6 28 6 19V9Z" fill="currentColor" />
-        <path d="M13.5 20 18 24.5 27 15" fill="none" stroke="#fff" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    );
-  }
-  if (kind === "clock") {
-    return (
-      <svg viewBox="0 0 40 40" aria-hidden="true">
-        <circle cx="20" cy="20" r="16" fill="currentColor" />
-        <path d="M20 11v9l6.5 4" fill="none" stroke="#fff" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    );
-  }
-  if (kind === "leaf") {
-    return (
-      <svg viewBox="0 0 40 40" aria-hidden="true">
-        <path d="M9 31c-1-11 5-20 22-22 2 17-7 23-22 22Z" fill="currentColor" />
-        <path d="M12 30c4-6 9-10 16-13" fill="none" stroke="#fff" strokeWidth="2.2" strokeLinecap="round" />
-      </svg>
-    );
-  }
-  return (
-    <svg viewBox="0 0 40 40" aria-hidden="true">
-      <circle cx="20" cy="20" r="16" fill="currentColor" />
-      <path d="M13 20.5 18 25.5 27.5 14.5" fill="none" stroke="#fff" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
@@ -232,7 +157,6 @@ function PopularIcon({ kind }: { kind: (typeof popularServices)[number]["icon"] 
 
 export default function Home() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [activeTestimonial, setActiveTestimonial] = useState(0);
 
   return (
     <main className="site-frame">
@@ -359,43 +283,6 @@ export default function Home() {
                   <Chevron />
                 </a>
               </div>
-            ))}
-          </div>
-        </section>
-      </div>
-
-      <section className="trust-band" aria-label="Why choose Endeavor">
-        <div className="content-shell trust-bar">
-          {trustPoints.map((point) => (
-            <div className="trust-item" key={point.title}>
-              <span className="trust-item__icon"><TrustIcon kind={point.icon} /></span>
-              <strong>{point.title}</strong>
-              <p>{point.copy}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <div className="content-shell">
-        <section className="testimonial-section" id="testimonials" aria-label="Customer testimonials">
-          <h2 className="section-heading">What Our Customers Say</h2>
-          <div className="testimonial-track">
-            <blockquote className="testimonial-card">
-              <p>“{testimonials[activeTestimonial].quote}”</p>
-              <cite>{testimonials[activeTestimonial].attribution}</cite>
-            </blockquote>
-          </div>
-          <div className="testimonial-dots" role="tablist" aria-label="Choose a testimonial">
-            {testimonials.map((testimonial, index) => (
-              <button
-                key={testimonial.attribution}
-                type="button"
-                role="tab"
-                aria-label={`Show testimonial ${index + 1}`}
-                aria-selected={activeTestimonial === index}
-                className={`testimonial-dot ${activeTestimonial === index ? "testimonial-dot--active" : ""}`}
-                onClick={() => setActiveTestimonial(index)}
-              />
             ))}
           </div>
         </section>

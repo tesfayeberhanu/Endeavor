@@ -687,121 +687,6 @@ a {
   background: #843217;
 }
 
-/* Trust / credibility band */
-
-.trust-band {
-  margin-top: 68px;
-  padding: 48px 0;
-  background: var(--navy);
-}
-
-.trust-bar {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
-}
-
-.trust-item {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  color: #fff;
-}
-
-.trust-item__icon {
-  width: 58px;
-  height: 58px;
-  display: grid;
-  place-items: center;
-  border-radius: 50%;
-  background: rgb(255 255 255 / 12%);
-  margin-bottom: 16px;
-}
-
-.trust-item__icon svg {
-  width: 30px;
-  height: 30px;
-  color: var(--rust);
-}
-
-.trust-item strong {
-  font-size: 19px;
-  line-height: 1.25;
-  font-weight: 800;
-}
-
-.trust-item p {
-  margin: 8px 0 0;
-  font-size: 15px;
-  line-height: 1.5;
-  font-weight: 500;
-  opacity: .82;
-}
-
-/* Testimonials */
-
-.testimonial-section {
-  margin-top: 68px;
-  text-align: center;
-}
-
-.testimonial-section .section-heading {
-  text-align: center;
-}
-
-.testimonial-track {
-  display: flex;
-  justify-content: center;
-}
-
-.testimonial-card {
-  margin: 0;
-  max-width: 760px;
-  padding: 36px 40px;
-  border-radius: 18px;
-  background: var(--cream);
-}
-
-.testimonial-card p {
-  margin: 0;
-  font-size: clamp(19px, 1.5vw, 25px);
-  line-height: 1.5;
-  font-weight: 600;
-  color: var(--navy);
-}
-
-.testimonial-card cite {
-  display: block;
-  margin-top: 18px;
-  font-style: normal;
-  font-size: 15px;
-  font-weight: 800;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  color: var(--rust);
-}
-
-.testimonial-dots {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 22px;
-}
-
-.testimonial-dot {
-  width: 10px;
-  height: 10px;
-  padding: 0;
-  border: 0;
-  border-radius: 50%;
-  background: var(--border);
-  cursor: pointer;
-}
-
-.testimonial-dot--active {
-  background: var(--rust);
-}
-
 /* Promo band */
 
 .promo-band {
@@ -1130,7 +1015,6 @@ a {
   .side-panels { grid-template-rows: auto; grid-template-columns: 1fr; }
   .air-card,
   .forest-card { min-height: 236px; }
-  .trust-bar { grid-template-columns: repeat(2, 1fr); }
   .popular-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
   .contact-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
   .promo-banner { justify-content: center; text-align: center; }
@@ -1144,8 +1028,6 @@ a {
   .air-copy p { font-size: 15px; }
   .forest-copy { left: 17px; }
   .plant-badge { width: 56px; height: 56px; }
-  .trust-bar { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr; }
   .footer-brand { grid-column: auto; }
-  .testimonial-card { padding: 28px 22px; }
 }
