@@ -690,29 +690,12 @@ a {
 /* Footer */
 
 .site-footer {
-  position: relative;
-  overflow: hidden;
   margin-top: 68px;
-  background: var(--ink);
+  background: rgb(23 23 91 / 68%);
+  -webkit-backdrop-filter: blur(9px);
+  backdrop-filter: blur(9px);
   color: #fff;
   padding-top: 32px;
-}
-
-.site-footer::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  background:
-    radial-gradient(circle at 12% -10%, rgb(159 64 33 / 40%), transparent 45%),
-    radial-gradient(circle at 88% 110%, rgb(159 64 33 / 22%), transparent 50%),
-    linear-gradient(160deg, rgb(23 23 91 / 92%), rgb(23 23 79 / 78%));
-  pointer-events: none;
-}
-
-.site-footer .content-shell {
-  position: relative;
-  z-index: 1;
 }
 
 .footer-grid {
