@@ -37,7 +37,7 @@ test("server-renders the Endeavor landing page", async () => {
 
     const html = await response.text();
     assert.match(html, /<title>Endeavor \| A Tradition of Quality Cleaning<\/title>/i);
-    assert.match(html, /A tradition of quality cleaning/);
+    assert.match(html, /A Tradition of Quality Cleaning/);
     assert.match(html, /What can we clean for you\?/);
     assert.match(html, /Residential/);
     assert.match(html, /Commercial/);

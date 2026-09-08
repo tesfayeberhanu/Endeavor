@@ -92,6 +92,7 @@ a {
 .primary-nav {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: clamp(26px, 2vw, 42px);
   height: 94px;
   flex: 1 1 auto;
@@ -137,7 +138,7 @@ a {
   display: flex;
   align-items: center;
   flex-shrink: 0;
-  gap: 20px;
+  gap: 26px;
   height: 94px;
 }
 
@@ -2334,7 +2335,7 @@ a {
   .brand img { width: 220px; }
 
   .primary-nav { gap: 33px; }
-  .nav-actions { gap: 13px; }
+  .nav-actions { gap: 17px; }
   .book-button { padding-inline: 18px; font-size: 16px; }
   .brand-note { display: none; }
   .service-menu__item { font-size: 21px; }
