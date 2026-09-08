@@ -142,20 +142,21 @@ a {
 }
 
 .book-button {
-  height: 59px;
-  min-width: 238px;
-  padding: 0 26px;
+  height: 52px;
+  min-width: 0;
+  padding: 0 22px;
   border-radius: 999px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
+  gap: 10px;
   background: var(--rust);
   color: #fff;
-  font-size: 23px;
+  font-size: 18px;
   line-height: 1;
-  letter-spacing: 2.7px;
+  letter-spacing: 1.6px;
   font-weight: 800;
+  white-space: nowrap;
   transition: background .18s ease, transform .18s ease;
 }
 
@@ -2297,7 +2298,7 @@ a {
 
   .primary-nav { gap: 33px; }
   .nav-actions { gap: 13px; }
-  .book-button { min-width: 174px; padding-inline: 20px; font-size: 20px; }
+  .book-button { padding-inline: 18px; font-size: 16px; }
   .brand-note { gap: 8px; font-size: 13px; }
   .service-menu__item { font-size: 21px; }
 }
@@ -2346,7 +2347,6 @@ a {
   .service-menu::before { display: none; }
   .service-menu__item { min-height: 44px; font-size: 17px; }
   .nav-actions { grid-column: 2; grid-row: 1; }
-  .book-button { min-width: 150px; }
   .contact-icon { display: none; }
   .brand-note { grid-column: 3; grid-row: 1; height: 90px; }
   .hero-grid { grid-template-columns: 1.8fr 1fr; }
