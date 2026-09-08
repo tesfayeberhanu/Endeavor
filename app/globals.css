@@ -208,6 +208,11 @@ a {
   stroke-width: 2;
 }
 
+.contact-icon--call svg .call-glyph {
+  fill: var(--navy);
+  stroke: none;
+}
+
 .contact-icon--whatsapp {
   width: 51px;
   height: 51px;
