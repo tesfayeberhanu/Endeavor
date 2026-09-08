@@ -281,15 +281,24 @@ a {
 .nav-services-panel {
   position: absolute;
   top: calc(100% + 24px);
-  left: 50%;
-  width: min(840px, 76vw);
-  padding: 22px;
-  border: 1px solid var(--border);
-  border-top: 4px solid var(--rust);
-  border-radius: 0 0 16px 16px;
-  background: #fff;
-  box-shadow: 0 22px 50px rgb(23 23 91 / 16%);
-  transform: translateX(-50%);
+  left: 0;
+  width: min(420px, 88vw);
+  padding: 12px 0;
+  border-radius: 12px;
+  background: var(--navy);
+  box-shadow: 0 22px 50px rgb(23 23 91 / 28%);
+}
+
+.nav-services-panel::before {
+  content: "";
+  position: absolute;
+  top: -12px;
+  left: 28px;
+  width: 0;
+  height: 0;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-bottom: 12px solid var(--navy);
 }
 
 .nav-services-all {
@@ -297,42 +306,50 @@ a {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 4px 12px;
-  border-bottom: 1px solid var(--border);
-  color: var(--rust);
+  padding: 0 24px 12px;
+  margin: 0 24px 8px;
+  border-bottom: 1px solid rgb(255 255 255 / 18%);
+  color: #fff;
   font-size: 15px;
   font-weight: 900;
 }
 
 .nav-services-panel > div {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 4px 20px;
-  padding-top: 12px;
+  display: flex;
+  flex-direction: column;
 }
 
 .nav-services-panel > div a {
-  min-height: 46px;
+  min-height: 54px;
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 7px 4px;
-  border-bottom: 1px solid rgb(221 200 189 / 60%);
-  color: var(--navy);
-  font-size: 13px;
-  font-weight: 800;
+  gap: 12px;
+  padding: 10px 24px;
+  color: #fff;
+  font-size: 17px;
+  font-weight: 500;
   letter-spacing: 0;
+}
+
+.nav-services-panel > div a span {
+  flex: 1;
+}
+
+.nav-services-panel > div a .chevron {
+  flex: 0 0 auto;
 }
 
 .nav-services-panel > div a:hover,
 .nav-services-panel > div a:focus-visible {
-  color: var(--rust);
+  outline: none;
+  background: rgb(255 255 255 / 10%);
 }
 
 .nav-services-panel img {
-  width: 32px;
-  height: 32px;
+  width: 26px;
+  height: 26px;
   object-fit: contain;
+  flex: 0 0 auto;
 }
 
 .hero-grid {

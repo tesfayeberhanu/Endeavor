@@ -13,6 +13,10 @@ const navLinks = [
   { label: "Contact Us", href: "/contact" },
 ];
 
+function Chevron() {
+  return <span className="chevron" aria-hidden="true" />;
+}
+
 function CallIcon() {
   return (
     <svg viewBox="0 0 37 37" aria-hidden="true">
@@ -69,6 +73,7 @@ export default function SiteHeader() {
                   <Link href={`/services/${service.slug}`} key={service.slug} onClick={() => setMobileOpen(false)}>
                     <img src={service.icon} alt="" />
                     <span>{service.shortName}</span>
+                    <Chevron />
                   </Link>
                 ))}
               </div>
