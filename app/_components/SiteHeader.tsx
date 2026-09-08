@@ -89,7 +89,7 @@ export default function SiteHeader() {
         <div className="nav-actions">
           <Link className="book-button" href="/book">
             <span className="calendar-icon" aria-hidden="true" />
-            Book a Service
+            Book Now
           </Link>
           <a className="contact-icon contact-icon--call" href="tel:+971529597778" aria-label="Call Endeavor Cleaning on +971 52 959 7778">
             <CallIcon />
