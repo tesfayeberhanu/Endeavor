@@ -119,8 +119,9 @@ export default function Home() {
             <img src="/assets/endeavor-hero.png" alt="An Endeavor cleaning professional caring for a modern living room" />
             <div className="hero-content">
               <div className="hero-blob">
-                <h1>A tradition of quality cleaning</h1>
-                <p>Professional cleaning options for homes and businesses across Dubai.</p>
+                <span className="page-eyebrow">A Tradition of Quality Cleaning</span>
+                <h1>Professional Cleaning for Healthier Homes and Businesses in Dubai</h1>
+                <p>From cleaner air and safer water to deeply refreshed living spaces, Endeavor delivers reliable cleaning solutions with professional care.</p>
                 <div className="hero-actions">
                   <Link className="hero-cta" href="/services">View Services</Link>
                   <Link className="hero-cta hero-cta--secondary" href="/book">Book a Service</Link>
