@@ -92,7 +92,7 @@ a {
 .primary-nav {
   display: flex;
   align-items: center;
-  gap: clamp(34px, 2.8vw, 66px);
+  gap: clamp(26px, 2vw, 42px);
   height: 94px;
   flex: 1 1 auto;
   min-width: 0;
@@ -107,7 +107,7 @@ a {
   color: var(--navy);
   font-size: clamp(19px, 1.15vw, 24px);
   line-height: 1.15;
-  letter-spacing: 3.1px;
+  letter-spacing: .2px;
   font-weight: 500;
   cursor: pointer;
 }
@@ -216,7 +216,14 @@ a {
 .contact-icon--whatsapp svg {
   width: 51px;
   height: 51px;
+  fill: #fff;
+  stroke: #1db139;
+  stroke-width: 2;
+}
+
+.contact-icon--whatsapp svg .whatsapp-glyph {
   fill: #1db139;
+  stroke: none;
 }
 
 .brand-note {
