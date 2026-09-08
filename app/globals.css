@@ -277,10 +277,9 @@ a {
   position: absolute;
   top: calc(100% + 24px);
   left: 0;
-  width: min(420px, 88vw);
-  padding: 12px 0;
+  display: flex;
+  align-items: stretch;
   border-radius: 12px;
-  background: var(--navy);
   box-shadow: 0 22px 50px rgb(23 23 91 / 28%);
 }
 
@@ -296,6 +295,14 @@ a {
   border-bottom: 12px solid var(--navy);
 }
 
+.nav-services-panel__categories {
+  width: min(360px, 82vw);
+  padding: 12px 0;
+  background: var(--navy);
+  border-radius: 12px 0 0 12px;
+  flex-shrink: 0;
+}
+
 .nav-services-all {
   min-height: 48px;
   display: flex;
@@ -309,12 +316,12 @@ a {
   font-weight: 900;
 }
 
-.nav-services-panel > div {
+.nav-services-panel__categories > div {
   display: flex;
   flex-direction: column;
 }
 
-.nav-services-panel > div a {
+.nav-services-category > a {
   min-height: 54px;
   display: flex;
   align-items: center;
@@ -326,16 +333,50 @@ a {
   letter-spacing: 0;
 }
 
-.nav-services-panel > div a span {
+.nav-services-category > a span {
   flex: 1;
 }
 
-.nav-services-panel > div a .chevron {
+.nav-services-category > a .chevron {
   flex: 0 0 auto;
 }
 
-.nav-services-panel > div a:hover,
-.nav-services-panel > div a:focus-visible {
+.nav-services-category > a:hover,
+.nav-services-category > a:focus-visible {
+  outline: none;
+  background: rgb(255 255 255 / 10%);
+}
+
+.nav-services-category--active > a {
+  background: rgb(255 255 255 / 10%);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.nav-services-subpanel {
+  width: min(320px, 76vw);
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  background: var(--navy);
+  border-left: 1px solid rgb(255 255 255 / 14%);
+  border-radius: 0 12px 12px 0;
+}
+
+.nav-services-subpanel a {
+  min-height: 46px;
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.nav-services-subpanel a:hover,
+.nav-services-subpanel a:focus-visible {
   outline: none;
   background: rgb(255 255 255 / 10%);
 }
