@@ -38,7 +38,13 @@ function WhatsAppIcon() {
 export default function SiteHeader() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
   const servicesActive = pathname.startsWith("/services");
+
+  const closeMenus = () => {
+    setMobileOpen(false);
+    setServicesOpen(false);
+  };
 
   return (
     <header className="site-header site-header--shared">
@@ -62,23 +68,34 @@ export default function SiteHeader() {
         <nav className={`primary-nav ${mobileOpen ? "primary-nav--open" : ""}`} aria-label="Main navigation">
           <Link className={`nav-link ${pathname === "/" ? "nav-link--active" : ""}`} href="/" onClick={() => setMobileOpen(false)}>Home</Link>
 
-          <details className="nav-services-dropdown">
-            <summary className={`nav-link nav-link--service ${servicesActive ? "nav-link--active" : ""}`}>
+          <div
+            className="nav-services-dropdown"
+            onMouseEnter={() => setServicesOpen(true)}
+            onMouseLeave={() => setServicesOpen(false)}
+          >
+            <button
+              type="button"
+              className={`nav-link nav-link--service ${servicesActive ? "nav-link--active" : ""}`}
+              aria-haspopup="menu"
+              aria-expanded={servicesOpen}
+              onClick={() => setServicesOpen((open) => !open)}
+            >
               Services <span aria-hidden="true">⌄</span>
-            </summary>
-            <div className="nav-services-panel">
-              <Link className="nav-services-all" href="/services" onClick={() => setMobileOpen(false)}>Explore all services <span>→</span></Link>
-              <div>
-                {services.map((service) => (
-                  <Link href={`/services/${service.slug}`} key={service.slug} onClick={() => setMobileOpen(false)}>
-                    <img src={service.icon} alt="" />
-                    <span>{service.shortName}</span>
-                    <Chevron />
-                  </Link>
-                ))}
+            </button>
+            {servicesOpen ? (
+              <div className="nav-services-panel">
+                <Link className="nav-services-all" href="/services" onClick={closeMenus}>Explore all services <span>→</span></Link>
+                <div>
+                  {services.map((service) => (
+                    <Link href={`/services/${service.slug}`} key={service.slug} onClick={closeMenus}>
+                      <span>{service.shortName}</span>
+                      <Chevron />
+                    </Link>
+                  ))}
+                </div>
               </div>
-            </div>
-          </details>
+            ) : null}
+          </div>
 
           {navLinks.slice(1).map((link) => (
             <Link

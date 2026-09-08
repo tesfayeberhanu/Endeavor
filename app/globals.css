@@ -262,18 +262,13 @@ a {
   position: relative;
 }
 
-.nav-services-dropdown > summary {
+.nav-services-dropdown > button {
   display: flex;
   align-items: center;
   gap: 8px;
-  list-style: none;
 }
 
-.nav-services-dropdown > summary::-webkit-details-marker {
-  display: none;
-}
-
-.nav-services-dropdown > summary span {
+.nav-services-dropdown > button span {
   font-size: 16px;
   transform: translateY(-2px);
 }
@@ -343,13 +338,6 @@ a {
 .nav-services-panel > div a:focus-visible {
   outline: none;
   background: rgb(255 255 255 / 10%);
-}
-
-.nav-services-panel img {
-  width: 26px;
-  height: 26px;
-  object-fit: contain;
-  flex: 0 0 auto;
 }
 
 .hero-grid {
