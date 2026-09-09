@@ -45,7 +45,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
         <section className="inner-shell service-hero">
           <div className="service-hero__copy">
             <span className="page-eyebrow">{service.category}</span>
-            <h1>{service.name}</h1>
+            <h1>{service.heroHeading ?? service.name}</h1>
             <p>{service.summary}</p>
             <div className="service-price-box">
               <small>Pricing approach</small>
@@ -60,9 +60,13 @@ export default async function ServicePage({ params }: ServicePageProps) {
                   {service.quoteOnly ? "Request an Exact Quote" : "Start Booking"}
                 </Link>
               )}
-              <a className="outline-action" href={`https://wa.me/971588754060?text=${encodeURIComponent(`Hello Endeavor, I need help choosing an option for ${service.name}.`)}`}>
-                Ask Us on WhatsApp
-              </a>
+              {service.secondaryHeroCta ? (
+                <Link className="outline-action" href={service.secondaryHeroCta.href}>{service.secondaryHeroCta.label}</Link>
+              ) : (
+                <a className="outline-action" href={`https://wa.me/971588754060?text=${encodeURIComponent(`Hello Endeavor, I need help choosing an option for ${service.name}.`)}`}>
+                  Ask Us on WhatsApp
+                </a>
+              )}
             </div>
             <p className="provisional-note">Requests remain provisional until price, availability and access are confirmed.</p>
             {service.trustPoints ? (
