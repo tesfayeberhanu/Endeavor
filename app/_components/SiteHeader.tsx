@@ -4,7 +4,9 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
-import { services } from "@/lib/services";
+import { getService, services } from "@/lib/services";
+
+const acCleaning = getService("ac-cleaning");
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -38,11 +40,13 @@ export default function SiteHeader() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
+  const [packagesOpen, setPackagesOpen] = useState(false);
   const servicesActive = pathname.startsWith("/services");
 
   const closeMenus = () => {
     setMobileOpen(false);
     setServicesOpen(false);
+    setPackagesOpen(false);
   };
 
   return (
@@ -84,6 +88,31 @@ export default function SiteHeader() {
             {servicesOpen ? (
               <div className="nav-services-panel">
                 <div className="nav-services-categories">
+                  {acCleaning?.packages ? (
+                    <div
+                      className={`nav-services-category ${packagesOpen ? "nav-services-category--active" : ""}`}
+                      onMouseEnter={() => setPackagesOpen(true)}
+                      onMouseLeave={() => setPackagesOpen(false)}
+                    >
+                      <Link href="/services/ac-cleaning#options" onClick={closeMenus}>
+                        <span>Packages &amp; Contracts</span>
+                        <Chevron />
+                      </Link>
+                      {packagesOpen ? (
+                        <div className="nav-services-subpanel">
+                          {acCleaning.packages.map((pkg) => (
+                            <Link
+                              href={`/book?service=ac-cleaning&package=${encodeURIComponent(pkg.name)}`}
+                              key={pkg.name}
+                              onClick={closeMenus}
+                            >
+                              {pkg.name}
+                            </Link>
+                          ))}
+                        </div>
+                      ) : null}
+                    </div>
+                  ) : null}
                   {services.map((service) => (
                     <div className="nav-services-category" key={service.slug}>
                       <Link href={`/services/${service.slug}`} onClick={closeMenus}>
