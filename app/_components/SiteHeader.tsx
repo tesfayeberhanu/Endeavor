@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
-import { services } from "@/lib/services";
+import { categories, categorySlug, servicesInCategory, type ServiceCategory } from "@/lib/services";
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -39,11 +39,13 @@ export default function SiteHeader() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
+  const [activeCategory, setActiveCategory] = useState<ServiceCategory | null>(null);
   const servicesActive = pathname.startsWith("/services");
 
   const closeMenus = () => {
     setMobileOpen(false);
     setServicesOpen(false);
+    setActiveCategory(null);
   };
 
   return (
@@ -71,7 +73,10 @@ export default function SiteHeader() {
           <div
             className="nav-services-dropdown"
             onMouseEnter={() => setServicesOpen(true)}
-            onMouseLeave={() => setServicesOpen(false)}
+            onMouseLeave={() => {
+              setServicesOpen(false);
+              setActiveCategory(null);
+            }}
           >
             <button
               type="button"
@@ -85,12 +90,25 @@ export default function SiteHeader() {
             {servicesOpen ? (
               <div className="nav-services-panel">
                 <div className="nav-services-categories">
-                  {services.map((service) => (
-                    <div className="nav-services-category" key={service.slug}>
-                      <Link href={`/services/${service.slug}`} onClick={closeMenus}>
-                        <span>{service.name}</span>
+                  {categories.map((category) => (
+                    <div
+                      key={category}
+                      className={`nav-services-category ${activeCategory === category ? "nav-services-category--active" : ""}`}
+                      onMouseEnter={() => setActiveCategory(category)}
+                    >
+                      <Link href={`/services?category=${categorySlug(category)}`} onClick={closeMenus}>
+                        <span>{category}</span>
                         <Chevron />
                       </Link>
+                      {activeCategory === category ? (
+                        <div className="nav-services-subpanel">
+                          {servicesInCategory(category).map((service) => (
+                            <Link href={`/services/${service.slug}`} key={service.slug} onClick={closeMenus}>
+                              {service.shortName}
+                            </Link>
+                          ))}
+                        </div>
+                      ) : null}
                     </div>
                   ))}
                 </div>
