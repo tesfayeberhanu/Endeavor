@@ -28,14 +28,14 @@ const popularServices = [
   {
     name: "AC Cleaning",
     copy: "Compare Endeavor service levels and request the right option for each AC unit.",
-    image: "/assets/popular-office-cleaning.jpg",
+    image: "/assets/service-ac-cleaning.jpg",
     icon: "air",
     href: "/services/ac-cleaning",
   },
   {
     name: "Water Tank Cleaning",
     copy: "Arrange tank cleaning around capacity, tank type, property and access conditions.",
-    image: "/assets/hero.webp",
+    image: "/assets/service-water-tank.jpg",
     icon: "water",
     href: "/services/water-tank-cleaning",
   },
