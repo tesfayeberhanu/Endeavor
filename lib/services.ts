@@ -45,10 +45,13 @@ export type Service = {
   concerns: string[];
   limitations?: string;
   inclusions: string[];
+  exclusions?: string[];
   steps: string[];
   preparation: string;
   duration: string;
   packages?: ServicePackage[];
+  optionsNote?: string;
+  optionsCtaLabel?: string;
   comparisonRows?: ComparisonRow[];
   seoTitle?: string;
   seoDescription?: string;
@@ -149,19 +152,93 @@ export const services: Service[] = [
     name: "Water Tank Cleaning",
     shortName: "Water Tank",
     category: "Air & Water",
-    summary: "A structured tank-cleaning service planned around tank size, type, location and safe access.",
+    summary: "Remove accumulated sediment, dirt and residue from your water-storage tank with professional cleaning and disinfection for residential and commercial properties.",
     cardCopy: "Tank care arranged around capacity, property type and access conditions.",
     icon: "/assets/water.webp",
     image: "/assets/service-water-tank.jpg",
-    priceNote: "Price confirmed by tank size, type and access",
+    priceNote: "Starting from AED 450",
     quoteOnly: false,
-    concerns: ["Scheduled tank maintenance", "Sediment or visible buildup", "A recently occupied property", "Unclear tank condition"],
-    inclusions: ["Tank and access review", "Confirmed cleaning scope", "Professional equipment for the agreed tank type", "Completion update after the service"],
-    steps: ["Collect tank details", "Confirm access and service scope", "Complete the approved cleaning process", "Share the service outcome"],
-    preparation: "Share the tank capacity, tank type, location, access route and recent photographs if available.",
-    duration: "Duration is confirmed after tank and access details are reviewed.",
+    concerns: [
+      "Visible sediment",
+      "Cloudy or discoloured water",
+      "Unusual taste or odour",
+      "Residue around the opening",
+      "Sludge or debris",
+      "Insects",
+      "A damaged cover",
+      "An extended period without cleaning",
+      "Recent plumbing work",
+      "A change of occupancy",
+    ],
+    limitations: "The service improves storage-tank cleanliness and can remove accumulated debris. It does not certify drinking-water quality. Laboratory testing is required to confirm chemical or microbiological water quality.",
+    inclusions: [
+      "Capacity and access confirmation",
+      "Initial inspection",
+      "Isolation where possible",
+      "Safe draining",
+      "Sediment and sludge removal",
+      "Manual scrubbing of accessible walls and floors",
+      "Rinsing",
+      "Application of an approved disinfectant",
+      "Tank-cover cleaning",
+      "Final inspection",
+      "Photographs where practical",
+      "Work-area cleaning",
+      "Coordination for return to service",
+    ],
+    exclusions: [
+      "Laboratory testing",
+      "Plumbing, pump or float-valve repairs",
+      "Tank replacement",
+      "Crack sealing, waterproofing or coating",
+      "Pipeline cleaning or disinfection",
+      "Filter replacement",
+      "Inaccessible contamination",
+      "Specialist confined-space entry",
+      "Scaffolding or cranes",
+      "Unusual waste disposal",
+      "Refill-water charges",
+      "Additional unbooked tanks",
+    ],
+    steps: [
+      "Confirmation and inspection",
+      "Isolation and draining",
+      "Sediment removal",
+      "Internal scrubbing",
+      "Rinsing and disinfection",
+      "Final inspection and photographs",
+      "Preparation for refilling and handover",
+    ],
+    preparation: "Confirm the tank count and capacity, provide label and access photographs, identify the tank location and drainage point, arrange building approval, parking and permits, inform occupants of the water interruption, stop automatic refill when instructed, disclose leaks or damage and keep people away from the work area. Customers must not enter the tank.",
+    duration: "Duration depends on tank size, count, type, stored-water volume, condition, drainage and access.",
+    packages: [
+      {
+        name: "Small",
+        price: "AED 450",
+        note: "Up to 500 USG — suited to apartments and small residential tanks. Removes accessible sediment, sludge, dirt and residue and disinfects accessible internal surfaces.",
+      },
+      {
+        name: "Medium",
+        price: "AED 750",
+        note: "550–1,000 USG — suited to villas and medium residential tanks. Removes accessible sediment, sludge, dirt and residue and disinfects accessible internal surfaces.",
+      },
+      {
+        name: "Large",
+        price: "AED 1,100",
+        note: "1,100–4,000 USG — suited to large villas and buildings. Removes accessible sediment, sludge, dirt and residue and disinfects accessible internal surfaces.",
+      },
+      {
+        name: "Extra Large",
+        price: "AED 1,300",
+        note: "4,100–10,000 USG — suited to buildings, commercial sites and facilities. Removes accessible sediment, sludge, dirt and residue and disinfects accessible internal surfaces.",
+      },
+    ],
+    optionsNote: "Final pricing can change for multiple tanks, restricted access, heavy contamination, unusual construction, specialist equipment or extra work.",
+    optionsCtaLabel: "View Service Options",
+    seoTitle: "Water Tank Cleaning Dubai | From AED 450 | Endeavor",
+    seoDescription: "Professional water tank cleaning and disinfection in Dubai for tanks up to 10,000 USG. Prices start from AED 450. Request a booking today.",
     faqs: [
-      { question: "What details are needed for pricing?", answer: "Please provide tank capacity, material or type, property type, location and access conditions." },
+      { question: "Which tank-size option should I choose?", answer: "Choose the option that matches your tank's capacity in US gallons (USG): Small (up to 500), Medium (550–1,000), Large (1,100–4,000) or Extra Large (4,100–10,000). Share your tank label or capacity if you're unsure." },
       { question: "Can I send tank photographs?", answer: "Yes. Start the request and continue on WhatsApp to attach photographs that help the team confirm access and scope." },
       sharedFaq,
     ],

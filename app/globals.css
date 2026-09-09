@@ -1576,7 +1576,7 @@ a {
 
 .service-concerns-band > div {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
 
 .service-concerns-band > div > div {
@@ -1585,9 +1585,7 @@ a {
   align-items: center;
   gap: 14px;
   padding: 20px;
-}
-
-.service-concerns-band > div > div + div {
+  border-top: 1px solid var(--border);
   border-left: 1px solid var(--border);
 }
 
@@ -1937,6 +1935,41 @@ a {
   color: var(--navy);
   font-size: 15px;
   font-weight: 700;
+}
+
+.inner-section-heading--tight {
+  margin-top: 42px;
+}
+
+.excluded-list {
+  margin: 20px 0 0;
+  padding: 0;
+  border-top: 1px solid var(--border);
+  list-style: none;
+}
+
+.excluded-list li {
+  min-height: 52px;
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid var(--border);
+  color: rgb(23 23 79 / 62%);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.excluded-list li span {
+  width: 25px;
+  height: 25px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--cream);
+  color: rgb(23 23 79 / 45%);
+  font-size: 11px;
+  font-weight: 900;
 }
 
 .included-list li span {
@@ -2805,9 +2838,6 @@ a {
   .service-directory-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .service-hero { grid-template-columns: 1fr 380px; gap: 42px; }
   .service-hero__media { height: 430px; }
-  .service-concerns-band > div { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .service-concerns-band > div > div:nth-child(3) { border-left: 0; border-top: 1px solid var(--border); }
-  .service-concerns-band > div > div:nth-child(4) { border-top: 1px solid var(--border); }
   .booking-layout,
   .about-hero__grid,
   .about-story-grid,
@@ -2874,10 +2904,6 @@ a {
   .service-hero__media { height: 420px; border-radius: 150px 150px 20px 20px; }
   .service-price-box { grid-template-columns: 1fr; }
   .service-price-box small { grid-row: auto; }
-  .service-concerns-band > div { grid-template-columns: 1fr; }
-  .service-concerns-band > div > div + div,
-  .service-concerns-band > div > div:nth-child(3),
-  .service-concerns-band > div > div:nth-child(4) { border-left: 0; border-top: 1px solid var(--border); }
   .service-detail-grid,
   .faq-section,
   .services-faq-section,

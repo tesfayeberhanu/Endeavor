@@ -54,7 +54,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
             </div>
             <div className="page-hero__actions">
               {service.packages ? (
-                <a className="solid-action" href="#options">View Cleaning Options</a>
+                <a className="solid-action" href="#options">{service.optionsCtaLabel ?? "View Cleaning Options"}</a>
               ) : (
                 <Link className="solid-action" href={{ pathname: "/book", query: bookingQuery }}>
                   {service.quoteOnly ? "Request an Exact Quote" : "Start Booking"}
@@ -94,6 +94,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
             <div className="inner-section-heading">
               <span className="page-eyebrow">Service options</span>
               <h2>Compare Endeavor’s {service.shortName} options</h2>
+              {service.optionsNote ? <p>{service.optionsNote}</p> : null}
             </div>
             <PackageOptions packages={service.packages} bookingQuery={bookingQuery} />
           </section>
@@ -135,6 +136,17 @@ export default async function ServicePage({ params }: ServicePageProps) {
             <ul className="included-list">
               {service.inclusions.map((item) => <li key={item}><span aria-hidden="true">✓</span>{item}</li>)}
             </ul>
+
+            {service.exclusions ? (
+              <>
+                <div className="inner-section-heading inner-section-heading--tight">
+                  <span className="page-eyebrow">Not included</span>
+                </div>
+                <ul className="excluded-list">
+                  {service.exclusions.map((item) => <li key={item}><span aria-hidden="true">✕</span>{item}</li>)}
+                </ul>
+              </>
+            ) : null}
           </div>
 
           <aside className="service-fact-panel">
