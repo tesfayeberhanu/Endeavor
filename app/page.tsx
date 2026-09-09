@@ -171,26 +171,6 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="partner-section" id="services" aria-label="Endeavor cleaning categories">
-          <div className="section-heading-row">
-            <div>
-              <span className="section-kicker">Choose by need</span>
-              <h2 className="section-heading">Cleaning support for every kind of space</h2>
-            </div>
-            <Link className="section-link" href="/services">See all 12 services →</Link>
-          </div>
-          <div className="partner-grid">
-            {partnerColumns.map((column) => (
-              <article className="partner-card" key={column.name}>
-                <div className="partner-card__image"><img src={column.image} alt="" /></div>
-                <h3>{column.name}</h3>
-                <p>{column.copy}</p>
-                <Link className="partner-card__cta" href={column.href}>Explore options</Link>
-              </article>
-            ))}
-          </div>
-        </section>
-
         <section className="popular-section" aria-label="Popular cleaning services">
           <div className="section-heading-row">
             <div>
@@ -211,6 +191,26 @@ export default function Home() {
                 <Link className="popular-card__cta" href={service.href}>
                   View service <Chevron />
                 </Link>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="partner-section" id="services" aria-label="Endeavor cleaning categories">
+          <div className="section-heading-row">
+            <div>
+              <span className="section-kicker">Choose by need</span>
+              <h2 className="section-heading">Cleaning support for every kind of space</h2>
+            </div>
+            <Link className="section-link" href="/services">See all 12 services →</Link>
+          </div>
+          <div className="partner-grid">
+            {partnerColumns.map((column) => (
+              <article className="partner-card" key={column.name}>
+                <div className="partner-card__image"><img src={column.image} alt="" /></div>
+                <h3>{column.name}</h3>
+                <p>{column.copy}</p>
+                <Link className="partner-card__cta" href={column.href}>Explore options</Link>
               </article>
             ))}
           </div>
