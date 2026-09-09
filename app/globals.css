@@ -10,7 +10,6 @@
   --ink: #17174f;
   --navy: #17175b;
   --rust: #9f4021;
-  --service-teal: #5b9298;
   --cream: #faf4f0;
   --border: #ddc8bd;
 }
@@ -278,11 +277,11 @@ a {
   position: absolute;
   top: calc(100% + 24px);
   left: 0;
-  width: min(500px, 90vw);
-  padding: 14px 0;
-  background: var(--service-teal);
-  border-radius: 8px;
-  box-shadow: 0 22px 50px rgb(38 78 82 / 28%);
+  width: min(560px, 90vw);
+  padding: 16px 0;
+  background: var(--navy);
+  border-radius: 14px;
+  box-shadow: 0 22px 50px rgb(23 23 91 / 28%);
   max-height: 78vh;
   overflow-y: auto;
 }
@@ -296,20 +295,20 @@ a {
   height: 0;
   border-left: 14px solid transparent;
   border-right: 14px solid transparent;
-  border-bottom: 14px solid var(--service-teal);
+  border-bottom: 14px solid var(--navy);
 }
 
 .nav-services-all {
-  min-height: 62px;
+  min-height: 56px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 36px 12px;
-  margin: 0 0 4px;
+  padding: 0 40px 16px;
+  margin: 0 40px 8px;
   border-bottom: 1px solid rgb(255 255 255 / 18%);
   color: #fff;
-  font-size: 20px;
-  font-weight: 800;
+  font-size: 17px;
+  font-weight: 900;
 }
 
 .nav-services-categories {
@@ -318,13 +317,13 @@ a {
 }
 
 .nav-services-category > a {
-  min-height: 76px;
+  min-height: 70px;
   display: flex;
   align-items: center;
   gap: 16px;
-  padding: 14px 36px;
+  padding: 14px 40px;
   color: #fff;
-  font-size: 25px;
+  font-size: 24px;
   font-weight: 500;
   letter-spacing: 0;
 }
@@ -340,9 +339,7 @@ a {
 }
 
 .nav-services-category > a:hover,
-.nav-services-category > a:focus-visible,
-.nav-services-all:hover,
-.nav-services-all:focus-visible {
+.nav-services-category > a:focus-visible {
   outline: none;
   background: rgb(255 255 255 / 10%);
 }
@@ -2494,7 +2491,7 @@ a {
     box-shadow: none;
   }
   .nav-services-panel::before { display: none; }
-  .nav-services-categories { display: grid; grid-template-columns: 1fr; }
+  .nav-services-categories { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .nav-services-category > a { min-height: 44px; padding: 7px 9px; font-size: 14px; }
   .nav-services-all { min-height: 44px; padding-bottom: 10px; margin-bottom: 5px; font-size: 15px; }
   .nav-actions { grid-column: 2; grid-row: 1; }
