@@ -9,7 +9,6 @@ import { services } from "@/lib/services";
 const navLinks = [
   { label: "Home", href: "/" },
   { label: "About Us", href: "/about" },
-  { label: "Reviews", href: "/reviews" },
   { label: "Contact Us", href: "/contact" },
 ];
 
