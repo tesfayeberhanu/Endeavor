@@ -57,7 +57,7 @@ export default function SiteHeader() {
         </Link>
 
         <button
-          className="mobile-toggle"
+          className={`mobile-toggle ${mobileOpen ? "mobile-toggle--open" : ""}`}
           type="button"
           aria-label={mobileOpen ? "Close navigation" : "Open navigation"}
           aria-expanded={mobileOpen}

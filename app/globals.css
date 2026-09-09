@@ -2498,23 +2498,33 @@ a {
     gap: 5px;
     cursor: pointer;
   }
-  .mobile-toggle span { height: 2px; width: 100%; background: var(--navy); }
+  .mobile-toggle span {
+    height: 2px;
+    width: 100%;
+    background: var(--navy);
+    transition: transform .2s ease, opacity .2s ease;
+  }
+  .mobile-toggle--open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .mobile-toggle--open span:nth-child(2) { opacity: 0; }
+  .mobile-toggle--open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
   .primary-nav {
     display: none;
-    position: absolute;
-    top: 100px;
-    left: 5.35vw;
-    right: 5.35vw;
+    position: fixed;
+    z-index: 40;
+    top: 122px;
+    left: 0;
+    right: 0;
+    bottom: 0;
     height: auto;
-    max-height: calc(100vh - 112px);
+    max-height: none;
     overflow-y: auto;
-    padding: 18px;
-    border-radius: 14px;
+    padding: 18px 5.35vw 88px;
+    border-radius: 0;
     flex-direction: column;
     align-items: stretch;
     gap: 4px;
     background: #fff;
-    box-shadow: 0 12px 36px rgb(23 60 66 / 15%);
+    box-shadow: none;
   }
   .primary-nav--open { display: flex; }
   .nav-link { display: block; width: 100%; padding: 13px; text-align: left; font-size: 18px; }
