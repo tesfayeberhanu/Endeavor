@@ -84,7 +84,6 @@ export default function SiteHeader() {
             </button>
             {servicesOpen ? (
               <div className="nav-services-panel">
-                <Link className="nav-services-all" href="/services" onClick={closeMenus}>Explore all services <span>→</span></Link>
                 <div className="nav-services-categories">
                   {services.map((service) => (
                     <div className="nav-services-category" key={service.slug}>
