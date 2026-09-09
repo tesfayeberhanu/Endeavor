@@ -2703,5 +2703,5 @@ a {
   .plant-badge { width: 56px; height: 56px; }
   .footer-grid { grid-template-columns: 1fr; }
   .footer-brand { grid-column: auto; }
-  .home-services-grid { grid-template-columns: repeat(2, 1fr); }
+  .home-services-grid { grid-template-columns: 1fr; }
 }
