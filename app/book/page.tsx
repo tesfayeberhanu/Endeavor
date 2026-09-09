@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import { getService } from "@/lib/services";
 import SiteFrame from "../_components/SiteFrame";
 import BookingForm from "./BookingForm";
 
@@ -18,8 +19,11 @@ function firstValue(value: string | string[] | undefined) {
 
 export default async function BookingPage({ searchParams }: BookingPageProps) {
   const query = await searchParams;
-  const initialService = firstValue(query.service);
-  const initialPackage = firstValue(query.package);
+  const requestedService = firstValue(query.service);
+  const selectedService = getService(requestedService);
+  const initialService = selectedService?.slug ?? "";
+  const requestedPackage = firstValue(query.package);
+  const initialPackage = selectedService?.packages?.some((option) => option.name === requestedPackage) ? requestedPackage : "";
   const initialMode = firstValue(query.mode) === "quote" ? "quote" : "booking";
 
   return (
