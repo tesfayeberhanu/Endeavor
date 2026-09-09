@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 
 import { getService, services } from "@/lib/services";
 
@@ -38,16 +39,93 @@ function WhatsAppIcon() {
 
 export default function SiteHeader() {
   const pathname = usePathname();
+  const [mounted, setMounted] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [packagesOpen, setPackagesOpen] = useState(false);
   const servicesActive = pathname.startsWith("/services");
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const closeMenus = () => {
     setMobileOpen(false);
     setServicesOpen(false);
     setPackagesOpen(false);
   };
+
+  const navContent = (
+    <>
+      <Link className={`nav-link ${pathname === "/" ? "nav-link--active" : ""}`} href="/" onClick={() => setMobileOpen(false)}>Home</Link>
+
+      <div
+        className="nav-services-dropdown"
+        onMouseEnter={() => setServicesOpen(true)}
+        onMouseLeave={() => setServicesOpen(false)}
+      >
+        <button
+          type="button"
+          className={`nav-link nav-link--service ${servicesActive ? "nav-link--active" : ""}`}
+          aria-haspopup="menu"
+          aria-expanded={servicesOpen}
+          onClick={() => setServicesOpen((open) => !open)}
+        >
+          Services <span aria-hidden="true">⌄</span>
+        </button>
+        {servicesOpen ? (
+          <div className="nav-services-panel">
+            <div className="nav-services-categories">
+              {acCleaning?.packages ? (
+                <div
+                  className={`nav-services-category ${packagesOpen ? "nav-services-category--active" : ""}`}
+                  onMouseEnter={() => setPackagesOpen(true)}
+                  onMouseLeave={() => setPackagesOpen(false)}
+                >
+                  <Link href="/services/ac-cleaning#options" onClick={closeMenus}>
+                    <span>Packages &amp; Contracts</span>
+                    <Chevron />
+                  </Link>
+                  {packagesOpen ? (
+                    <div className="nav-services-subpanel">
+                      {acCleaning.packages.map((pkg) => (
+                        <Link
+                          href={`/book?service=ac-cleaning&package=${encodeURIComponent(pkg.name)}`}
+                          key={pkg.name}
+                          onClick={closeMenus}
+                        >
+                          {pkg.name}
+                        </Link>
+                      ))}
+                    </div>
+                  ) : null}
+                </div>
+              ) : null}
+              {services.map((service) => (
+                <div className="nav-services-category" key={service.slug}>
+                  <Link href={`/services/${service.slug}`} onClick={closeMenus}>
+                    <span>{service.name}</span>
+                    <Chevron />
+                  </Link>
+                </div>
+              ))}
+            </div>
+          </div>
+        ) : null}
+      </div>
+
+      {navLinks.slice(1).map((link) => (
+        <Link
+          className={`nav-link ${pathname === link.href ? "nav-link--active" : ""}`}
+          href={link.href}
+          key={link.href}
+          onClick={() => setMobileOpen(false)}
+        >
+          {link.label}
+        </Link>
+      ))}
+    </>
+  );
 
   return (
     <header className="site-header site-header--shared">
@@ -68,74 +146,8 @@ export default function SiteHeader() {
           <span />
         </button>
 
-        <nav className={`primary-nav ${mobileOpen ? "primary-nav--open" : ""}`} aria-label="Main navigation">
-          <Link className={`nav-link ${pathname === "/" ? "nav-link--active" : ""}`} href="/" onClick={() => setMobileOpen(false)}>Home</Link>
-
-          <div
-            className="nav-services-dropdown"
-            onMouseEnter={() => setServicesOpen(true)}
-            onMouseLeave={() => setServicesOpen(false)}
-          >
-            <button
-              type="button"
-              className={`nav-link nav-link--service ${servicesActive ? "nav-link--active" : ""}`}
-              aria-haspopup="menu"
-              aria-expanded={servicesOpen}
-              onClick={() => setServicesOpen((open) => !open)}
-            >
-              Services <span aria-hidden="true">⌄</span>
-            </button>
-            {servicesOpen ? (
-              <div className="nav-services-panel">
-                <div className="nav-services-categories">
-                  {acCleaning?.packages ? (
-                    <div
-                      className={`nav-services-category ${packagesOpen ? "nav-services-category--active" : ""}`}
-                      onMouseEnter={() => setPackagesOpen(true)}
-                      onMouseLeave={() => setPackagesOpen(false)}
-                    >
-                      <Link href="/services/ac-cleaning#options" onClick={closeMenus}>
-                        <span>Packages &amp; Contracts</span>
-                        <Chevron />
-                      </Link>
-                      {packagesOpen ? (
-                        <div className="nav-services-subpanel">
-                          {acCleaning.packages.map((pkg) => (
-                            <Link
-                              href={`/book?service=ac-cleaning&package=${encodeURIComponent(pkg.name)}`}
-                              key={pkg.name}
-                              onClick={closeMenus}
-                            >
-                              {pkg.name}
-                            </Link>
-                          ))}
-                        </div>
-                      ) : null}
-                    </div>
-                  ) : null}
-                  {services.map((service) => (
-                    <div className="nav-services-category" key={service.slug}>
-                      <Link href={`/services/${service.slug}`} onClick={closeMenus}>
-                        <span>{service.name}</span>
-                        <Chevron />
-                      </Link>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ) : null}
-          </div>
-
-          {navLinks.slice(1).map((link) => (
-            <Link
-              className={`nav-link ${pathname === link.href ? "nav-link--active" : ""}`}
-              href={link.href}
-              key={link.href}
-              onClick={() => setMobileOpen(false)}
-            >
-              {link.label}
-            </Link>
-          ))}
+        <nav className="primary-nav" aria-label="Main navigation">
+          {navContent}
         </nav>
 
         <div className="nav-actions">
@@ -153,7 +165,15 @@ export default function SiteHeader() {
 
         <div className="brand-note"><span aria-hidden="true" />Dubai service</div>
       </div>
+
+      {mounted
+        ? createPortal(
+            <nav className={`mobile-nav-overlay ${mobileOpen ? "mobile-nav-overlay--open" : ""}`} aria-label="Mobile navigation">
+              {navContent}
+            </nav>,
+            document.body,
+          )
+        : null}
     </header>
   );
 }
-
