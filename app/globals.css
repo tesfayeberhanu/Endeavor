@@ -2483,6 +2483,7 @@ a {
 }
 
 @media (max-width: 1400px) {
+  .hero-cta--secondary { display: none; }
   .site-header { height: 122px; }
   .header-shell { display: grid; grid-template-columns: 1fr auto auto; align-items: center; padding-top: 0; }
   .brand { height: 90px; }
