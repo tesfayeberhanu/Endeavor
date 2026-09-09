@@ -129,12 +129,6 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            <div className="stats-panel">
-              <div><strong>Clear</strong><span>Service Options</span></div>
-              <div><strong>Flexible</strong><span>Booking Requests</span></div>
-              <div><strong>Detailed</strong><span>Agreed Scope</span></div>
-              <div><strong>Dubai</strong><span>Homes & Businesses</span></div>
-            </div>
           </div>
 
           <aside className="side-panels" aria-label="Endeavor service information">

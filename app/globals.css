@@ -405,7 +405,6 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-bottom: 130px;
 }
 
 .hero-blob {
@@ -485,44 +484,6 @@ a {
 .hero-cta--secondary:focus-visible {
   background: var(--navy);
   color: #fff;
-}
-
-.stats-panel {
-  position: absolute;
-  z-index: 3;
-  left: 11%;
-  right: 11%;
-  bottom: 98px;
-  min-height: 96px;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  align-items: center;
-  border-radius: 15px;
-  background: rgb(80 73 115 / 68%);
-  -webkit-backdrop-filter: blur(9px);
-  backdrop-filter: blur(9px);
-}
-
-.stats-panel div {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-
-.stats-panel strong {
-  font-size: clamp(25px, 1.7vw, 34px);
-  line-height: 1.15;
-  letter-spacing: .4px;
-  font-weight: 800;
-}
-
-.stats-panel span {
-  margin-top: 7px;
-  font-size: clamp(15px, .93vw, 19px);
-  line-height: 1.1;
-  font-weight: 600;
 }
 
 .side-panels {
@@ -1035,26 +996,15 @@ a {
 .mobile-contact-bar a {
   flex: 1;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 2px;
-  color: var(--navy);
-  font-size: 12px;
+  height: 100%;
+  background: var(--rust);
+  color: #fff;
+  font-size: 16px;
   font-weight: 800;
-  letter-spacing: .3px;
-}
-
-.mobile-contact-bar a span {
-  font-size: 18px;
-}
-
-.mobile-contact-bar a:nth-child(2) {
-  color: #1db139;
-}
-
-.mobile-contact-bar a:last-child {
-  color: var(--rust);
+  letter-spacing: .6px;
+  text-transform: uppercase;
 }
 
 /* Shared inner pages */
@@ -2568,6 +2518,7 @@ a {
   }
   .primary-nav--open { display: flex; }
   .nav-link { display: block; width: 100%; padding: 13px; text-align: left; font-size: 18px; }
+  .nav-link--active { box-shadow: none; }
   .nav-link--service { display: flex; justify-content: space-between; }
   .nav-services-dropdown { width: 100%; }
   .nav-services-panel {
@@ -2577,12 +2528,19 @@ a {
     margin-top: 4px;
     padding: 13px;
     border-radius: 11px;
+    background: transparent;
     box-shadow: none;
   }
   .nav-services-panel::before { display: none; }
   .nav-services-categories { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .nav-services-category > a { min-height: 44px; padding: 7px 9px; font-size: 14px; }
-  .nav-services-subpanel { position: static; width: 100%; margin-top: 6px; box-shadow: none; }
+  .nav-services-category > a { min-height: 44px; padding: 7px 9px; font-size: 14px; color: var(--navy); }
+  .nav-services-category--active > a,
+  .nav-services-category > a:hover,
+  .nav-services-category > a:focus-visible { background: rgb(80 73 115 / 8%); }
+  .nav-services-subpanel { position: static; width: 100%; margin-top: 6px; background: transparent; box-shadow: none; }
+  .nav-services-subpanel a { color: var(--navy); }
+  .nav-services-subpanel a:hover,
+  .nav-services-subpanel a:focus-visible { background: rgb(80 73 115 / 8%); }
   .nav-actions { grid-column: 2; grid-row: 1; }
   .contact-icon { display: none; }
   .brand-note { display: none; }
@@ -2638,20 +2596,16 @@ a {
     gap: 8px;
   }
   .book-button { display: none; }
-  .contact-icon,
+  .contact-icon { display: inline-flex; width: 32px; height: 32px; }
   .contact-icon svg { width: 32px; height: 32px; }
-  .contact-icon--whatsapp,
+  .contact-icon--whatsapp { width: 32px; height: 32px; }
   .contact-icon--whatsapp svg { width: 32px; height: 32px; }
   .brand-note { display: none; }
   .nav-services-categories { grid-template-columns: 1fr; }
   .hero-grid { height: auto; grid-template-columns: 1fr; }
   .hero-banner { height: 560px; }
-  .hero-content { padding-bottom: 110px; }
   .hero-blob { padding: 32px 24px; gap: 12px; width: min(90%, 460px); }
   .hero-blob h1 { font-size: clamp(26px, 7vw, 36px); }
-  .stats-panel { left: 4%; right: 4%; bottom: 40px; grid-template-columns: repeat(2, 1fr); padding: 13px; row-gap: 14px; }
-  .stats-panel strong { font-size: 21px; }
-  .stats-panel span { font-size: 13px; }
   .side-panels { grid-template-rows: auto; grid-template-columns: 1fr; }
   .air-card,
   .forest-card { min-height: 236px; }
