@@ -21,15 +21,17 @@ export default function PackageOptions({ packages, bookingQuery }: PackageOption
             {servicePackage.image ? (
               <div className="package-option__image"><img src={servicePackage.image} alt="" /></div>
             ) : null}
-            <span>{index === packages.length - 1 ? "Most complete" : `Option ${index + 1}`}</span>
+            <span className="package-option__badge">{index === packages.length - 1 ? "Best Value" : `Option ${index + 1}`}</span>
             <h3>{servicePackage.name}</h3>
             {servicePackage.price ? <strong className="package-option__price">{servicePackage.price}</strong> : null}
             <p className="package-option__note">{servicePackage.note}</p>
             <div className="package-option__actions">
+              <Link className="package-option__select" href={{ pathname: "/book", query: { ...bookingQuery, package: servicePackage.name } }}>
+                Select This Option
+              </Link>
               <button type="button" className="package-option__more" onClick={() => setOpenPackage(servicePackage)}>
-                View More
+                View full details <span aria-hidden="true">→</span>
               </button>
-              <Link href={{ pathname: "/book", query: { ...bookingQuery, package: servicePackage.name } }}>Select this option →</Link>
             </div>
           </article>
         ))}
