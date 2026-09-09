@@ -260,8 +260,8 @@ a {
 
 .nav-services-dropdown {
   position: relative;
-  padding-bottom: 24px;
-  margin-bottom: -24px;
+  padding-bottom: 10px;
+  margin-bottom: -10px;
 }
 
 .nav-services-dropdown > button {
@@ -277,7 +277,7 @@ a {
 
 .nav-services-panel {
   position: absolute;
-  top: calc(100% + 24px);
+  top: calc(100% + 10px);
   left: 0;
   width: min(250px, 88vw);
   padding: 10px;
