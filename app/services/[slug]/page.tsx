@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 
 import SiteFrame from "@/app/_components/SiteFrame";
 import { getService, services } from "@/lib/services";
+import PackageOptions from "./PackageOptions";
 
 type ServicePageProps = {
   params: Promise<{ slug: string }>;
@@ -20,8 +21,8 @@ export async function generateMetadata({ params }: ServicePageProps): Promise<Me
   if (!service) return {};
 
   return {
-    title: `${service.name} Dubai | Endeavor Cleaning`,
-    description: service.summary,
+    title: service.seoTitle ?? `${service.name} Dubai | Endeavor Cleaning`,
+    description: service.seoDescription ?? service.summary,
   };
 }
 
@@ -52,14 +53,25 @@ export default async function ServicePage({ params }: ServicePageProps) {
               <span>Final confirmation states the scope and VAT status.</span>
             </div>
             <div className="page-hero__actions">
-              <Link className="solid-action" href={{ pathname: "/book", query: bookingQuery }}>
-                {service.quoteOnly ? "Request an Exact Quote" : "Start Booking"}
-              </Link>
+              {service.packages ? (
+                <a className="solid-action" href="#options">View Cleaning Options</a>
+              ) : (
+                <Link className="solid-action" href={{ pathname: "/book", query: bookingQuery }}>
+                  {service.quoteOnly ? "Request an Exact Quote" : "Start Booking"}
+                </Link>
+              )}
               <a className="outline-action" href={`https://wa.me/971588754060?text=${encodeURIComponent(`Hello Endeavor, I need help choosing an option for ${service.name}.`)}`}>
                 Ask Us on WhatsApp
               </a>
             </div>
             <p className="provisional-note">Requests remain provisional until price, availability and access are confirmed.</p>
+            {service.trustPoints ? (
+              <ul className="service-trust-points">
+                {service.trustPoints.map((point) => (
+                  <li key={point}><span aria-hidden="true">✓</span>{point}</li>
+                ))}
+              </ul>
+            ) : null}
           </div>
 
           <div className="service-hero__media">
@@ -74,6 +86,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
               <div key={concern}><span>0{index + 1}</span><strong>{concern}</strong></div>
             ))}
           </div>
+          {service.limitations ? <p className="inner-shell service-limitations-note">{service.limitations}</p> : null}
         </section>
 
         {service.packages ? (
@@ -81,22 +94,34 @@ export default async function ServicePage({ params }: ServicePageProps) {
             <div className="inner-section-heading">
               <span className="page-eyebrow">Service options</span>
               <h2>Compare Endeavor’s {service.shortName} options</h2>
-              <p>Package names come from Endeavor’s brief. Approved prices and exact inclusions must be added from the Price Book before publication.</p>
             </div>
-            <div className="package-option-grid">
-              {service.packages.map((servicePackage, index) => (
-                <article className={index === 1 ? "package-option package-option--featured" : "package-option"} key={servicePackage.name}>
-                  <span>{index === 1 ? "Compare this option" : `Option ${index + 1}`}</span>
-                  <h3>{servicePackage.name}</h3>
-                  <p>{servicePackage.note}</p>
-                  <ul>
-                    <li>Scope shown before confirmation</li>
-                    <li>Price shown per AC unit</li>
-                    <li>Duration and exclusions stated clearly</li>
-                  </ul>
-                  <Link href={{ pathname: "/book", query: { ...bookingQuery, package: servicePackage.name } }}>Select this option →</Link>
-                </article>
-              ))}
+            <PackageOptions packages={service.packages} bookingQuery={bookingQuery} />
+          </section>
+        ) : null}
+
+        {service.comparisonRows && service.packages ? (
+          <section className="inner-section inner-shell">
+            <div className="inner-section-heading">
+              <span className="page-eyebrow">Comparison</span>
+              <h2>What each option includes</h2>
+            </div>
+            <div className="comparison-table-wrap">
+              <table className="comparison-table">
+                <thead>
+                  <tr>
+                    <th scope="col"></th>
+                    {service.packages.map((servicePackage) => <th scope="col" key={servicePackage.name}>{servicePackage.name}</th>)}
+                  </tr>
+                </thead>
+                <tbody>
+                  {service.comparisonRows.map((row) => (
+                    <tr key={row.label}>
+                      <th scope="row">{row.label}</th>
+                      {row.values.map((value, index) => <td key={index}>{value}</td>)}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           </section>
         ) : null}
@@ -123,7 +148,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
           <div className="inner-shell">
             <div className="inner-section-heading">
               <span className="page-eyebrow">How the service works</span>
-              <h2>Four steps from request to handover</h2>
+              <h2>{service.steps.length} steps from request to handover</h2>
             </div>
             <ol className="service-process-grid">
               {service.steps.map((step, index) => (

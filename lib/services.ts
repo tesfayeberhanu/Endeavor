@@ -21,6 +21,13 @@ export function categoryFromSlug(slug: string | undefined): ServiceCategory | un
 export type ServicePackage = {
   name: string;
   note: string;
+  price?: string;
+  image?: string;
+};
+
+export type ComparisonRow = {
+  label: string;
+  values: string[];
 };
 
 export type Service = {
@@ -34,12 +41,17 @@ export type Service = {
   image: string;
   priceNote: string;
   quoteOnly: boolean;
+  trustPoints?: string[];
   concerns: string[];
+  limitations?: string;
   inclusions: string[];
   steps: string[];
   preparation: string;
   duration: string;
   packages?: ServicePackage[];
+  comparisonRows?: ComparisonRow[];
+  seoTitle?: string;
+  seoDescription?: string;
   faqs: Array<{ question: string; answer: string }>;
 };
 
@@ -55,30 +67,80 @@ export const services: Service[] = [
     name: "AC Cleaning",
     shortName: "AC Cleaning",
     category: "Air & Water",
-    summary: "Choose an AC cleaning level that matches the condition of your unit and the components you want covered.",
+    summary: "Cleaner AC components can support better airflow, fresher indoor spaces and more efficient cooling. Choose the level of cleaning that matches your AC system’s condition and your property’s needs.",
     cardCopy: "Clear service levels for vents, filters and deeper internal AC care.",
     icon: "/assets/ac.webp",
     image: "/assets/service-ac-cleaning.jpg",
-    priceNote: "Priced per AC unit from the approved Price Book",
+    priceNote: "Starting from AED 150 per AC unit",
     quoteOnly: false,
-    concerns: ["Visible dust around vents", "Stale airflow", "Routine unit care", "A deeper system clean"],
+    trustPoints: [
+      "Four options",
+      "Clear per-unit pricing",
+      "Professional equipment",
+      "Residential and commercial properties",
+      "Dubai-wide service",
+    ],
+    concerns: [
+      "Dust around vents",
+      "Dirty filters",
+      "Musty odours",
+      "Recurring dust",
+      "Reduced or uneven airflow",
+      "Visible coil buildup",
+      "Long periods without cleaning",
+      "Renovation dust",
+    ],
+    limitations: "Cleaning may remove buildup and support airflow through cleaned components. It does not repair refrigerant problems, damaged parts, leaks, electrical faults or other mechanical defects.",
     inclusions: [
       "A pre-service review of the selected AC unit",
-      "Cleaning tasks listed in the confirmed package",
+      "Cleaning tasks listed in the confirmed option",
       "Protection of the immediate work area",
       "A clear handover when the selected work is complete",
     ],
-    steps: ["Confirm the unit and access", "Protect the nearby area", "Complete the selected cleaning scope", "Review the result with the customer"],
-    preparation: "Provide clear access to each indoor AC unit and tell the team about any known leaks, faults or access restrictions.",
-    duration: "Duration depends on package, unit type, quantity and access.",
-    packages: [
-      { name: "Pure Flow", note: "Approved inclusions and price will be shown before confirmation." },
-      { name: "Fresh Air", note: "Approved inclusions and price will be shown before confirmation." },
-      { name: "Full-system option", note: "Final package name, inclusions and price are pending approval." },
+    steps: [
+      "Arrival and option confirmation",
+      "Accessible-component inspection",
+      "Protection of nearby property",
+      "Cleaning of confirmed components",
+      "Reinstallation and final check",
+      "Handover with photographs where applicable",
     ],
+    preparation: "Confirm the unit count and locations, provide access to grills and panels, move fragile items, disclose high ceilings or access restrictions and known faults, arrange building access and parking, and keep children and pets away during the visit.",
+    duration: "Duration depends on the option, unit count, AC type, accessibility and buildup. Confirm duration during booking.",
+    packages: [
+      {
+        name: "Pure Flow — Grill and Filter Cleaning",
+        price: "AED 150 per unit",
+        note: "Routine cleaning of accessible AC grills and washable filters. Recommended for light visible dust, regularly maintained systems and customers who do not require duct or coil cleaning.",
+      },
+      {
+        name: "Fresh Air — AC Duct Cleaning",
+        price: "AED 450 per unit",
+        note: "Cleaning of grills, washable filters and accessible duct sections. Recommended when dust returns quickly, buildup is visible around vents or duct cleaning has not been completed recently. Duct disinfection is included only when confirmed under the approved method.",
+      },
+      {
+        name: "Coil Care — AC Coil Cleaning",
+        price: "AED 500 per unit",
+        note: "A standalone service focused on safely cleaning an accessible AC coil. Recommended for visible coil buildup or when coil cleaning is required without duct cleaning.",
+      },
+      {
+        name: "Full AC Cleaning With Coil",
+        price: "AED 700 per unit",
+        note: "Endeavor’s most comprehensive AC cleaning option, combining accessible duct cleaning, coil cleaning, grills, washable filters and other approved internal components.",
+      },
+    ],
+    comparisonRows: [
+      { label: "Price per unit", values: ["AED 150", "AED 450", "AED 500", "AED 700"] },
+      { label: "Grills and washable filters", values: ["Included", "Included", "Not included", "Included"] },
+      { label: "Accessible ducts", values: ["Not included", "Included", "Not included", "Included"] },
+      { label: "Coil", values: ["Not included", "Not included", "Included", "Included"] },
+      { label: "Photographs", values: ["Where applicable", "Where applicable", "Where applicable", "Where applicable"] },
+    ],
+    seoTitle: "AC Cleaning Services in Dubai | Options From AED 150 | Endeavor",
+    seoDescription: "Choose from four professional AC cleaning options in Dubai, including grill and filter, duct, coil-only and full AC cleaning. View options and prices before booking.",
     faqs: [
-      { question: "Which AC package should I choose?", answer: "Tell us the unit type, quantity and the issue you are noticing. Endeavor will confirm the most suitable approved package before the visit." },
-      { question: "Is the price per property or per unit?", answer: "AC cleaning is structured per unit. The confirmed quote will state the package, quantity, VAT status and any access-related charge." },
+      { question: "Which AC package should I choose?", answer: "Pure Flow suits light visible dust and regularly maintained systems. Fresh Air adds duct cleaning if dust keeps returning quickly. Coil Care targets visible coil buildup on its own. Full AC Cleaning With Coil combines ducts, coil, grills and filters for the most complete clean." },
+      { question: "Is the price per property or per unit?", answer: "AC cleaning is priced per unit. The confirmed quote will state the option, quantity, VAT status and any access-related charge." },
       sharedFaq,
     ],
   },
