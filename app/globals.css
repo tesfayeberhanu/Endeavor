@@ -2635,13 +2635,13 @@ a {
   .nav-actions {
     grid-column: 3;
     height: auto;
-    gap: 10px;
+    gap: 8px;
   }
   .book-button { display: none; }
   .contact-icon,
-  .contact-icon svg { width: 38px; height: 38px; }
+  .contact-icon svg { width: 32px; height: 32px; }
   .contact-icon--whatsapp,
-  .contact-icon--whatsapp svg { width: 40px; height: 40px; }
+  .contact-icon--whatsapp svg { width: 32px; height: 32px; }
   .brand-note { display: none; }
   .nav-services-categories { grid-template-columns: 1fr; }
   .hero-grid { height: auto; grid-template-columns: 1fr; }
