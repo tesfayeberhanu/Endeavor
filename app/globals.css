@@ -277,7 +277,7 @@ a {
 
 .nav-services-panel {
   position: absolute;
-  top: calc(100% + 10px);
+  top: 100%;
   left: 0;
   width: min(250px, 88vw);
   padding: 10px;
