@@ -277,10 +277,13 @@ a {
   position: absolute;
   top: calc(100% + 24px);
   left: 0;
-  display: flex;
-  align-items: stretch;
+  width: min(380px, 88vw);
+  padding: 12px 0;
+  background: var(--navy);
   border-radius: 12px;
   box-shadow: 0 22px 50px rgb(23 23 91 / 28%);
+  max-height: 70vh;
+  overflow-y: auto;
 }
 
 .nav-services-panel::before {
@@ -293,14 +296,6 @@ a {
   border-left: 12px solid transparent;
   border-right: 12px solid transparent;
   border-bottom: 12px solid var(--navy);
-}
-
-.nav-services-panel__categories {
-  width: min(360px, 82vw);
-  padding: 12px 0;
-  background: var(--navy);
-  border-radius: 12px 0 0 12px;
-  flex-shrink: 0;
 }
 
 .nav-services-all {
@@ -316,7 +311,7 @@ a {
   font-weight: 900;
 }
 
-.nav-services-panel__categories > div {
+.nav-services-categories {
   display: flex;
   flex-direction: column;
 }
@@ -339,6 +334,7 @@ a {
 
 .nav-services-category > a .chevron {
   flex: 0 0 auto;
+  transition: transform .15s ease;
 }
 
 .nav-services-category > a:hover,
@@ -349,36 +345,35 @@ a {
 
 .nav-services-category--active > a {
   background: rgb(255 255 255 / 10%);
-  text-decoration: underline;
-  text-underline-offset: 4px;
 }
 
-.nav-services-subpanel {
-  width: min(320px, 76vw);
-  padding: 20px 24px;
+.nav-services-category--active > a .chevron {
+  transform: rotate(135deg) translateY(2px);
+}
+
+.nav-services-subitems {
   display: flex;
   flex-direction: column;
   gap: 2px;
-  background: var(--navy);
-  border-left: 1px solid rgb(255 255 255 / 14%);
-  border-radius: 0 12px 12px 0;
+  padding: 4px 24px 12px 52px;
 }
 
-.nav-services-subpanel a {
-  min-height: 46px;
+.nav-services-subitems a {
+  min-height: 40px;
   display: flex;
   align-items: center;
-  padding: 8px 12px;
+  padding: 6px 12px;
   border-radius: 8px;
-  color: #fff;
-  font-size: 16px;
+  color: rgb(255 255 255 / 85%);
+  font-size: 15px;
   font-weight: 500;
 }
 
-.nav-services-subpanel a:hover,
-.nav-services-subpanel a:focus-visible {
+.nav-services-subitems a:hover,
+.nav-services-subitems a:focus-visible {
   outline: none;
   background: rgb(255 255 255 / 10%);
+  color: #fff;
 }
 
 .hero-grid {
