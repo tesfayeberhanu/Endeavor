@@ -73,7 +73,10 @@ export default function SiteHeader() {
           <div
             className="nav-services-dropdown"
             onMouseEnter={() => setServicesOpen(true)}
-            onMouseLeave={() => setServicesOpen(false)}
+            onMouseLeave={() => {
+              setServicesOpen(false);
+              setActiveCategory(null);
+            }}
           >
             <button
               type="button"
@@ -86,34 +89,32 @@ export default function SiteHeader() {
             </button>
             {servicesOpen ? (
               <div className="nav-services-panel">
-                <Link className="nav-services-all" href="/services" onClick={closeMenus}>Explore all services <span>→</span></Link>
-                <div className="nav-services-categories">
-                  {categories.map((category) => {
-                    const isActive = activeCategory === category;
-                    return (
+                <div className="nav-services-panel__categories">
+                  <Link className="nav-services-all" href="/services" onClick={closeMenus}>Explore all services <span>→</span></Link>
+                  <div className="nav-services-categories">
+                    {categories.map((category) => (
                       <div
                         key={category}
-                        className={`nav-services-category ${isActive ? "nav-services-category--active" : ""}`}
+                        className={`nav-services-category ${activeCategory === category ? "nav-services-category--active" : ""}`}
                         onMouseEnter={() => setActiveCategory(category)}
-                        onMouseLeave={() => setActiveCategory(null)}
                       >
                         <Link href={`/services?category=${categorySlug(category)}`} onClick={closeMenus}>
                           <span>{category}</span>
                           <Chevron />
                         </Link>
-                        {isActive ? (
-                          <div className="nav-services-subitems">
-                            {servicesInCategory(category).map((service) => (
-                              <Link href={`/services/${service.slug}`} key={service.slug} onClick={closeMenus}>
-                                {service.shortName}
-                              </Link>
-                            ))}
-                          </div>
-                        ) : null}
                       </div>
-                    );
-                  })}
+                    ))}
+                  </div>
                 </div>
+                {activeCategory ? (
+                  <div className="nav-services-subpanel">
+                    {servicesInCategory(activeCategory).map((service) => (
+                      <Link href={`/services/${service.slug}`} key={service.slug} onClick={closeMenus}>
+                        {service.shortName}
+                      </Link>
+                    ))}
+                  </div>
+                ) : null}
               </div>
             ) : null}
           </div>

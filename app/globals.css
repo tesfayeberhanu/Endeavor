@@ -277,13 +277,11 @@ a {
   position: absolute;
   top: calc(100% + 24px);
   left: 0;
-  width: min(560px, 90vw);
-  padding: 16px 0;
-  background: var(--navy);
+  display: flex;
+  align-items: flex-start;
   border-radius: 14px;
   box-shadow: 0 22px 50px rgb(23 23 91 / 28%);
   max-height: 78vh;
-  overflow-y: auto;
 }
 
 .nav-services-panel::before {
@@ -296,6 +294,20 @@ a {
   border-left: 14px solid transparent;
   border-right: 14px solid transparent;
   border-bottom: 14px solid var(--navy);
+}
+
+.nav-services-panel__categories {
+  width: min(560px, 90vw);
+  flex-shrink: 0;
+  padding: 16px 0;
+  background: var(--navy);
+  border-radius: 14px 0 0 14px;
+  max-height: 78vh;
+  overflow-y: auto;
+}
+
+.nav-services-panel__categories:last-child {
+  border-radius: 14px;
 }
 
 .nav-services-all {
@@ -336,7 +348,6 @@ a {
   flex: 0 0 auto;
   width: 13px;
   height: 13px;
-  transition: transform .15s ease;
 }
 
 .nav-services-category > a:hover,
@@ -347,32 +358,37 @@ a {
 
 .nav-services-category--active > a {
   background: rgb(255 255 255 / 10%);
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }
 
-.nav-services-category--active > a .chevron {
-  transform: rotate(135deg) translateY(2px);
-}
-
-.nav-services-subitems {
+.nav-services-subpanel {
+  width: min(420px, 80vw);
+  flex-shrink: 0;
+  padding: 24px 32px;
   display: flex;
   flex-direction: column;
   gap: 4px;
-  padding: 6px 40px 18px 76px;
+  background: var(--navy);
+  border-left: 1px solid rgb(255 255 255 / 14%);
+  border-radius: 0 14px 14px 0;
+  max-height: 78vh;
+  overflow-y: auto;
 }
 
-.nav-services-subitems a {
+.nav-services-subpanel a {
   min-height: 48px;
   display: flex;
   align-items: center;
   padding: 8px 16px;
   border-radius: 8px;
   color: rgb(255 255 255 / 85%);
-  font-size: 18px;
+  font-size: 19px;
   font-weight: 500;
 }
 
-.nav-services-subitems a:hover,
-.nav-services-subitems a:focus-visible {
+.nav-services-subpanel a:hover,
+.nav-services-subpanel a:focus-visible {
   outline: none;
   background: rgb(255 255 255 / 10%);
   color: #fff;
