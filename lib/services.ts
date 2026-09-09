@@ -194,8 +194,8 @@ export const services: Service[] = [
   },
   {
     slug: "carpet-cleaning",
-    name: "Carpet Cleaning",
-    shortName: "Carpet Cleaning",
+    name: "Carpet Shampooing",
+    shortName: "Carpet Shampooing",
     category: "Furniture & Floors",
     summary: "Carpet cleaning planned around material, measured area, installation type and the condition of the fibres.",
     cardCopy: "A suitable cleaning method for loose rugs and fitted carpet areas.",
