@@ -8,33 +8,39 @@ import type { ServicePackage } from "@/lib/services";
 type PackageOptionsProps = {
   packages: ServicePackage[];
   bookingQuery: { service: string; mode: string };
+  ctaLabel?: string;
+  noFeatured?: boolean;
 };
 
-export default function PackageOptions({ packages, bookingQuery }: PackageOptionsProps) {
+export default function PackageOptions({ packages, bookingQuery, ctaLabel, noFeatured }: PackageOptionsProps) {
   const [openPackage, setOpenPackage] = useState<ServicePackage | null>(null);
+  const selectLabel = ctaLabel ?? "Select This Option";
 
   return (
     <>
       <div className="package-option-grid">
-        {packages.map((servicePackage, index) => (
-          <article className={index === packages.length - 1 ? "package-option package-option--featured" : "package-option"} key={servicePackage.name}>
-            {servicePackage.image ? (
-              <div className="package-option__image"><img src={servicePackage.image} alt="" /></div>
-            ) : null}
-            <span className="package-option__badge">{index === packages.length - 1 ? "Best Value" : `Option ${index + 1}`}</span>
-            <h3>{servicePackage.name}</h3>
-            {servicePackage.price ? <strong className="package-option__price">{servicePackage.price}</strong> : null}
-            <p className="package-option__note">{servicePackage.note}</p>
-            <div className="package-option__actions">
-              <Link className="package-option__select" href={{ pathname: "/book", query: { ...bookingQuery, package: servicePackage.name } }}>
-                Select This Option
-              </Link>
-              <button type="button" className="package-option__more" onClick={() => setOpenPackage(servicePackage)}>
-                View full details <span aria-hidden="true">→</span>
-              </button>
-            </div>
-          </article>
-        ))}
+        {packages.map((servicePackage, index) => {
+          const isFeatured = !noFeatured && index === packages.length - 1;
+          return (
+            <article className={isFeatured ? "package-option package-option--featured" : "package-option"} key={servicePackage.name}>
+              {servicePackage.image ? (
+                <div className="package-option__image"><img src={servicePackage.image} alt="" /></div>
+              ) : null}
+              <span className="package-option__badge">{isFeatured ? "Best Value" : `Option ${index + 1}`}</span>
+              <h3>{servicePackage.name}</h3>
+              {servicePackage.price ? <strong className="package-option__price">{servicePackage.price}</strong> : null}
+              <p className="package-option__note">{servicePackage.note}</p>
+              <div className="package-option__actions">
+                <Link className="package-option__select" href={{ pathname: "/book", query: { ...bookingQuery, package: servicePackage.name } }}>
+                  {selectLabel}
+                </Link>
+                <button type="button" className="package-option__more" onClick={() => setOpenPackage(servicePackage)}>
+                  View full details <span aria-hidden="true">→</span>
+                </button>
+              </div>
+            </article>
+          );
+        })}
       </div>
 
       <div className={`package-panel-overlay ${openPackage ? "package-panel-overlay--open" : ""}`} onClick={() => setOpenPackage(null)} aria-hidden={!openPackage}>
@@ -54,7 +60,7 @@ export default function PackageOptions({ packages, bookingQuery }: PackageOption
                 className="package-panel__cta"
                 href={{ pathname: "/book", query: { ...bookingQuery, package: openPackage.name } }}
               >
-                Select this option →
+                {selectLabel}
               </Link>
             </>
           ) : null}

@@ -1940,6 +1940,35 @@ a {
   line-height: 1.6;
 }
 
+.quotation-factors-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 14px 24px;
+  margin: 32px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.quotation-factors-list li {
+  position: relative;
+  padding-left: 20px;
+  color: var(--navy);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.quotation-factors-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 9px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--rust);
+}
+
 .service-detail-grid {
   display: grid;
   grid-template-columns: 1fr .75fr;

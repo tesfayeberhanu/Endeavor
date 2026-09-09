@@ -46,14 +46,18 @@ export type Service = {
   trustPoints?: string[];
   concerns: string[];
   limitations?: string;
+  quotationFactors?: string[];
   inclusions: string[];
   exclusions?: string[];
   steps: string[];
   preparation: string;
   duration: string;
   packages?: ServicePackage[];
+  optionsHeading?: string;
   optionsNote?: string;
   optionsCtaLabel?: string;
+  packageCtaLabel?: string;
+  noFeaturedOption?: boolean;
   comparisonRows?: ComparisonRow[];
   seoTitle?: string;
   seoDescription?: string;
@@ -329,20 +333,85 @@ export const services: Service[] = [
     name: "External Window & Façade Cleaning",
     shortName: "Window & Façade",
     category: "Property Cleaning",
-    summary: "External glass and façade cleaning planned around building height, surface area, access and site conditions.",
+    heroHeading: "External Window & Façade Cleaning in Dubai",
+    summary: "Improve the appearance of exterior glass and accessible building surfaces with a cleaning plan based on the property, height, access method and surface condition.",
     cardCopy: "Clearer exterior surfaces with access requirements reviewed first.",
     icon: "/assets/inspection.webp",
     image: "/assets/service-window-facade.jpg",
-    priceNote: "Site details are required for an exact quote",
+    priceNote: "Site assessment and quotation",
     quoteOnly: true,
-    concerns: ["Dusty exterior glass", "Weather-marked façades", "High or restricted access", "Handover presentation"],
-    inclusions: ["Access and surface review", "A clearly defined external cleaning scope", "Equipment matched to the approved access method", "Site handover after completion"],
-    steps: ["Share building and access details", "Complete an inspection if needed", "Approve the final quotation", "Schedule and complete the service"],
-    preparation: "Provide façade photographs, approximate height or floor count, access information and any building-management restrictions.",
-    duration: "Duration is confirmed after surface area and access are assessed.",
+    concerns: [
+      "Villas and townhouses",
+      "Low-rise buildings",
+      "Shops and offices",
+      "Managed properties",
+      "Exterior glass with dust or water marks",
+      "Façade surfaces requiring planned cleaning",
+      "One-time or periodic projects",
+    ],
+    limitations: "No price is shown until the access method and scope are approved.",
+    quotationFactors: [
+      "Building type and height",
+      "Glass or façade area",
+      "Surface material",
+      "Level of soil and staining",
+      "Safe access from inside or outside",
+      "Ladders, platforms, rope access, scaffolding or lifting equipment",
+      "Water access",
+      "Permits and building-management approval",
+      "Operating hours",
+      "Parking, traffic or pedestrian control",
+    ],
+    inclusions: [
+      "Site and access review",
+      "Confirmation of surfaces",
+      "Protection of the immediate area",
+      "Removal of loose dust",
+      "Washing of accessible exterior glass or approved façade surfaces",
+      "Cleaning of frames and sills when quoted",
+      "Spot check",
+      "Work-area cleanup",
+      "Photographs where practical",
+    ],
+    exclusions: [
+      "Rope access, scaffolding, cranes or lifting equipment unless quoted",
+      "Sealant or façade repair",
+      "Scratch removal",
+      "Glass restoration",
+      "Paint, cement or adhesive removal unless assessed",
+      "Work near unsafe electrical or structural conditions",
+      "Unrestricted access to neighbouring property",
+      "Permanent mineral etching",
+      "Interior window cleaning unless included",
+    ],
+    steps: [
+      "Photo review",
+      "Site assessment",
+      "Access and safety plan",
+      "Quotation approval",
+      "Area protection",
+      "Cleaning",
+      "Quality check",
+      "Handover",
+    ],
+    preparation: "Provide building and elevation photographs, the approximate height and number of windows, arrange authorised access and permits, identify water and power availability, disclose restricted areas, advise occupants and remove items from balconies and window areas.",
+    duration: "Duration is project-specific and confirmed after the site assessment.",
+    packages: [
+      { name: "Accessible Exterior Windows", note: "Cleaning of exterior windows that can be safely reached from inside or with standard access, without specialist equipment." },
+      { name: "Villa Windows and Glass", note: "Exterior window and glass cleaning planned around villa height, layout and accessible surfaces." },
+      { name: "Low-Rise Façade Cleaning", note: "Façade cleaning for low-rise buildings, assessed for surface material, soil level and safe access." },
+      { name: "Commercial or High-Access Façade Projects", note: "Larger or higher-access façade projects assessed for building height, access method, permits and safety requirements." },
+    ],
+    optionsHeading: "Choose the type of access your property needs",
+    optionsNote: "Each option opens a side panel explaining access requirements. No price is shown until the access method and scope are approved.",
+    optionsCtaLabel: "Request an Assessment",
+    packageCtaLabel: "Request Assessment",
+    noFeaturedOption: true,
+    seoTitle: "External Window and Facade Cleaning Dubai | Endeavor",
+    seoDescription: "Professional external window and facade cleaning in Dubai. Request a site assessment and quotation based on height, access and surface condition.",
     faqs: [
-      { question: "Is an inspection required?", answer: "An inspection may be required when height, access method or site restrictions cannot be confirmed from the information provided." },
-      { question: "Can the work be scheduled around business hours?", answer: "Share your preferred working window and any site rules. Availability is confirmed with the quotation." },
+      { question: "Why isn't a fixed price shown?", answer: "Pricing depends on building height, access method, surface area and safety requirements. No price is shown until the access method and scope are approved after assessment." },
+      { question: "What if my building needs rope access, scaffolding or a lift?", answer: "Specialist access equipment is only included when it has been assessed and quoted. Share your building height and access details so this can be reviewed." },
       sharedFaq,
     ],
   },

@@ -93,14 +93,31 @@ export default async function ServicePage({ params }: ServicePageProps) {
           {service.limitations ? <p className="inner-shell service-limitations-note">{service.limitations}</p> : null}
         </section>
 
+        {service.quotationFactors ? (
+          <section className="inner-section inner-shell">
+            <div className="inner-section-heading">
+              <span className="page-eyebrow">Quotation factors</span>
+              <h2>What affects your quote</h2>
+            </div>
+            <ul className="quotation-factors-list">
+              {service.quotationFactors.map((factor) => <li key={factor}>{factor}</li>)}
+            </ul>
+          </section>
+        ) : null}
+
         {service.packages ? (
           <section className="inner-section inner-shell" id="options">
             <div className="inner-section-heading">
               <span className="page-eyebrow">Service options</span>
-              <h2>Compare Endeavor’s {service.shortName} options</h2>
+              <h2>{service.optionsHeading ?? `Compare Endeavor’s ${service.shortName} options`}</h2>
               {service.optionsNote ? <p>{service.optionsNote}</p> : null}
             </div>
-            <PackageOptions packages={service.packages} bookingQuery={bookingQuery} />
+            <PackageOptions
+              packages={service.packages}
+              bookingQuery={bookingQuery}
+              ctaLabel={service.packageCtaLabel}
+              noFeatured={service.noFeaturedOption}
+            />
           </section>
         ) : null}
 
