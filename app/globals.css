@@ -277,10 +277,10 @@ a {
   position: absolute;
   top: calc(100% + 24px);
   left: 0;
-  width: min(560px, 90vw);
-  padding: 16px 0;
+  width: min(250px, 88vw);
+  padding: 10px;
   background: var(--navy);
-  border-radius: 14px;
+  border-radius: 4px;
   box-shadow: 0 22px 50px rgb(23 23 91 / 28%);
   max-height: 78vh;
   overflow-y: auto;
@@ -289,41 +289,40 @@ a {
 .nav-services-panel::before {
   content: "";
   position: absolute;
-  top: -14px;
-  left: 32px;
+  top: -8px;
+  left: 22px;
   width: 0;
   height: 0;
-  border-left: 14px solid transparent;
-  border-right: 14px solid transparent;
-  border-bottom: 14px solid var(--navy);
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid var(--navy);
 }
 
 .nav-services-all {
-  min-height: 56px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 40px 16px;
-  margin: 0 40px 8px;
+  padding: 4px 4px 10px;
+  margin-bottom: 8px;
   border-bottom: 1px solid rgb(255 255 255 / 18%);
   color: #fff;
-  font-size: 17px;
+  font-size: 13px;
   font-weight: 900;
 }
 
 .nav-services-categories {
   display: flex;
   flex-direction: column;
+  gap: 12px;
 }
 
 .nav-services-category > a {
-  min-height: 70px;
   display: flex;
   align-items: center;
-  gap: 16px;
-  padding: 14px 40px;
+  gap: 8px;
+  padding: 4px;
   color: #fff;
-  font-size: 24px;
+  font-size: 16px;
   font-weight: 500;
   letter-spacing: 0;
 }
@@ -334,8 +333,8 @@ a {
 
 .nav-services-category > a .chevron {
   flex: 0 0 auto;
-  width: 13px;
-  height: 13px;
+  width: 7px;
+  height: 7px;
 }
 
 .nav-services-category > a:hover,
