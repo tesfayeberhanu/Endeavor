@@ -737,9 +737,13 @@ a {
 }
 
 .home-services-grid {
-  display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
+  display: flex;
   gap: 22px;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  padding-bottom: 10px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--navy) transparent;
 }
 
 .home-services-card {
@@ -748,6 +752,8 @@ a {
   align-items: center;
   gap: 12px;
   text-align: center;
+  flex: 0 0 200px;
+  scroll-snap-align: start;
 }
 
 .home-services-card__image {
@@ -2596,7 +2602,7 @@ a {
   .hero-grid { grid-template-columns: 1.8fr 1fr; }
   .partner-grid { grid-template-columns: 1fr; max-width: 520px; margin: 0 auto; }
   .popular-grid { grid-template-columns: repeat(2, 1fr); }
-  .home-services-grid { grid-template-columns: repeat(4, 1fr); }
+  .home-services-grid { display: grid; grid-template-columns: repeat(4, 1fr); overflow-x: visible; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
   .footer-brand { grid-column: 1 / -1; }
 
