@@ -478,17 +478,6 @@ a {
   gap: 10px;
 }
 
-.hero-cta--secondary {
-  border: 2px solid var(--navy);
-  background: #fff;
-  color: var(--navy);
-}
-
-.hero-cta--secondary:hover,
-.hero-cta--secondary:focus-visible {
-  background: var(--navy);
-  color: #fff;
-}
 
 .side-panels {
   display: grid;
