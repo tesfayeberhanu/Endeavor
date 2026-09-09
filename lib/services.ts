@@ -17,14 +17,6 @@ export function categoryFromSlug(slug: string | undefined): ServiceCategory | un
   return (Object.keys(categorySlugs) as ServiceCategory[]).find((category) => categorySlugs[category] === slug);
 }
 
-export function categorySlug(category: ServiceCategory): string {
-  return categorySlugs[category];
-}
-
-export const categories = serviceCategories.filter(
-  (category): category is ServiceCategory => category !== "All Services",
-);
-
 
 export type ServicePackage = {
   name: string;
@@ -336,10 +328,6 @@ export const services: Service[] = [
 
 export function getService(slug: string) {
   return services.find((service) => service.slug === slug);
-}
-
-export function servicesInCategory(category: ServiceCategory) {
-  return services.filter((service) => service.category === category);
 }
 
 export const featuredServices = [
