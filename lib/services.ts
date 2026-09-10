@@ -987,7 +987,7 @@ export const services: Service[] = [
     summary: "Remove accumulated scale, soap residue and everyday dirt from accessible bathroom surfaces and fixtures through a focused deep-cleaning service.",
     cardCopy: "Detailed attention for the bathroom surfaces and fixtures you identify.",
     icon: "/assets/deep-clean.webp",
-    image: "/assets/service-bathroom.jpg",
+    image: "/assets/bath.jpg",
     priceNote: "Prices from AED 180",
     quoteOnly: false,
     secondaryHeroCta: { label: "Book Bathroom Cleaning", href: "/book?service=bathroom-deep-cleaning&mode=booking" },
