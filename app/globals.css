@@ -2087,20 +2087,19 @@ a {
 
 .service-process-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 0;
   margin: 38px 0 0;
   padding: 0;
-  border-block: 1px solid var(--border);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
   list-style: none;
 }
 
 .service-process-grid li {
   min-height: 190px;
   padding: 26px;
-}
-
-.service-process-grid li + li {
+  border-top: 1px solid var(--border);
   border-left: 1px solid var(--border);
 }
 
@@ -2972,7 +2971,6 @@ a {
   .services-review-band__grid { grid-template-columns: 1fr; }
   .service-process-grid,
   .services-journey-grid { grid-template-columns: 1fr; }
-  .service-process-grid li + li,
   .services-journey-grid li + li { border-left: 0; border-top: 1px solid var(--border); }
   .services-journey-grid li { min-height: 220px; }
   .services-journey-grid h3 { margin-top: 38px; }
