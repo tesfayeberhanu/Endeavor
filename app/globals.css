@@ -429,7 +429,7 @@ a {
   inset: -14%;
   z-index: -1;
   border-radius: 50%;
-  background: radial-gradient(closest-side, rgb(255 255 255 / 94%) 60%, rgb(255 255 255 / 0%) 100%);
+  background: radial-gradient(closest-side, rgb(255 255 255 / 55%) 60%, rgb(255 255 255 / 0%) 100%);
 }
 
 .hero-blob h1 {
