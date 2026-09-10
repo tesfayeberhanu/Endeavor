@@ -497,7 +497,7 @@ export const services: Service[] = [
     summary: "Deep-clean mattresses to reduce accumulated dust, everyday dirt and treatable marks, using a method suitable for the mattress material and condition.",
     cardCopy: "Detailed mattress care with the method confirmed before work begins.",
     icon: "/assets/mattress.webp",
-    image: "/assets/service-mattress.jpg",
+    image: "/assets/mat1.jpg",
     priceNote: "Prices from AED 150",
     quoteOnly: false,
     secondaryHeroCta: { label: "Book Mattress Cleaning", href: "/book?service=mattress-cleaning&mode=booking" },
@@ -653,7 +653,7 @@ export const services: Service[] = [
     summary: "Restore clarity and improve the appearance of suitable marble surfaces with a polishing plan based on the stone type, area and existing condition.",
     cardCopy: "Condition-led polishing for marble floors and selected surfaces.",
     icon: "/assets/more.webp",
-    image: "/assets/service-marble.jpg",
+    image: "/assets/marble.jpg",
     priceNote: "Site assessment and quotation",
     quoteOnly: true,
     secondaryHeroCta: {
