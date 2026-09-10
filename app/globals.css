@@ -692,7 +692,7 @@ a {
 
 .home-services-grid {
   display: flex;
-  gap: 22px;
+  gap: 16px;
   overflow-x: auto;
   scroll-snap-type: x proximity;
   padding-bottom: 10px;
@@ -704,9 +704,9 @@ a {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   text-align: center;
-  flex: 0 0 200px;
+  flex: 0 0 150px;
   scroll-snap-align: start;
 }
 
@@ -731,7 +731,7 @@ a {
 }
 
 .home-services-card span {
-  font-size: 15px;
+  font-size: 13px;
   line-height: 1.3;
   font-weight: 800;
   color: var(--navy);
@@ -2887,7 +2887,7 @@ a {
   .hero-grid { grid-template-columns: 1.8fr 1fr; }
   .partner-grid { grid-template-columns: 1fr; max-width: 520px; margin: 0 auto; }
   .popular-grid { grid-template-columns: repeat(2, 1fr); }
-  .home-services-grid { display: grid; grid-template-columns: repeat(4, 1fr); overflow-x: visible; }
+  .home-services-grid { display: grid; grid-template-columns: repeat(6, 1fr); overflow-x: visible; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
   .footer-brand { grid-column: 1 / -1; }
 
@@ -2934,7 +2934,7 @@ a {
   .air-card,
   .forest-card { min-height: 236px; }
   .popular-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
-  .home-services-grid { grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .home-services-grid { grid-template-columns: repeat(4, 1fr); gap: 14px; }
   .footer-bottom { justify-content: center; text-align: center; }
 
   .inner-shell { width: min(92vw, 720px); }
