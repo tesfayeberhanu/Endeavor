@@ -163,7 +163,7 @@ export const services: Service[] = [
     summary: "Remove accumulated sediment, dirt and residue from your water-storage tank with professional cleaning and disinfection for residential and commercial properties.",
     cardCopy: "Tank care arranged around capacity, property type and access conditions.",
     icon: "/assets/water.webp",
-    image: "/assets/service-water-tank.jpg",
+    image: "/assets/tanker-cleaning.png",
     priceNote: "Starting from AED 450",
     quoteOnly: false,
     concerns: [

@@ -35,7 +35,7 @@ const popularServices = [
   {
     name: "Water Tank Cleaning",
     copy: "Arrange tank cleaning around capacity, tank type, property and access conditions.",
-    image: "/assets/service-water-tank.jpg",
+    image: "/assets/tanker-cleaning.png",
     icon: "water",
     href: "/services/water-tank-cleaning",
   },
