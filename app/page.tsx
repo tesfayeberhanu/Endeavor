@@ -13,7 +13,7 @@ const partnerColumns = [
   {
     name: "Commercial Cleaning",
     copy: "Planned cleaning for offices, facilities and customer-facing spaces around access and operating needs.",
-    image: "/assets/hero.webp",
+    image: "/assets/commercial.png",
     href: "/contact",
   },
   {
