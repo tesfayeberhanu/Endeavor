@@ -2088,19 +2088,18 @@ a {
 .service-process-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 0;
+  gap: 16px;
   margin: 38px 0 0;
   padding: 0;
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
   list-style: none;
 }
 
 .service-process-grid li {
-  min-height: 190px;
+  min-height: 170px;
   padding: 26px;
-  border-top: 1px solid var(--border);
-  border-left: 1px solid var(--border);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: #fff;
 }
 
 .service-process-grid span {
