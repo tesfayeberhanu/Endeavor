@@ -80,7 +80,7 @@ export const services: Service[] = [
     summary: "Cleaner AC components can support better airflow, fresher indoor spaces and more efficient cooling. Choose the level of cleaning that matches your AC system’s condition and your property’s needs.",
     cardCopy: "Clear service levels for vents, filters and deeper internal AC care.",
     icon: "/assets/ac.webp",
-    image: "/assets/service-ac-cleaning.jpg",
+    image: "/assets/ac.png",
     priceNote: "Starting from AED 150 per AC unit",
     quoteOnly: false,
     trustPoints: [
@@ -424,7 +424,7 @@ export const services: Service[] = [
     summary: "Refresh upholstered seating by removing accessible dust, everyday dirt and treatable marks using a method selected for the fabric and condition.",
     cardCopy: "Focused upholstery care for everyday marks and embedded buildup.",
     icon: "/assets/sofa.webp",
-    image: "/assets/service-sofa.jpg",
+    image: "/assets/sofa.png",
     priceNote: "Prices from AED 100",
     quoteOnly: false,
     secondaryHeroCta: {

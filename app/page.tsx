@@ -28,7 +28,7 @@ const popularServices = [
   {
     name: "AC Cleaning",
     copy: "Compare Endeavor service levels and request the right option for each AC unit.",
-    image: "/assets/service-ac-cleaning.jpg",
+    image: "/assets/ac.png",
     icon: "air",
     href: "/services/ac-cleaning",
   },
