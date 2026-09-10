@@ -56,7 +56,7 @@ const popularServices = [
   {
     name: "Carpet Cleaning",
     copy: "Choose a suitable approach for fitted carpet or loose rugs based on material and area.",
-    image: "/assets/popular-carpet-upholstery.jpg",
+    image: "/assets/mat.jpg",
     icon: "sofa",
     href: "/services/carpet-cleaning",
   },

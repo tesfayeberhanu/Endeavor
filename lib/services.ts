@@ -563,7 +563,7 @@ export const services: Service[] = [
     summary: "Refresh fitted carpets and suitable loose carpets by removing accessible dust, dirt and treatable marks with a cleaning method matched to the material and condition.",
     cardCopy: "A suitable cleaning method for loose rugs and fitted carpet areas.",
     icon: "/assets/deep-clean.webp",
-    image: "/assets/popular-carpet-upholstery.jpg",
+    image: "/assets/mat.jpg",
     priceNote: "Request a quotation",
     quoteOnly: true,
     secondaryHeroCta: {
