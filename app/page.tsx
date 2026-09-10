@@ -7,7 +7,7 @@ const partnerColumns = [
   {
     name: "Residential Cleaning",
     copy: "Detailed services for apartments and villas, from focused furniture care to complete property cleaning.",
-    image: "/assets/endeavor-hero.png",
+    image: "/assets/residential.png",
     href: "/services?category=property-cleaning",
   },
   {
