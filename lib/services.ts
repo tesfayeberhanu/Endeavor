@@ -19,15 +19,26 @@ export function categoryFromSlug(slug: string | undefined): ServiceCategory | un
 
 
 export type ServicePackage = {
+  id?: string;
   name: string;
+  subtitle?: string;
   note: string;
   price?: string;
   image?: string;
+  bookLabel?: string;
 };
 
 export type ComparisonRow = {
   label: string;
   values: string[];
+};
+
+export type BookingField = {
+  name: string;
+  label: string;
+  type: "text" | "select" | "number";
+  options?: string[];
+  required?: boolean;
 };
 
 export type Service = {
@@ -59,6 +70,10 @@ export type Service = {
   packageCtaLabel?: string;
   noFeaturedOption?: boolean;
   comparisonRows?: ComparisonRow[];
+  comparisonHeading?: string;
+  notSureGuide?: Array<{ name: string; blurb: string }>;
+  bookingFields?: BookingField[];
+  villaBookingFields?: BookingField[];
   seoTitle?: string;
   seoDescription?: string;
   faqs: Array<{ question: string; answer: string }>;
@@ -119,24 +134,32 @@ export const services: Service[] = [
     duration: "Duration depends on the option, unit count, AC type, accessibility and buildup. Confirm duration during booking.",
     packages: [
       {
-        name: "Pure Flow — Grill and Filter Cleaning",
+        name: "Pure Flow",
+        subtitle: "Grill & Filter Cleaning",
         price: "AED 150 per unit",
         note: "Routine cleaning of accessible AC grills and washable filters. Recommended for light visible dust, regularly maintained systems and customers who do not require duct or coil cleaning.",
+        bookLabel: "Book Pure Flow",
       },
       {
-        name: "Fresh Air — AC Duct Cleaning",
+        name: "Fresh Air",
+        subtitle: "AC Duct Cleaning",
         price: "AED 450 per unit",
         note: "Cleaning of grills, washable filters and accessible duct sections. Recommended when dust returns quickly, buildup is visible around vents or duct cleaning has not been completed recently. Duct disinfection is included only when confirmed under the approved method.",
+        bookLabel: "Book Fresh Air",
       },
       {
-        name: "Coil Care — AC Coil Cleaning",
+        name: "Coil Care",
+        subtitle: "AC Coil Cleaning",
         price: "AED 500 per unit",
         note: "A standalone service focused on safely cleaning an accessible AC coil. Recommended for visible coil buildup or when coil cleaning is required without duct cleaning.",
+        bookLabel: "Book Coil Care",
       },
       {
-        name: "Full AC Cleaning With Coil",
+        name: "Package 4 (Name Pending Approval)",
+        subtitle: "Accessible Duct, Coil, Grills & Filters",
         price: "AED 700 per unit",
-        note: "Endeavor’s most comprehensive AC cleaning option, combining accessible duct cleaning, coil cleaning, grills, washable filters and other approved internal components.",
+        note: "Endeavor’s most comprehensive AC cleaning option, combining accessible duct cleaning, coil cleaning, grills, washable filters and other approved internal components. Public package name to be confirmed by management before publication.",
+        bookLabel: "Book Package 4",
       },
     ],
     comparisonRows: [
@@ -144,12 +167,26 @@ export const services: Service[] = [
       { label: "Grills and washable filters", values: ["Included", "Included", "Not included", "Included"] },
       { label: "Accessible ducts", values: ["Not included", "Included", "Not included", "Included"] },
       { label: "Coil", values: ["Not included", "Not included", "Included", "Included"] },
+      { label: "Duct disinfection", values: ["Not applicable", "Confirmed at inspection", "Not applicable", "Confirmed at inspection"] },
+      { label: "Drain tray", values: ["Confirmed at inspection", "Confirmed at inspection", "Confirmed at inspection", "Confirmed at inspection"] },
+      { label: "Accessible drainage", values: ["Confirmed at inspection", "Confirmed at inspection", "Confirmed at inspection", "Confirmed at inspection"] },
       { label: "Photographs", values: ["Where applicable", "Where applicable", "Where applicable", "Where applicable"] },
+      { label: "Best suited for", values: ["Light dust, well-maintained systems", "Recurring dust, vents needing duct care", "Visible coil buildup only", "Most complete care in one visit"] },
+      { label: "Booking action", values: ["Book Pure Flow", "Book Fresh Air", "Book Coil Care", "Book Package 4"] },
+    ],
+    notSureGuide: [
+      { name: "Pure Flow", blurb: "Start here for light visible dust on a regularly maintained system — no duct or coil work needed." },
+      { name: "Fresh Air", blurb: "Choose this if dust keeps returning quickly or duct cleaning hasn’t been done in a while." },
+      { name: "Coil Care", blurb: "Pick this when coil buildup is visible but ducts don’t need attention." },
+      { name: "Package 4", blurb: "The most complete option — ducts, coil, grills and filters together in one visit." },
+    ],
+    bookingFields: [
+      { name: "acType", label: "AC type", type: "select", options: ["Split unit", "Window unit", "Central / Ducted", "Not sure"], required: true },
     ],
     seoTitle: "AC Cleaning Services in Dubai | Options From AED 150 | Endeavor",
     seoDescription: "Choose from four professional AC cleaning options in Dubai, including grill and filter, duct, coil-only and full AC cleaning. View options and prices before booking.",
     faqs: [
-      { question: "Which AC package should I choose?", answer: "Pure Flow suits light visible dust and regularly maintained systems. Fresh Air adds duct cleaning if dust keeps returning quickly. Coil Care targets visible coil buildup on its own. Full AC Cleaning With Coil combines ducts, coil, grills and filters for the most complete clean." },
+      { question: "Which AC package should I choose?", answer: "Pure Flow suits light visible dust and regularly maintained systems. Fresh Air adds duct cleaning if dust keeps returning quickly. Coil Care targets visible coil buildup on its own. Package 4 combines ducts, coil, grills and filters for the most complete clean." },
       { question: "Is the price per property or per unit?", answer: "AC cleaning is priced per unit. The confirmed quote will state the option, quantity, VAT status and any access-related charge." },
       sharedFaq,
     ],
@@ -221,28 +258,43 @@ export const services: Service[] = [
     duration: "Duration depends on tank size, count, type, stored-water volume, condition, drainage and access.",
     packages: [
       {
-        name: "Small",
+        name: "Small Water Tank Cleaning",
+        subtitle: "Up to 500 USG",
         price: "AED 450",
-        note: "Up to 500 USG — suited to apartments and small residential tanks. Removes accessible sediment, sludge, dirt and residue and disinfects accessible internal surfaces.",
+        note: "Suited to apartments and small residential tanks. Removes accessible sediment, sludge, dirt and residue and disinfects accessible internal surfaces.",
       },
       {
-        name: "Medium",
+        name: "Medium Water Tank Cleaning",
+        subtitle: "550 to 1,000 USG",
         price: "AED 750",
-        note: "550–1,000 USG — suited to villas and medium residential tanks. Removes accessible sediment, sludge, dirt and residue and disinfects accessible internal surfaces.",
+        note: "Suited to villas and medium residential tanks. Removes accessible sediment, sludge, dirt and residue and disinfects accessible internal surfaces.",
       },
       {
-        name: "Large",
+        name: "Large Water Tank Cleaning",
+        subtitle: "1,100 to 4,000 USG",
         price: "AED 1,100",
-        note: "1,100–4,000 USG — suited to large villas and buildings. Removes accessible sediment, sludge, dirt and residue and disinfects accessible internal surfaces.",
+        note: "Suited to large villas and buildings. Removes accessible sediment, sludge, dirt and residue and disinfects accessible internal surfaces.",
       },
       {
-        name: "Extra Large",
+        name: "Extra-Large Water Tank Cleaning",
+        subtitle: "4,100 to 10,000 USG",
         price: "AED 1,300",
-        note: "4,100–10,000 USG — suited to buildings, commercial sites and facilities. Removes accessible sediment, sludge, dirt and residue and disinfects accessible internal surfaces.",
+        note: "Suited to buildings, commercial sites and facilities. Removes accessible sediment, sludge, dirt and residue and disinfects accessible internal surfaces.",
       },
     ],
     optionsNote: "Final pricing can change for multiple tanks, restricted access, heavy contamination, unusual construction, specialist equipment or extra work.",
     optionsCtaLabel: "View Service Options",
+    packageCtaLabel: "Request Booking",
+    comparisonHeading: "Water Tank Cleaning Prices",
+    comparisonRows: [
+      { label: "Capacity", values: ["Up to 500 USG", "550 to 1,000 USG", "1,100 to 4,000 USG", "4,100 to 10,000 USG"] },
+      { label: "Price", values: ["AED 450", "AED 750", "AED 1,100", "AED 1,300"] },
+      { label: "Typical property", values: ["Apartments and small residential tanks", "Villas and medium residential tanks", "Large villas and buildings", "Buildings, commercial sites and facilities"] },
+    ],
+    bookingFields: [
+      { name: "tankMaterial", label: "Tank material (if known)", type: "select", options: ["Plastic", "GRP / Fibreglass", "Concrete", "Steel", "Not sure"] },
+      { name: "tankAccess", label: "Access conditions", type: "select", options: ["Easy roof access", "Restricted access", "Confined space", "Not sure"], required: true },
+    ],
     seoTitle: "Water Tank Cleaning Dubai | From AED 450 | Endeavor",
     seoDescription: "Professional water tank cleaning and disinfection in Dubai for tanks up to 10,000 USG. Prices start from AED 450. Request a booking today.",
     faqs: [
@@ -309,17 +361,23 @@ export const services: Service[] = [
     preparation: "Confirm the furnishing status and apartment size, identify priority areas, send photographs for heavy conditions, remove personal items and valuables, empty cabinets if interiors are included, provide water and electricity, arrange access, parking and permits, and secure pets.",
     duration: "Studio or 1-bedroom apartments normally take 4–5 hours with two technicians; 2–3 bedroom apartments normally take 6–8 hours with three technicians, subject to condition.",
     packages: [
-      { name: "Studio — Unfurnished", price: "AED 700", note: "Standard deep-cleaning scope for a studio apartment in confirmed standard condition, unfurnished." },
-      { name: "Studio — Furnished", price: "AED 900", note: "Standard deep-cleaning scope for a studio apartment in confirmed standard condition, furnished." },
-      { name: "1 Bedroom — Unfurnished", price: "AED 900", note: "Standard deep-cleaning scope for a 1-bedroom apartment in confirmed standard condition, unfurnished." },
-      { name: "1 Bedroom — Furnished", price: "AED 950", note: "Standard deep-cleaning scope for a 1-bedroom apartment in confirmed standard condition, furnished." },
-      { name: "2 Bedroom — Unfurnished", price: "AED 1,600", note: "Standard deep-cleaning scope for a 2-bedroom apartment in confirmed standard condition, unfurnished." },
-      { name: "2 Bedroom — Furnished", price: "AED 1,850", note: "Standard deep-cleaning scope for a 2-bedroom apartment in confirmed standard condition, furnished." },
-      { name: "3 Bedroom — Unfurnished", price: "AED 2,100", note: "Standard deep-cleaning scope for a 3-bedroom apartment in confirmed standard condition, unfurnished." },
-      { name: "3 Bedroom — Furnished", price: "AED 2,150", note: "Standard deep-cleaning scope for a 3-bedroom apartment in confirmed standard condition, furnished." },
+      { id: "studio-unfurnished", name: "Studio", subtitle: "Unfurnished", price: "AED 700", note: "Standard deep-cleaning scope for a studio apartment in confirmed standard condition, unfurnished.", bookLabel: "Book Studio — Unfurnished" },
+      { id: "studio-furnished", name: "Studio", subtitle: "Furnished", price: "AED 900", note: "Standard deep-cleaning scope for a studio apartment in confirmed standard condition, furnished.", bookLabel: "Book Studio — Furnished" },
+      { id: "1bed-unfurnished", name: "1 Bedroom", subtitle: "Unfurnished", price: "AED 900", note: "Standard deep-cleaning scope for a 1-bedroom apartment in confirmed standard condition, unfurnished.", bookLabel: "Book 1 Bedroom — Unfurnished" },
+      { id: "1bed-furnished", name: "1 Bedroom", subtitle: "Furnished", price: "AED 950", note: "Standard deep-cleaning scope for a 1-bedroom apartment in confirmed standard condition, furnished.", bookLabel: "Book 1 Bedroom — Furnished" },
+      { id: "2bed-unfurnished", name: "2 Bedroom", subtitle: "Unfurnished", price: "AED 1,600", note: "Standard deep-cleaning scope for a 2-bedroom apartment in confirmed standard condition, unfurnished.", bookLabel: "Book 2 Bedroom — Unfurnished" },
+      { id: "2bed-furnished", name: "2 Bedroom", subtitle: "Furnished", price: "AED 1,850", note: "Standard deep-cleaning scope for a 2-bedroom apartment in confirmed standard condition, furnished.", bookLabel: "Book 2 Bedroom — Furnished" },
+      { id: "3bed-unfurnished", name: "3 Bedroom", subtitle: "Unfurnished", price: "AED 2,100", note: "Standard deep-cleaning scope for a 3-bedroom apartment in confirmed standard condition, unfurnished.", bookLabel: "Book 3 Bedroom — Unfurnished" },
+      { id: "3bed-furnished", name: "3 Bedroom", subtitle: "Furnished", price: "AED 2,150", note: "Standard deep-cleaning scope for a 3-bedroom apartment in confirmed standard condition, furnished.", bookLabel: "Book 3 Bedroom — Furnished" },
     ],
     optionsNote: "Prices apply only to apartments in standard deep-cleaning condition and the confirmed standard scope. Villas, properties above three bedrooms, post-construction conditions, heavy grease, pest contamination and unusual residue require photographs, assessment and quotation.",
     optionsCtaLabel: "View Apartment Options",
+    villaBookingFields: [
+      { name: "villaSize", label: "Approximate villa size (sq ft)", type: "text" },
+      { name: "bedrooms", label: "Number of bedrooms", type: "number", required: true },
+      { name: "furnishedStatus", label: "Furnished or unfurnished", type: "select", options: ["Furnished", "Unfurnished", "Partially furnished"], required: true },
+      { name: "propertyCondition", label: "Property condition", type: "select", options: ["Standard", "Post-construction", "Heavy grease or dust", "Other"], required: true },
+    ],
     seoTitle: "Specialized Deep Cleaning Dubai | Apartment Prices | Endeavor",
     seoDescription: "Detailed furnished and unfurnished apartment deep cleaning in Dubai. View standard apartment prices or request a villa assessment.",
     faqs: [
@@ -407,6 +465,11 @@ export const services: Service[] = [
     optionsCtaLabel: "Request an Assessment",
     packageCtaLabel: "Request Assessment",
     noFeaturedOption: true,
+    bookingFields: [
+      { name: "floors", label: "Number of floors", type: "number", required: true },
+      { name: "glassArea", label: "Approximate glass / façade area (sq ft)", type: "text" },
+      { name: "accessConditions", label: "Access conditions", type: "select", options: ["Accessible from inside", "Exterior access needed", "Rope access or scaffolding likely needed", "Not sure"], required: true },
+    ],
     seoTitle: "External Window and Facade Cleaning Dubai | Endeavor",
     seoDescription: "Professional external window and facade cleaning in Dubai. Request a site assessment and quotation based on height, access and surface condition.",
     faqs: [
@@ -474,12 +537,19 @@ export const services: Service[] = [
     preparation: "Send full-sofa and close-up photographs, confirm the number of seats or pieces and material, remove personal items, provide access and ventilation, disclose previous treatments or delicate fabric, and keep children and pets away until advised.",
     duration: "Duration and drying time depend on sofa size, fabric, method, ventilation and condition.",
     packages: [
-      { name: "1 Seat", price: "AED 100", note: "Standard cleaning for a single-seat sofa or armchair in typical condition." },
-      { name: "2 Seats", price: "AED 200", note: "Standard cleaning for a 2-seat sofa in typical condition." },
-      { name: "3 Seats", price: "AED 300", note: "Standard cleaning for a 3-seat sofa in typical condition." },
+      { name: "1 Seat", price: "AED 100", note: "Standard cleaning for a single-seat sofa or armchair in typical condition.", bookLabel: "Book 1 Seat" },
+      { name: "2 Seats", price: "AED 200", note: "Standard cleaning for a 2-seat sofa in typical condition.", bookLabel: "Book 2 Seats" },
+      { name: "3 Seats", price: "AED 300", note: "Standard cleaning for a 3-seat sofa in typical condition.", bookLabel: "Book 3 Seats" },
+      { name: "More Than 3 Seats", note: "L-shaped sofas, recliners, sofa beds, loose cushions, unusual materials and sofas with more than three seats require photographs and confirmation before a price is issued.", bookLabel: "Request Confirmation" },
     ],
     optionsNote: "L-shaped sofas, recliners, sofa beds, loose cushions, unusual materials and more than three seats require photographs and confirmation. Prices are conditional on fabric, pieces, condition and forecast service time.",
     optionsCtaLabel: "View Sofa Options",
+    noFeaturedOption: true,
+    bookingFields: [
+      { name: "sofaType", label: "Sofa type", type: "select", options: ["Straight sofa", "L-shaped / sectional", "Recliner", "Sofa bed", "Armchair", "Other"], required: true },
+      { name: "material", label: "Fabric / material (if known)", type: "text" },
+      { name: "condition", label: "Condition", type: "select", options: ["Light dust or dirt", "Visible stains", "Pet hair or odour", "Heavy soiling", "Not sure"], required: true },
+    ],
     seoTitle: "Sofa Cleaning Dubai | Prices From AED 100 | Endeavor",
     seoDescription: "Professional sofa cleaning in Dubai for upholstered seating. View per-seat prices and send photographs for service confirmation.",
     faqs: [
@@ -540,12 +610,16 @@ export const services: Service[] = [
     preparation: "Remove linen and mattress protectors, make both sides accessible if included, send photographs of stains or damage, disclose previous treatment, provide ventilation and access, and keep the mattress unused until sufficiently dry.",
     duration: "Duration and drying time depend on size, method, ventilation, number of mattresses and condition.",
     packages: [
-      { name: "Single", price: "AED 150", note: "Standard cleaning for a single mattress in typical condition." },
-      { name: "Double", price: "AED 190", note: "Standard cleaning for a double mattress in typical condition." },
-      { name: "King", price: "AED 230", note: "Standard cleaning for a king mattress in typical condition." },
+      { name: "Single", price: "AED 150", note: "Standard cleaning for a single mattress in typical condition.", bookLabel: "Book Single" },
+      { name: "Double", price: "AED 190", note: "Standard cleaning for a double mattress in typical condition.", bookLabel: "Book Double" },
+      { name: "King", price: "AED 230", note: "Standard cleaning for a king mattress in typical condition.", bookLabel: "Book King" },
     ],
     optionsNote: "Confirm the number of mattresses, exact size, condition and access before booking. Cleaning both sides requires both sides to be accessible and must be confirmed in the scope. Prices are conditional on forecast service time.",
     optionsCtaLabel: "View Mattress Options",
+    bookingFields: [
+      { name: "mattressMaterial", label: "Mattress material (if known)", type: "text" },
+      { name: "condition", label: "Condition", type: "select", options: ["Light dust or dirt", "Visible stains", "Odour", "Heavy soiling", "Not sure"], required: true },
+    ],
     seoTitle: "Mattress Cleaning Dubai | Prices From AED 150 | Endeavor",
     seoDescription: "Professional mattress cleaning in Dubai for single, double and king mattresses. View prices and request booking confirmation.",
     faqs: [
@@ -636,6 +710,14 @@ export const services: Service[] = [
     optionsCtaLabel: "Request a Quotation",
     packageCtaLabel: "Request Quotation",
     noFeaturedOption: true,
+    bookingFields: [
+      { name: "carpetType", label: "Carpet type / material", type: "text" },
+      { name: "fittedOrLoose", label: "Fitted or loose", type: "select", options: ["Fitted carpet", "Loose carpet / rug", "Both"], required: true },
+      { name: "carpetArea", label: "Approximate area or dimensions", type: "text" },
+      { name: "rooms", label: "Number of rooms", type: "number" },
+      { name: "stainDetails", label: "Stain or mark details", type: "text" },
+      { name: "furnitureMovement", label: "Furniture movement needed?", type: "select", options: ["No furniture to move", "Some furniture to move", "Not sure"] },
+    ],
     seoTitle: "Carpet Shampooing Dubai | Home and Office Carpet Cleaning | Endeavor",
     seoDescription: "Professional carpet shampooing in Dubai for homes and offices. Send carpet details and photographs to request a quotation.",
     faqs: [
@@ -727,6 +809,12 @@ export const services: Service[] = [
     optionsCtaLabel: "Request an Assessment",
     packageCtaLabel: "Request Assessment",
     noFeaturedOption: true,
+    bookingFields: [
+      { name: "marbleArea", label: "Approximate area (sq metres)", type: "text" },
+      { name: "currentCondition", label: "Current condition", type: "select", options: ["Dull or lost clarity", "Light scratching", "Stains", "Uneven or high-traffic wear", "Not sure"], required: true },
+      { name: "requiredFinish", label: "Required finish", type: "select", options: ["Glossy", "Satin", "Matte", "Not sure"] },
+      { name: "accessConditions", label: "Access conditions", type: "text" },
+    ],
     seoTitle: "Marble Polishing Dubai | Floor Assessment and Quotation | Endeavor",
     seoDescription: "Professional marble polishing in Dubai for homes, villas and commercial properties. Request an assessment based on area and stone condition.",
     faqs: [
@@ -816,6 +904,13 @@ export const services: Service[] = [
     optionsCtaLabel: "Request an Assessment",
     packageCtaLabel: "Request Assessment",
     noFeaturedOption: true,
+    bookingFields: [
+      { name: "propertySize", label: "Approximate size (sq ft)", type: "text" },
+      { name: "constructionStatus", label: "Construction completion stage", type: "select", options: ["Fully complete", "Nearly complete", "Final fix stage", "Not sure"], required: true },
+      { name: "residueTypes", label: "Residue types present", type: "text" },
+      { name: "completionDeadline", label: "Required completion date", type: "text" },
+      { name: "utilities", label: "Water and electricity available on site?", type: "select", options: ["Yes", "No", "Not sure"], required: true },
+    ],
     seoTitle: "Post-Construction Cleaning Dubai | Request an Assessment | Endeavor",
     seoDescription: "Detailed post-construction and post-renovation cleaning in Dubai. Request a site assessment and quotation based on property condition and scope.",
     faqs: [
@@ -826,10 +921,10 @@ export const services: Service[] = [
   },
   {
     slug: "move-in-move-out-cleaning",
-    name: "Move-In / Move-Out Cleaning",
-    shortName: "Move-In / Move-Out",
+    name: "Move-In/Move-Out Cleaning",
+    shortName: "Move-In/Move-Out",
     category: "Property Cleaning",
-    heroHeading: "Move-In and Move-Out Cleaning in Dubai",
+    heroHeading: "Move-In/Move-Out Cleaning in Dubai",
     summary: "Prepare an empty apartment for arrival or handover with a detailed cleaning scope arranged around your moving deadline.",
     cardCopy: "Prepare a home before arrival or leave it ready for handover.",
     icon: "/assets/more.webp",
@@ -878,14 +973,23 @@ export const services: Service[] = [
     preparation: "Confirm whether it's a move-in or move-out, ensure the property is empty, finish painting and maintenance first, remove belongings and waste, provide water and electricity, arrange keys, permits, parking and lift access, identify the handover deadline, and disclose any construction residue.",
     duration: "Standard apartment duration is approximately 4–8 hours depending on size and condition. Timing is confirmed before booking.",
     packages: [
-      { name: "Studio", price: "AED 700", note: "Standard move-in/move-out cleaning for an empty studio apartment in standard condition." },
-      { name: "1 Bedroom", price: "AED 900", note: "Standard move-in/move-out cleaning for an empty 1-bedroom apartment in standard condition." },
-      { name: "2 Bedroom", price: "AED 1,150", note: "Standard move-in/move-out cleaning for an empty 2-bedroom apartment in standard condition." },
-      { name: "3 Bedroom", price: "AED 1,400", note: "Standard move-in/move-out cleaning for an empty 3-bedroom apartment in standard condition." },
+      { name: "Studio", price: "AED 700", note: "Standard move-in/move-out cleaning for an empty studio apartment in standard condition.", bookLabel: "Book Studio" },
+      { name: "1 Bedroom", price: "AED 900", note: "Standard move-in/move-out cleaning for an empty 1-bedroom apartment in standard condition.", bookLabel: "Book 1 Bedroom" },
+      { name: "2 Bedroom", price: "AED 1,150", note: "Standard move-in/move-out cleaning for an empty 2-bedroom apartment in standard condition.", bookLabel: "Book 2 Bedrooms" },
+      { name: "3 Bedroom", price: "AED 1,400", note: "Standard move-in/move-out cleaning for an empty 3-bedroom apartment in standard condition.", bookLabel: "Book 3 Bedrooms" },
     ],
     optionsNote: "Prices apply to empty apartments in standard condition and the confirmed standard scope. Villas, furnished properties, post-construction conditions, heavy residue and non-standard requirements need assessment and quotation.",
     optionsCtaLabel: "View Apartment Prices",
-    seoTitle: "Move-In and Move-Out Cleaning Dubai | Endeavor",
+    bookingFields: [
+      { name: "moveType", label: "Move-in or move-out", type: "select", options: ["Move-in", "Move-out"], required: true },
+    ],
+    villaBookingFields: [
+      { name: "moveType", label: "Move-in or move-out", type: "select", options: ["Move-in", "Move-out"], required: true },
+      { name: "villaSize", label: "Approximate villa size (sq ft)", type: "text" },
+      { name: "propertyCondition", label: "Property condition", type: "select", options: ["Standard", "Heavy residue", "Post-construction", "Other"], required: true },
+      { name: "movingDeadline", label: "Moving deadline", type: "text" },
+    ],
+    seoTitle: "Move-In/Move-Out Cleaning Dubai | Endeavor",
     seoDescription: "Detailed move-in and move-out apartment cleaning in Dubai. View standard apartment prices or request a villa assessment.",
     faqs: [
       { question: "What if I have a villa or furnished property?", answer: "Request a Villa Assessment. Villas, furnished properties, post-construction conditions and non-standard requirements are quoted after assessment." },
@@ -970,6 +1074,15 @@ export const services: Service[] = [
     optionsCtaLabel: "Request a Site Assessment",
     packageCtaLabel: "Request Assessment",
     noFeaturedOption: true,
+    bookingFields: [
+      { name: "businessType", label: "Business type", type: "select", options: ["Restaurant", "Café", "Hotel", "Catering kitchen", "Cloud kitchen", "Staff kitchen", "Other"], required: true },
+      { name: "hoodCount", label: "Hood count", type: "number", required: true },
+      { name: "ductDimensions", label: "Duct dimensions (if known)", type: "text" },
+      { name: "accessPanels", label: "Access panels available?", type: "select", options: ["Yes", "No", "Not sure"] },
+      { name: "extractionFans", label: "Extraction fans need cleaning?", type: "select", options: ["Yes", "No", "Not sure"] },
+      { name: "lastCleaned", label: "Last cleaning date", type: "text" },
+      { name: "operatingHours", label: "Operating hours", type: "text" },
+    ],
     seoTitle: "Commercial Kitchen Duct Cleaning Dubai | Endeavor",
     seoDescription: "Commercial kitchen hood and duct cleaning in Dubai. Request a site assessment and formal quotation based on system design, access and grease condition.",
     faqs: [
@@ -1032,12 +1145,19 @@ export const services: Service[] = [
     preparation: "Remove toiletries, towels and personal items, provide photographs for heavy scale or damage, disclose delicate stone or previous treatments, ensure ventilation, water and electricity, report leaks or loose fixtures, and keep the room clear during service.",
     duration: "Duration depends on bathroom count, size, condition, surfaces and access.",
     packages: [
-      { name: "1 Bathroom", price: "AED 180", note: "Standard deep cleaning for a single bathroom in typical condition." },
-      { name: "2 Bathrooms", price: "AED 340", note: "Standard deep cleaning for two bathrooms in typical condition." },
-      { name: "3 Bathrooms", price: "AED 470", note: "Standard deep cleaning for three bathrooms in typical condition." },
+      { name: "1 Bathroom", price: "AED 180", note: "Standard deep cleaning for a single bathroom in typical condition.", bookLabel: "Book 1 Bathroom" },
+      { name: "2 Bathrooms", price: "AED 340", note: "Standard deep cleaning for two bathrooms in typical condition.", bookLabel: "Book 2 Bathrooms" },
+      { name: "3 Bathrooms", price: "AED 470", note: "Standard deep cleaning for three bathrooms in typical condition.", bookLabel: "Book 3 Bathrooms" },
+      { name: "More Than 3 Bathrooms", note: "More than three bathrooms, unusually heavy condition, special stone, difficult access or additional areas require photographs and confirmation before a price is issued.", bookLabel: "Request Confirmation" },
     ],
     optionsNote: "More than three bathrooms, unusually heavy condition, special stone, difficult access or additional areas require photographs and confirmation. Prices are conditional on forecast service time.",
     optionsCtaLabel: "View Bathroom Options",
+    noFeaturedOption: true,
+    bookingFields: [
+      { name: "bathroomCondition", label: "Condition", type: "select", options: ["Light scale or residue", "Visible buildup", "Heavy condition", "Not sure"], required: true },
+      { name: "specialSurfaces", label: "Special stone or delicate surfaces?", type: "select", options: ["No", "Yes — please specify in notes", "Not sure"] },
+      { name: "accessConditions", label: "Access conditions", type: "text" },
+    ],
     seoTitle: "Bathroom Deep Cleaning Dubai | Prices From AED 180 | Endeavor",
     seoDescription: "Focused bathroom deep cleaning in Dubai for scale, soap residue and accumulated dirt. View prices and request booking confirmation.",
     faqs: [

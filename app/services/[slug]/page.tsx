@@ -87,7 +87,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
         <section className="service-concerns-band" aria-label={`Reasons to consider ${service.name}`}>
           <div className="inner-shell">
             {service.concerns.map((concern, index) => (
-              <div key={concern}><span>0{index + 1}</span><strong>{concern}</strong></div>
+              <div key={concern}><span>{String(index + 1).padStart(2, "0")}</span><strong>{concern}</strong></div>
             ))}
           </div>
           {service.limitations ? <p className="inner-shell service-limitations-note">{service.limitations}</p> : null}
@@ -121,18 +121,35 @@ export default async function ServicePage({ params }: ServicePageProps) {
           </section>
         ) : null}
 
+        {service.notSureGuide ? (
+          <section className="inner-section inner-shell not-sure-section">
+            <div className="inner-section-heading">
+              <span className="page-eyebrow">Still deciding?</span>
+              <h2>Not Sure Which Option to Choose?</h2>
+            </div>
+            <div className="not-sure-grid">
+              {service.notSureGuide.map((item) => (
+                <div key={item.name}>
+                  <strong>{item.name}</strong>
+                  <p>{item.blurb}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+        ) : null}
+
         {service.comparisonRows && service.packages ? (
           <section className="inner-section inner-shell">
             <div className="inner-section-heading">
               <span className="page-eyebrow">Comparison</span>
-              <h2>What each option includes</h2>
+              <h2>{service.comparisonHeading ?? "What each option includes"}</h2>
             </div>
             <div className="comparison-table-wrap">
               <table className="comparison-table">
                 <thead>
                   <tr>
                     <th scope="col"></th>
-                    {service.packages.map((servicePackage) => <th scope="col" key={servicePackage.name}>{servicePackage.name}</th>)}
+                    {service.packages.map((servicePackage) => <th scope="col" key={servicePackage.id ?? servicePackage.name}>{servicePackage.name}</th>)}
                   </tr>
                 </thead>
                 <tbody>

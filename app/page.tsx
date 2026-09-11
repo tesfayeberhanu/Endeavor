@@ -47,7 +47,7 @@ const popularServices = [
     href: "/services/specialized-deep-cleaning",
   },
   {
-    name: "Move-In / Move-Out Cleaning",
+    name: "Move-In/Move-Out Cleaning",
     copy: "Prepare a property for arrival or handover with an agreed cleaning checklist.",
     image: "/assets/popular-move-in-out.jpg",
     icon: "box",

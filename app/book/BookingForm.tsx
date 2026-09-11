@@ -3,6 +3,7 @@
 import { useMemo, useState, type FormEvent } from "react";
 
 import { getService, services } from "@/lib/services";
+import type { BookingField } from "@/lib/services";
 
 type BookingFormProps = {
   initialService: string;
@@ -10,25 +11,34 @@ type BookingFormProps = {
   initialMode: "booking" | "quote";
 };
 
+function packageKey(option: { id?: string; name: string }) {
+  return option.id ?? option.name;
+}
+
 export default function BookingForm({ initialService, initialPackage, initialMode }: BookingFormProps) {
   const [serviceSlug, setServiceSlug] = useState(initialService);
-  const [packageName, setPackageName] = useState(initialPackage);
+  const [packageKeyValue, setPackageKeyValue] = useState(initialPackage);
   const [whatsAppUrl, setWhatsAppUrl] = useState("");
 
   const selectedService = useMemo(() => getService(serviceSlug), [serviceSlug]);
   const isQuote = initialMode === "quote" || selectedService?.quoteOnly;
+  const activeFields: BookingField[] =
+    (selectedService?.villaBookingFields && isQuote ? selectedService.villaBookingFields : selectedService?.bookingFields) ?? [];
+  const selectedPackage = selectedService?.packages?.find((option) => packageKey(option) === packageKeyValue);
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     const selectedName = selectedService?.name ?? String(formData.get("service") ?? "General enquiry");
+    const packageLabel = selectedPackage ? `${selectedPackage.name}${selectedPackage.subtitle ? ` — ${selectedPackage.subtitle}` : ""}` : "Please advise";
     const lines = [
       "Hello Endeavor Cleaning,",
       "",
       `Request type: ${isQuote ? "Exact quote" : "Booking request"}`,
       `Service: ${selectedName}`,
-      `Package: ${packageName || "Please advise"}`,
+      `Package: ${packageLabel}`,
       `Quantity / units: ${String(formData.get("quantity") || "Not specified")}`,
+      ...activeFields.map((field) => `${field.label}: ${String(formData.get(field.name) || "Not specified")}`),
       `Name: ${String(formData.get("name") || "")}`,
       `Mobile: ${String(formData.get("mobile") || "")}`,
       `Email: ${String(formData.get("email") || "Not provided")}`,
@@ -61,7 +71,7 @@ export default function BookingForm({ initialService, initialPackage, initialMod
             required
             onChange={(event) => {
               setServiceSlug(event.target.value);
-              setPackageName("");
+              setPackageKeyValue("");
               setWhatsAppUrl("");
             }}
           >
@@ -72,10 +82,12 @@ export default function BookingForm({ initialService, initialPackage, initialMod
 
         <label>
           Service option
-          <select name="package" value={packageName} onChange={(event) => setPackageName(event.target.value)}>
+          <select name="package" value={packageKeyValue} onChange={(event) => setPackageKeyValue(event.target.value)}>
             <option value="">Please advise me</option>
             {selectedService?.packages?.map((servicePackage) => (
-              <option value={servicePackage.name} key={servicePackage.name}>{servicePackage.name}</option>
+              <option value={packageKey(servicePackage)} key={packageKey(servicePackage)}>
+                {servicePackage.name}{servicePackage.subtitle ? ` — ${servicePackage.subtitle}` : ""}
+              </option>
             ))}
           </select>
         </label>
@@ -92,6 +104,20 @@ export default function BookingForm({ initialService, initialPackage, initialMod
             <option>Other</option>
           </select>
         </label>
+
+        {activeFields.map((field) => (
+          <label key={`${serviceSlug}-${isQuote ? "quote" : "book"}-${field.name}`}>
+            {field.label}{field.required ? " *" : ""}
+            {field.type === "select" ? (
+              <select name={field.name} defaultValue="" required={field.required}>
+                <option value="" disabled>Select an option</option>
+                {field.options?.map((option) => <option key={option}>{option}</option>)}
+              </select>
+            ) : (
+              <input name={field.name} type={field.type === "number" ? "number" : "text"} min={field.type === "number" ? 0 : undefined} required={field.required} />
+            )}
+          </label>
+        ))}
 
         <label>Customer name *<input name="name" type="text" autoComplete="name" required placeholder="Full name" /></label>
         <label>Mobile number *<input name="mobile" type="tel" autoComplete="tel" required placeholder="+971" /></label>
@@ -120,4 +146,3 @@ export default function BookingForm({ initialService, initialPackage, initialMod
     </form>
   );
 }
-

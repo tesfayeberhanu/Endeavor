@@ -23,7 +23,7 @@ export default async function BookingPage({ searchParams }: BookingPageProps) {
   const selectedService = getService(requestedService);
   const initialService = selectedService?.slug ?? "";
   const requestedPackage = firstValue(query.package);
-  const initialPackage = selectedService?.packages?.some((option) => option.name === requestedPackage) ? requestedPackage : "";
+  const initialPackage = selectedService?.packages?.some((option) => (option.id ?? option.name) === requestedPackage) ? requestedPackage : "";
   const initialMode = firstValue(query.mode) === "quote" ? "quote" : "booking";
 
   return (

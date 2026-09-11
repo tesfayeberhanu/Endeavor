@@ -12,30 +12,35 @@ type PackageOptionsProps = {
   noFeatured?: boolean;
 };
 
+function packageKey(servicePackage: ServicePackage) {
+  return servicePackage.id ?? servicePackage.name;
+}
+
 export default function PackageOptions({ packages, bookingQuery, ctaLabel, noFeatured }: PackageOptionsProps) {
   const [openPackage, setOpenPackage] = useState<ServicePackage | null>(null);
-  const selectLabel = ctaLabel ?? "Select This Option";
+  const defaultLabel = ctaLabel ?? "Select This Option";
 
   return (
     <>
       <div className="package-option-grid">
         {packages.map((servicePackage, index) => {
           const isFeatured = !noFeatured && index === packages.length - 1;
+          const label = servicePackage.bookLabel ?? defaultLabel;
           return (
-            <article className={isFeatured ? "package-option package-option--featured" : "package-option"} key={servicePackage.name}>
+            <article className={isFeatured ? "package-option package-option--featured" : "package-option"} key={packageKey(servicePackage)}>
               {servicePackage.image ? (
                 <div className="package-option__image"><img src={servicePackage.image} alt="" /></div>
               ) : null}
               <span className="package-option__badge">{isFeatured ? "Best Value" : `Option ${index + 1}`}</span>
               <h3>{servicePackage.name}</h3>
+              {servicePackage.subtitle ? <p className="package-option__subtitle">{servicePackage.subtitle}</p> : null}
               {servicePackage.price ? <strong className="package-option__price">{servicePackage.price}</strong> : null}
-              <p className="package-option__note">{servicePackage.note}</p>
               <div className="package-option__actions">
-                <Link className="package-option__select" href={{ pathname: "/book", query: { ...bookingQuery, package: servicePackage.name } }}>
-                  {selectLabel}
+                <Link className="package-option__select" href={{ pathname: "/book", query: { ...bookingQuery, package: packageKey(servicePackage) } }}>
+                  {label}
                 </Link>
                 <button type="button" className="package-option__more" onClick={() => setOpenPackage(servicePackage)}>
-                  View full details <span aria-hidden="true">→</span>
+                  View More <span aria-hidden="true">→</span>
                 </button>
               </div>
             </article>
@@ -54,13 +59,14 @@ export default function PackageOptions({ packages, bookingQuery, ctaLabel, noFea
                 <div className="package-panel__image"><img src={openPackage.image} alt="" /></div>
               ) : null}
               <h3>{openPackage.name}</h3>
+              {openPackage.subtitle ? <p className="package-panel__subtitle">{openPackage.subtitle}</p> : null}
               {openPackage.price ? <strong className="package-panel__price">{openPackage.price}</strong> : null}
               <p>{openPackage.note}</p>
               <Link
                 className="package-panel__cta"
-                href={{ pathname: "/book", query: { ...bookingQuery, package: openPackage.name } }}
+                href={{ pathname: "/book", query: { ...bookingQuery, package: packageKey(openPackage) } }}
               >
-                {selectLabel}
+                {openPackage.bookLabel ?? defaultLabel}
               </Link>
             </>
           ) : null}
