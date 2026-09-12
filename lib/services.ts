@@ -71,6 +71,7 @@ export type Service = {
   noFeaturedOption?: boolean;
   comparisonRows?: ComparisonRow[];
   comparisonHeading?: string;
+  recommendedFrequency?: Array<{ label: string; frequency: string }>;
   notSureGuide?: Array<{ name: string; blurb: string }>;
   bookingFields?: BookingField[];
   villaBookingFields?: BookingField[];
@@ -167,9 +168,9 @@ export const services: Service[] = [
       { label: "Grills and washable filters", values: ["Included", "Included", "Not included", "Included"] },
       { label: "Accessible ducts", values: ["Not included", "Included", "Not included", "Included"] },
       { label: "Coil", values: ["Not included", "Not included", "Included", "Included"] },
-      { label: "Duct disinfection", values: ["Not applicable", "Confirmed at inspection", "Not applicable", "Confirmed at inspection"] },
-      { label: "Drain tray", values: ["Confirmed at inspection", "Confirmed at inspection", "Confirmed at inspection", "Confirmed at inspection"] },
-      { label: "Accessible drainage", values: ["Confirmed at inspection", "Confirmed at inspection", "Confirmed at inspection", "Confirmed at inspection"] },
+      { label: "Duct disinfection", values: ["Not included", "Included — subject to the approved method", "Not included", "Included — subject to the approved method"] },
+      { label: "Drain tray", values: ["Not included", "Not included", "Not included", "Confirm inclusion"] },
+      { label: "Accessible drainage", values: ["Not included", "Not included", "Not included", "Confirm inclusion"] },
       { label: "Photographs", values: ["Where applicable", "Where applicable", "Where applicable", "Where applicable"] },
       { label: "Best suited for", values: ["Light dust, well-maintained systems", "Recurring dust, vents needing duct care", "Visible coil buildup only", "Most complete care in one visit"] },
       { label: "Booking action", values: ["Book Pure Flow", "Book Fresh Air", "Book Coil Care", "Book Package 4"] },
@@ -188,6 +189,10 @@ export const services: Service[] = [
     faqs: [
       { question: "Which AC package should I choose?", answer: "Pure Flow suits light visible dust and regularly maintained systems. Fresh Air adds duct cleaning if dust keeps returning quickly. Coil Care targets visible coil buildup on its own. Package 4 combines ducts, coil, grills and filters for the most complete clean." },
       { question: "Is the price per property or per unit?", answer: "AC cleaning is priced per unit. The confirmed quote will state the option, quantity, VAT status and any access-related charge." },
+      { question: "What happens during the visit?", answer: "The team confirms the unit and access, protects the nearby area, completes the cleaning tasks listed in the confirmed option, and reviews the result with you before handover." },
+      { question: "Does AC cleaning fix poor cooling or a refrigerant issue?", answer: "No. Cleaning may remove buildup and support airflow through cleaned components, but it does not repair refrigerant problems, damaged parts, leaks, electrical faults or other mechanical defects." },
+      { question: "How long does an AC cleaning visit take?", answer: "Duration depends on the option, unit count, AC type, accessibility and buildup. This is confirmed during booking." },
+      { question: "What should I prepare before the visit?", answer: "Confirm the unit count and locations, provide access to grills and panels, move fragile items, disclose high ceilings or access restrictions and known faults, arrange building access and parking, and keep children and pets away during the visit." },
       sharedFaq,
     ],
   },
@@ -291,7 +296,16 @@ export const services: Service[] = [
       { label: "Price", values: ["AED 450", "AED 750", "AED 1,100", "AED 1,300"] },
       { label: "Typical property", values: ["Apartments and small residential tanks", "Villas and medium residential tanks", "Large villas and buildings", "Buildings, commercial sites and facilities"] },
     ],
+    recommendedFrequency: [
+      { label: "Residential apartments and villas", frequency: "Every 6 months" },
+      { label: "Commercial and high-usage buildings", frequency: "Every 3 to 4 months" },
+      { label: "After a change of occupancy or extended vacancy", frequency: "Before reoccupation" },
+      { label: "Visible sediment, odour or discolouration", frequency: "As soon as noticed, regardless of schedule" },
+    ],
     bookingFields: [
+      { name: "tankCapacity", label: "Approximate capacity (USG, if known)", type: "text" },
+      { name: "tankLocation", label: "Tank location on property", type: "select", options: ["Roof", "Ground level", "Basement", "Other"], required: true },
+      { name: "lastCleaned", label: "Last cleaning date (if known)", type: "text" },
       { name: "tankMaterial", label: "Tank material (if known)", type: "select", options: ["Plastic", "GRP / Fibreglass", "Concrete", "Steel", "Not sure"] },
       { name: "tankAccess", label: "Access conditions", type: "select", options: ["Easy roof access", "Restricted access", "Confined space", "Not sure"], required: true },
     ],
@@ -300,6 +314,10 @@ export const services: Service[] = [
     faqs: [
       { question: "Which tank-size option should I choose?", answer: "Choose the option that matches your tank's capacity in US gallons (USG): Small (up to 500), Medium (550–1,000), Large (1,100–4,000) or Extra Large (4,100–10,000). Share your tank label or capacity if you're unsure." },
       { question: "Can I send tank photographs?", answer: "Yes. Start the request and continue on WhatsApp to attach photographs that help the team confirm access and scope." },
+      { question: "What does the service include?", answer: "Capacity and access confirmation, isolation and safe draining where possible, sediment and sludge removal, manual scrubbing of accessible walls and floors, rinsing, application of an approved disinfectant, tank-cover cleaning and a final inspection with photographs where practical." },
+      { question: "Does the service certify drinking-water quality?", answer: "No. The service improves storage-tank cleanliness and removes accumulated debris, but it does not certify drinking-water quality. Laboratory testing is required to confirm chemical or microbiological water quality." },
+      { question: "How long does tank cleaning take?", answer: "Duration depends on tank size, count, type, stored-water volume, condition, drainage and access." },
+      { question: "How often should my water tank be cleaned?", answer: "Every 6 months for residential apartments and villas, and every 3 to 4 months for commercial or high-usage buildings. Clean sooner regardless of schedule if you notice sediment, odour or discolouration, or after a change of occupancy." },
       sharedFaq,
     ],
   },
@@ -372,6 +390,9 @@ export const services: Service[] = [
     ],
     optionsNote: "Prices apply only to apartments in standard deep-cleaning condition and the confirmed standard scope. Villas, properties above three bedrooms, post-construction conditions, heavy grease, pest contamination and unusual residue require photographs, assessment and quotation.",
     optionsCtaLabel: "View Apartment Options",
+    bookingFields: [
+      { name: "apartmentCondition", label: "Property condition", type: "select", options: ["Standard", "Post-construction", "Heavy grease or dust", "Other"], required: true },
+    ],
     villaBookingFields: [
       { name: "villaSize", label: "Approximate villa size (sq ft)", type: "text" },
       { name: "bedrooms", label: "Number of bedrooms", type: "number", required: true },
@@ -383,6 +404,10 @@ export const services: Service[] = [
     faqs: [
       { question: "What if I have a villa or a property above three bedrooms?", answer: "Request a Villa Assessment. Villas, properties above three bedrooms and non-standard conditions are quoted after photographs and an assessment." },
       { question: "Are appliance and cabinet interiors included?", answer: "No. Inside appliances, inside cabinets, high-level areas, external windows, upholstery, mattresses and specialist stain treatment must be expressly selected or quoted." },
+      { question: "What's included in the standard scope?", answer: "Dusting and wiping accessible surfaces, floors and skirting, doors and switches, empty cupboards and wardrobes, kitchen worktops and accessible appliance exteriors, bathroom fixtures, tiles and glass, accessible internal windows, and a final room-by-room check." },
+      { question: "How long does the clean take?", answer: "Studio or 1-bedroom apartments normally take 4–5 hours with two technicians; 2–3 bedroom apartments normally take 6–8 hours with three technicians, subject to condition." },
+      { question: "What should I do before the team arrives?", answer: "Confirm the furnishing status and apartment size, identify priority areas, send photographs for heavy conditions, remove personal items and valuables, empty cabinets if interiors are included, provide water and electricity, arrange access and parking, and secure pets." },
+      { question: "Can post-construction dust or pest issues be included?", answer: "No. Post-construction residue, pest treatment and hazardous or biological waste are outside the standard scope and require Post-Construction Cleaning or a separate specialist service." },
       sharedFaq,
     ],
   },
@@ -475,6 +500,9 @@ export const services: Service[] = [
     faqs: [
       { question: "Why isn't a fixed price shown?", answer: "Pricing depends on building height, access method, surface area and safety requirements. No price is shown until the access method and scope are approved after assessment." },
       { question: "What if my building needs rope access, scaffolding or a lift?", answer: "Specialist access equipment is only included when it has been assessed and quoted. Share your building height and access details so this can be reviewed." },
+      { question: "What information does the quotation depend on?", answer: "Building type and height, glass or façade area, surface material, level of soil and staining, safe access, required equipment, permits and building-management approval, operating hours and parking or pedestrian control." },
+      { question: "What's included in the standard scope?", answer: "A site and access review, protection of the immediate area, removal of loose dust, washing of accessible exterior glass or approved façade surfaces, cleaning of frames and sills when quoted, a spot check and photographs where practical." },
+      { question: "What should I prepare before the assessment?", answer: "Provide building and elevation photographs, the approximate height and number of windows, arrange authorised access and permits, identify water and power availability, disclose restricted areas, and remove items from balconies and window areas." },
       sharedFaq,
     ],
   },
@@ -555,6 +583,9 @@ export const services: Service[] = [
     faqs: [
       { question: "What if I have an L-shaped sofa, recliner or sofa bed?", answer: "Send photographs so the team can confirm the price. L-shaped sofas, recliners, sofa beds, loose cushions, unusual materials and sofas with more than three seats require confirmation before booking." },
       { question: "Can you remove all stains and odours?", answer: "Results depend on the material, age, previous treatment and stain type. Guaranteed removal of permanent stains, dye transfer, fading, burns or odours cannot be promised." },
+      { question: "What's included in sofa cleaning?", answer: "A photo and fabric review, a colourfastness check where appropriate, dry removal of loose dust and debris, treatment using the confirmed upholstery method, attention to accessible seating, back and arms, cleaning of removable cushions when included, and a final inspection." },
+      { question: "Is reupholstery or fabric repair included?", answer: "No. Fabric repair, reupholstery, structural repair and specialist leather restoration are not included and would need a separate service." },
+      { question: "What should I do before the appointment?", answer: "Send full-sofa and close-up photographs, confirm the number of seats or pieces and material, remove personal items, provide access and ventilation, and disclose any previous treatments or delicate fabric." },
       sharedFaq,
     ],
   },
@@ -625,6 +656,9 @@ export const services: Service[] = [
     faqs: [
       { question: "Can both sides of the mattress be cleaned?", answer: "Yes, if both sides are accessible and this is confirmed in the scope before the visit." },
       { question: "Can you remove all stains and odours?", answer: "Results depend on the stain type, age, material and previous treatment. Guaranteed removal of permanent stains, dye, burns, discolouration or odours cannot be promised." },
+      { question: "What's included?", answer: "A condition inspection, dry removal of loose dust and debris, cleaning using the approved mattress method, treatment of disclosed areas where suitable, extraction or controlled moisture removal where applicable, and drying and use guidance." },
+      { question: "How should I prepare the mattress?", answer: "Remove linen and mattress protectors, make both sides accessible if included, send photographs of stains or damage, disclose previous treatment, and provide ventilation and access." },
+      { question: "Is bed-frame or linen cleaning included?", answer: "No. Cleaning of the bed frame, pillows or linen is not included unless quoted separately, and bedbug or pest treatment is excluded." },
       sharedFaq,
     ],
   },
@@ -723,6 +757,10 @@ export const services: Service[] = [
     faqs: [
       { question: "Why isn't a fixed price shown?", answer: "Carpet cleaning is quoted after reviewing the carpet type, area, condition and access. Send measurements and photographs to receive a quotation." },
       { question: "Can you clean delicate or valuable rugs?", answer: "Delicate or valuable rugs may require a specialist service. Disclose the rug type and condition so this can be confirmed before booking." },
+      { question: "What information do you need for a quotation?", answer: "Carpet type and material, fitted or loose, total area or dimensions, number of rooms, stain type and age, pile condition, furniture-movement needs, access and working hours, and required drying time." },
+      { question: "What's included in the cleaning?", answer: "A material and condition inspection, dry soil removal, pre-treatment of suitable areas, shampooing or extraction using the confirmed method, attention to accessible edges, controlled rinsing or extraction where applicable, and drying advice." },
+      { question: "What isn't included?", answer: "Carpet repair or re-stretching, specialist rug restoration, dye correction, guaranteed stain or odour removal, pest treatment and lifting fitted carpet are not included." },
+      { question: "How should I prepare the area?", answer: "Provide measurements and photographs, identify the material if known, disclose stains and previous treatments, remove small items, agree any furniture movement, and ensure ventilation, water and electricity." },
       sharedFaq,
     ],
   },
@@ -820,6 +858,10 @@ export const services: Service[] = [
     faqs: [
       { question: "Why isn't a fixed price shown?", answer: "Marble polishing is quoted after a site assessment covering stone type, area, existing finish and condition. A rate and minimum booking value are confirmed before work begins." },
       { question: "Can all marble damage be fully restored?", answer: "Final results depend on the stone condition and previous treatments. Deep etching, chips, cracks and structural damage are not guaranteed to be fully restored." },
+      { question: "What factors affect the assessment?", answer: "Stone identification, area in square metres, existing finish, depth of scratches or etching, stains, cracks or loose tiles, access and furniture, edge work, required sheen and protection of adjacent materials." },
+      { question: "What's included?", answer: "An area and condition inspection, a test area where appropriate, protection of adjoining surfaces, cleaning and preparation, polishing using the confirmed process, edge attention where accessible and quoted, and a final inspection with care guidance." },
+      { question: "What isn't included?", answer: "Tile replacement, crack or joint repair, levelling or major grinding, sealing and movement of heavy furniture are not included unless quoted." },
+      { question: "How should I prepare?", answer: "Provide wide and close-up photographs, the approximate area, disclose previous polishing or coatings, remove movable items, arrange parking and access, and keep the area clear during work and curing." },
       sharedFaq,
     ],
   },
@@ -910,12 +952,17 @@ export const services: Service[] = [
       { name: "residueTypes", label: "Residue types present", type: "text" },
       { name: "completionDeadline", label: "Required completion date", type: "text" },
       { name: "utilities", label: "Water and electricity available on site?", type: "select", options: ["Yes", "No", "Not sure"], required: true },
+      { name: "siteAccess", label: "Site-access conditions", type: "text" },
     ],
     seoTitle: "Post-Construction Cleaning Dubai | Request an Assessment | Endeavor",
     seoDescription: "Detailed post-construction and post-renovation cleaning in Dubai. Request a site assessment and quotation based on property condition and scope.",
     faqs: [
       { question: "Why isn't a fixed price shown?", answer: "Post-construction cleaning is quoted after reviewing the property size, completion stage, residue type and access. Send photos or video to request an assessment." },
       { question: "Does construction need to be finished first?", answer: "Yes. The assessment and quotation assume construction is substantially complete. Cleaning before this stage is not included." },
+      { question: "What factors affect the quotation?", answer: "Property type and size, construction completion stage, dust volume, residue type, high-level areas, installed fixtures, utilities availability, contractor waste, and access, permits and deadline." },
+      { question: "What's included?", answer: "Initial condition documentation, systematic removal of loose construction dust, wiping of accessible surfaces, doors, frames, switches, skirting and cabinetry, cleaning of kitchens and bathrooms, floor vacuuming and washing, accessible internal glass and a final detailed check." },
+      { question: "What isn't included?", answer: "Building or trade work, removal of heavy rubble or contractor waste, hazardous material handling, scratch repair, polishing or restoration and high external façade work are not included unless quoted." },
+      { question: "How should I prepare the site?", answer: "Ensure construction is complete, remove tools and contractor materials, provide safe water and power, arrange access and permits, identify delicate new finishes, and disclose the deadline." },
       sharedFaq,
     ],
   },
@@ -982,18 +1029,25 @@ export const services: Service[] = [
     optionsCtaLabel: "View Apartment Prices",
     bookingFields: [
       { name: "moveType", label: "Move-in or move-out", type: "select", options: ["Move-in", "Move-out"], required: true },
+      { name: "propertyCondition", label: "Property condition", type: "select", options: ["Standard", "Heavy residue", "Post-construction", "Other"], required: true },
+      { name: "movingDeadline", label: "Moving or handover deadline", type: "text" },
+      { name: "accessInfo", label: "Access information", type: "text" },
     ],
     villaBookingFields: [
       { name: "moveType", label: "Move-in or move-out", type: "select", options: ["Move-in", "Move-out"], required: true },
       { name: "villaSize", label: "Approximate villa size (sq ft)", type: "text" },
       { name: "propertyCondition", label: "Property condition", type: "select", options: ["Standard", "Heavy residue", "Post-construction", "Other"], required: true },
-      { name: "movingDeadline", label: "Moving deadline", type: "text" },
+      { name: "movingDeadline", label: "Moving or handover deadline", type: "text" },
+      { name: "accessInfo", label: "Access information", type: "text" },
     ],
     seoTitle: "Move-In/Move-Out Cleaning Dubai | Endeavor",
     seoDescription: "Detailed move-in and move-out apartment cleaning in Dubai. View standard apartment prices or request a villa assessment.",
     faqs: [
       { question: "What if I have a villa or furnished property?", answer: "Request a Villa Assessment. Villas, furnished properties, post-construction conditions and non-standard requirements are quoted after assessment." },
       { question: "Does the apartment need to be empty?", answer: "Yes, standard apartment prices apply to empty apartments in standard condition. Furnished properties need a separate assessment." },
+      { question: "What's included?", answer: "Dusting and wiping accessible surfaces, floors and skirting, doors and switches, empty cabinet and wardrobe interiors, kitchen worktops and accessible appliance areas, bathrooms, tiles and glass, accessible internal windows and a final room-by-room check." },
+      { question: "What isn't included?", answer: "Post-construction cleaning, furniture or upholstery cleaning, pest treatment, repairs, disposal of belongings or large waste, and permanent stain removal are not included." },
+      { question: "How should I prepare?", answer: "Confirm whether it's a move-in or move-out, ensure the property is empty, finish painting and maintenance first, remove belongings and waste, provide water and electricity, and arrange keys, permits, parking and lift access." },
       sharedFaq,
     ],
   },
@@ -1082,12 +1136,17 @@ export const services: Service[] = [
       { name: "extractionFans", label: "Extraction fans need cleaning?", type: "select", options: ["Yes", "No", "Not sure"] },
       { name: "lastCleaned", label: "Last cleaning date", type: "text" },
       { name: "operatingHours", label: "Operating hours", type: "text" },
+      { name: "roofAccess", label: "Roof or high-level access required?", type: "select", options: ["Yes", "No", "Not applicable", "Not sure"] },
     ],
     seoTitle: "Commercial Kitchen Duct Cleaning Dubai | Endeavor",
     seoDescription: "Commercial kitchen hood and duct cleaning in Dubai. Request a site assessment and formal quotation based on system design, access and grease condition.",
     faqs: [
       { question: "Why isn't a fixed price shown?", answer: "Pricing depends on system design, hood count, duct dimensions, access and grease condition. A formal quotation follows an authorised site assessment." },
       { question: "Can cleaning happen during operating hours?", answer: "No. Cleaning requires a confirmed shutdown time and cannot take place during live kitchen operation." },
+      { question: "What factors affect the quotation?", answer: "System design, hood count, duct dimensions and route, access panels, extraction fans, grease condition, last cleaning date, operating hours, roof or high-level access, and permits and waste handling." },
+      { question: "What's included?", answer: "Protection of the working area, cleaning of listed hoods, filters and accessible duct sections, grease removal using the approved method, cleaning of approved accessible fan components, waste collection and disposal, and a final inspection with service report where included." },
+      { question: "What isn't included?", answer: "Unlisted ducts or equipment, inaccessible sections, creation of access panels, mechanical, electrical or fire-system repair, and scaffolding, lifting equipment or roof access are not included unless quoted." },
+      { question: "How should I prepare for the assessment?", answer: "Provide system information and records, nominate an authorised contact, confirm the shutdown time, clear the work area, and arrange permits, roof access and parking." },
       sharedFaq,
     ],
   },
@@ -1163,6 +1222,9 @@ export const services: Service[] = [
     faqs: [
       { question: "What if I have more than three bathrooms?", answer: "Send photographs so the team can confirm the price. More than three bathrooms, unusually heavy condition, special stone, difficult access or additional areas require confirmation before booking." },
       { question: "Can you remove all scale, stains and damage?", answer: "Cleaning cannot reverse damaged materials. Permanent scale etching, corrosion, scratches, stains or discolouration are not guaranteed to be removed." },
+      { question: "What's included?", answer: "A condition inspection, cleaning of accessible tiles, floors, basins, taps, toilets, showers and bathtubs, cleaning of glass partitions, attention to accessible grout and corners, and a final inspection." },
+      { question: "Are leaks or grout repairs included?", answer: "No. Repair or replacement of grout, silicone, fixtures, pipes or drains, leak repair and mould remediation are not included." },
+      { question: "How should I prepare?", answer: "Remove toiletries, towels and personal items, provide photographs for heavy scale or damage, disclose delicate stone or previous treatments, ensure ventilation, water and electricity, and report leaks or loose fixtures." },
       sharedFaq,
     ],
   },

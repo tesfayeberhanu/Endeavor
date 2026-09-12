@@ -2012,6 +2012,36 @@ a {
   line-height: 1.55;
 }
 
+.frequency-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-top: 32px;
+}
+
+.frequency-grid > div {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 20px 22px;
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--rust);
+  border-radius: 14px;
+  background: #fff;
+}
+
+.frequency-grid strong {
+  color: var(--navy);
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.frequency-grid span {
+  color: rgb(23 23 79 / 65%);
+  font-size: 13.5px;
+  line-height: 1.5;
+}
+
 .service-detail-grid {
   display: grid;
   grid-template-columns: 1fr .75fr;

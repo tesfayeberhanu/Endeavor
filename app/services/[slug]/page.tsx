@@ -165,6 +165,23 @@ export default async function ServicePage({ params }: ServicePageProps) {
           </section>
         ) : null}
 
+        {service.recommendedFrequency ? (
+          <section className="inner-section inner-shell">
+            <div className="inner-section-heading">
+              <span className="page-eyebrow">Maintenance</span>
+              <h2>Recommended Cleaning Frequency</h2>
+            </div>
+            <div className="frequency-grid">
+              {service.recommendedFrequency.map((item) => (
+                <div key={item.label}>
+                  <strong>{item.frequency}</strong>
+                  <span>{item.label}</span>
+                </div>
+              ))}
+            </div>
+          </section>
+        ) : null}
+
         <section className="inner-section inner-shell service-detail-grid">
           <div>
             <div className="inner-section-heading">
